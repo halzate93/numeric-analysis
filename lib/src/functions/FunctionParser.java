@@ -6,7 +6,16 @@ public class FunctionParser {
 	
 	public static Function parse(String function){
 		evalutor = new Evaluator();
-		String resultInString = evalutor.evaluate(function);
-		return resultInString;
+		try
+		{
+			String resultInString = evalutor.evaluate(function);
+			evalutor.clearFunctions();
+			return resultInString;
+		}
+		catch (EvaluationException e)
+		{
+			evalutor.clearFunctions();
+			return "error en la expresión";
+		}
 	}
 }

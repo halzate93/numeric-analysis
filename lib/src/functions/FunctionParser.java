@@ -1,10 +1,13 @@
 package functions;
 
+import net.sourceforge.jeval.EvaluationException;
+import net.sourceforge.jeval.Evaluator;
+
 public class FunctionParser {
 	
-	private Evaluator evalutor;
+	private static Evaluator evalutor;
 	
-	public static Function parse(String function){
+	public static String parse(String function){
 		evalutor = new Evaluator();
 		try
 		{

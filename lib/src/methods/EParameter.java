@@ -1,5 +1,5 @@
 package methods;
 
 public enum EParameter {
-	Function
+	Function, Dx, X0, N
 }

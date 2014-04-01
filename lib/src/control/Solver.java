@@ -1,5 +1,7 @@
 package control;
 
+import net.sourceforge.jeval.EvaluationException;
+
 import org.json.JSONObject;
 import methods.*;
 
@@ -57,8 +59,9 @@ public class Solver {
 	 * messages.
 	 * @throws MissingParametersException If at least one of the parameters needed
 	 * to execute the solving is missing the method can't continue.
+	 * @throws EvaluationException 
 	 */
-	public JSONObject solve() throws MissingParametersException{
-		return method.solve();
+	public JSONObject solve() throws MissingParametersException, EvaluationException{
+		return method.run();
 	}
 }

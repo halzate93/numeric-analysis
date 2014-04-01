@@ -1,6 +1,12 @@
 package methods;
 
+import net.sourceforge.jeval.EvaluationException;
+
 import org.json.JSONObject;
+
+import functions.Function;
+
+import java.util.ArrayList;
 
 /**
  * Starting with a given continuous function f(x) we will find and interval where it 
@@ -38,35 +44,77 @@ public class IncrementalSearch extends Method {
 		return x0;
 	}
 
-	public void setX0(float x0) {
-		this.x0 = x0;
-	}
-
 	public float getDx() {
 		return dx;
-	}
-
-	public void setDx(float dx) {
-		this.dx = dx;
 	}
 
 	public int getN() {
 		return n;
 	}
-
-	public void setN(int n) {
-		this.n = n;
+	
+	@Override
+	protected JSONObject solve() throws EvaluationException{
+		JSONObject result = new JSONObject();
+		boolean root = false;
+		Function f = getFunction();
+		
+		float xi = x0;
+		float yi = f.evaluate(xi);
+		
+		if(yi == 0){
+			root = true;
+			result.put(EResults.Root.toString(), x0);
+		}
+		
+		int i = 0;
+		float xf, yf;
+		while(i < n && root){
+			xf = xi + dx;
+			yf = f.evaluate(xf);
+			
+			if(yf == 0){
+				root = true;
+				result.put(EResults.Root.toString(), xf);
+			}else if(yf * yi < 0){
+				root = true;
+				result.append(EResults.Interval.toString(), xi);
+				result.append(EResults.Interval.toString(), xf);
+			}
+				
+			xi = xf;
+			yi = yf;
+			i++;
+		}
+		
+		if(!root){
+			result.put(EResults.Error.toString(), EResultInfo.IterationCount.toString());
+		}
+		
+		result.put(EResultInfo.MaxAbsoluteError.toString(), dx);
+		result.put(EResultInfo.IterationCount.toString(), i);
+		return result;
 	}
 	
 	@Override
-	public JSONObject solve(){
-		// TODO Auto-generated method stub
-		return null;
+	public void setup(JSONObject parameters) throws InvalidParameterException{
+		super.setup(parameters);
+		if(parameters.has(EParameter.Dx.toString()))
+			dx = (float) parameters.getDouble(EParameter.Dx.toString());
+		if(parameters.has(EParameter.X0.toString()))
+			x0 = (float) parameters.getDouble(EParameter.X0.toString());
+		if(parameters.has(EParameter.N.toString()))
+			n = parameters.getInt(EParameter.N.toString());
 	}
 
+	/**
+	 * Only dx and n are absolutely necessary for the execution, it's
+	 * ok if x0's value is 0.
+	 */
 	@Override
 	public EParameter[] checkParameters() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<EParameter> parameters = new ArrayList<EParameter>(2);
+		if(dx == 0) parameters.add(EParameter.Dx);
+		if(n == 0) parameters.add(EParameter.N);
+		return (EParameter[]) parameters.toArray();
 	}
 }

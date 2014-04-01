@@ -20,22 +20,9 @@ public abstract class Method {
 	private EMethod methodDescriptor;
 	
 	/**
-	 * The max error tolerance that this run will allow.
-	 */
-	private float tolerance;
-	
-	/**
 	 * This is the function to work with while looking for roots. 
 	 */
 	private Function function;
-	
-	public float getTolerance(){
-		return tolerance;
-	}
-	
-	protected void setTolerance(float tolerance){
-		this.tolerance = tolerance;	
-	}
 	
 	public Function getFunction(){
 		return function;
@@ -55,8 +42,9 @@ public abstract class Method {
 	 * @return a JSONObject containing the information of this run.
 	 * @throws MissingParametersException If any required parameter is missing the 
 	 * execution fails.
+	 * @throws EvaluationException 
 	 */
-	public JSONObject run() throws MissingParametersException{
+	public JSONObject run() throws MissingParametersException, EvaluationException{
 		EParameter[] missingParams = checkParameters();
 		if(missingParams.length > 0)
 			throw new MissingParametersException(missingParams, getMethodDescriptor());
@@ -67,8 +55,9 @@ public abstract class Method {
 	/**
 	 * Runs the determined equation solving method.
 	 * @return A JSONObject containing the specific output for this run and method.
+	 * @throws EvaluationException 
 	 */
-	public abstract JSONObject solve();
+	protected abstract JSONObject solve() throws EvaluationException;
 	
 	/**
 	 * Checks if all the required parameters are set.
@@ -85,7 +74,7 @@ public abstract class Method {
 	 */
 	public void setup(JSONObject parameters) throws InvalidParameterException{
 		if(parameters.has("function")){
-			String value = parameters.getString("function");
+			String value = parameters.getString(EParameter.Function.toString());
 			try {
 				function = new Function(value);
 			} catch (JSONException e) {

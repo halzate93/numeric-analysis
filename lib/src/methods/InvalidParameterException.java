@@ -29,6 +29,6 @@ public class InvalidParameterException extends Exception {
 	}
 	
 	private static String createMessage(EParameter parameter, String value){
-		return "The " + parameter.toString() + "current value of " + value + "is invalid.";
+		return "The " + parameter.toString() + " current value of " + value + " is invalid.";
 	}
 }

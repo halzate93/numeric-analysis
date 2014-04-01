@@ -73,7 +73,7 @@ public abstract class Method {
 	 * @param parameters the JSONObject that contains the configuration.
 	 */
 	public void setup(JSONObject parameters) throws InvalidParameterException{
-		if(parameters.has("function")){
+		if(parameters.has(EParameter.Function.toString())){
 			String value = parameters.getString(EParameter.Function.toString());
 			try {
 				function = new Function(value);

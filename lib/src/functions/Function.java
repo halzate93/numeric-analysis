@@ -5,6 +5,7 @@ import net.sourceforge.jeval.Evaluator;
 
 public class Function {
 	private Evaluator evaluator;
+	private String expression;
 	
 	/**
 	 * Creates a Function from a String representation.
@@ -16,6 +17,7 @@ public class Function {
 		evaluator = new Evaluator();
 		//The library uses this format for variables.
 		evaluator.parse(expression.replace("x", "#{x}"));
+		this.expression = expression;
 	}
 	
 	/**
@@ -29,6 +31,10 @@ public class Function {
 		evaluator.putVariable("x", x+"");
 		String resultString = evaluator.evaluate();
 		return Float.parseFloat(resultString);
+	}
+
+	public String getExpression() {
+		return expression;
 	}
 }
 

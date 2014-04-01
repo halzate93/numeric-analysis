@@ -2,6 +2,7 @@ package methods;
 
 import net.sourceforge.jeval.EvaluationException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import functions.Function;
@@ -68,7 +69,7 @@ public class IncrementalSearch extends Method {
 		
 		int i = 0;
 		float xf, yf;
-		while(i < n && root){
+		while(!root && i < n){
 			xf = xi + dx;
 			yf = f.evaluate(xf);
 			
@@ -87,7 +88,7 @@ public class IncrementalSearch extends Method {
 		}
 		
 		if(!root){
-			result.put(EResults.Error.toString(), EResultInfo.IterationCount.toString());
+			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
 		}
 		
 		result.put(EResultInfo.MaxAbsoluteError.toString(), dx);
@@ -98,12 +99,31 @@ public class IncrementalSearch extends Method {
 	@Override
 	public void setup(JSONObject parameters) throws InvalidParameterException{
 		super.setup(parameters);
-		if(parameters.has(EParameter.Dx.toString()))
-			dx = (float) parameters.getDouble(EParameter.Dx.toString());
-		if(parameters.has(EParameter.X0.toString()))
-			x0 = (float) parameters.getDouble(EParameter.X0.toString());
-		if(parameters.has(EParameter.N.toString()))
-			n = parameters.getInt(EParameter.N.toString());
+		
+		if(parameters.has(EParameter.Dx.toString())){
+			try{
+				dx = (float) parameters.getDouble(EParameter.Dx.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.Dx, 
+						parameters.getString(EParameter.Dx.toString()));
+			}
+		}
+		if(parameters.has(EParameter.X0.toString())){
+			try{
+				x0 = (float) parameters.getDouble(EParameter.X0.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.X0, 
+						parameters.get(EParameter.X0.toString()).toString());
+			}
+		}
+		if(parameters.has(EParameter.N.toString())){
+			try{
+				n = parameters.getInt(EParameter.N.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.N, 
+						parameters.getString(EParameter.N.toString()));
+			}
+		}
 	}
 
 	/**
@@ -115,6 +135,7 @@ public class IncrementalSearch extends Method {
 		ArrayList<EParameter> parameters = new ArrayList<EParameter>(2);
 		if(dx == 0) parameters.add(EParameter.Dx);
 		if(n == 0) parameters.add(EParameter.N);
-		return (EParameter[]) parameters.toArray();
+		EParameter[] returnArray = new EParameter[parameters.size()];
+		return parameters.toArray(returnArray);
 	}
 }

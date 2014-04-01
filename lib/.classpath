@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="lib/json"/>
+	<classpathentry kind="src" path="lib/zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="F:/backup/DOCUMENTOS ESTUDIO/eafit/analisis_numerico/librerias_graficar_parser/jeval.jar"/>
+	<classpathentry kind="lib" path="lib/jeval.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

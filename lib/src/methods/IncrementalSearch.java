@@ -18,7 +18,7 @@ import org.json.JSONObject;
  * https://github.com/halzate93/solver/wiki/Incremental-Search
  */
 public class IncrementalSearch extends Method {
-	
+
 	/**
 	 * The beginning x value to start searching for roots.
 	 */
@@ -57,9 +57,15 @@ public class IncrementalSearch extends Method {
 	public void setN(int n) {
 		this.n = n;
 	}
+	
+	@Override
+	public JSONObject solve(){
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public JSONObject solve() throws MissingParametersException {
+	public EParameter[] checkParameters() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -8,29 +8,38 @@ package methods;
 public class MissingParametersException extends Exception {
 
 	private static final long serialVersionUID = 588219344875840310L;
-	private String[] missingParams;
-	private String message;
+	private EParameter[] missingParams;
+	private EMethod method;
 	
 	/**
 	 * Gets the missing parameter names that caused this exception.
 	 * @return The missing parameter names.
 	 */
-	public String[] getMissingParams(){
+	public EParameter[] getMissingParams(){
 		return missingParams;
 	}
 	
-	public MissingParametersException(String[] missingParams, EMethod method){
-		super("The following parameters are needed to use the " + method + " method");
-		
+	/**
+	 * Gets the method that caused the error.
+	 * @return the method that caused the error.
+	 */
+	public EMethod getMethod() {
+		return method;
+	}
+
+	
+	public MissingParametersException(EParameter[] missingParams, EMethod method){
+		super(createMessage(missingParams, method));
 		this.missingParams = missingParams;
-		message = "The following parameters are needed to use the " + method + " method: ";
-		for(String param : missingParams){
-			message += param + ", ";
-		}
-		message = message.substring(0, message.length()-1);
+		this.method = method;
 	}
 	
-	public String toString(){
+	private static String createMessage(EParameter[] missingParams, EMethod method){
+		String message = "The following parameters are needed to use the " + method + " method: ";
+		for(EParameter param : missingParams){
+			message += param.toString() + ", ";
+		}
+		message = message.substring(0, message.length()-1);
 		return message;
 	}
 }

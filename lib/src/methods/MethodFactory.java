@@ -13,9 +13,21 @@ public class MethodFactory {
 	 * Builds a Method instance with all the configuration parameters blank.
 	 * @param method The specified method to build.
 	 * @return a Method instance with all the configuration parameters blank.
+	 * @throws Exception when the specified method is not available.
 	 */
-	public static Method build(EMethod method) {
-		return new IncrementalSearch(); // TODO: This serves as a mockup.
+	public static Method build(EMethod method) throws Exception {
+		Method result = null;
+		switch (method) {
+		case IncrementalSearch:
+			result = new IncrementalSearch();
+		default:
+			break;
+		}
+		if(result != null){
+			result.setMethodDescriptor(method);
+			return result;
+		} else
+			throw new Exception("Invalid method descriptor.");
 	}
 	
 	/**
@@ -25,17 +37,11 @@ public class MethodFactory {
 	 * @param params The starting configuration parameters.
 	 * @return A Method instance with it's configuration parameters completely or
 	 * partially set.
+	 * @throws Exception when the specified method is not available. 
 	 */
-	public static Method build(EMethod method, JSONObject params){
-		return new IncrementalSearch(); // TODO: This serves as a mockup.
-	}
-	
-	/**
-	 * Sets the given parameters to the Method instance.
-	 * @param method The Method prototype to fill.
-	 * @param params The given parameters to configure the prototype with.
-	 */
-	public static void set(Method method, JSONObject params){
-		// TODO Auto-generated method stub
+	public static Method build(EMethod method, JSONObject params) throws Exception{
+		Method blank = build(method);
+		blank.setup(params);
+		return blank;
 	}
 }

@@ -20,8 +20,9 @@ public class Solver {
 	/**
 	 * Sets the equation solving method.
 	 * @param method The desired equation solving method.
+	 * @throws Exception 
 	 */
-	public void setMethodPrototype(EMethod method){
+	public void setMethodPrototype(EMethod method) throws Exception{
 		this.method = MethodFactory.build(method);
 	}
 	
@@ -30,8 +31,9 @@ public class Solver {
 	 * @param method The desired equation solving method.
 	 * @param params The beginning configuration parameters for the equation
 	 * solving method.
+	 * @throws Exception if anything went wrong creating the filled up prototype.
 	 */
-	public void setMethodPrototype(EMethod method, JSONObject params){
+	public void setMethodPrototype(EMethod method, JSONObject params) throws Exception{
 		this.method = MethodFactory.build(method, params);
 	}
 	
@@ -41,9 +43,11 @@ public class Solver {
 	 * @param params A JSONObject containing configuration parameters, it can
 	 * be all of the required parameters for the current method or a subset of
 	 * them.
+	 * @throws InvalidParameterException if any parameter contained in the 
+	 * parameters JSON has an invalid value.
 	 */
-	public void setMethodParams(JSONObject params){
-		MethodFactory.set(method, params);
+	public void setMethodParams(JSONObject params) throws InvalidParameterException{
+		method.setup(params);
 	}
 	
 	/**

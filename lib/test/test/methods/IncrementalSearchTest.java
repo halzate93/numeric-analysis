@@ -1,21 +1,21 @@
 package test.methods;
 
 import static org.junit.Assert.*;
-
 import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
-import methods.EMethod;
-import methods.EParameter;
-import methods.EResultInfo;
-import methods.EResults;
-import methods.IncrementalSearch;
-import methods.InvalidParameterException;
-import methods.MethodFactory;
-import methods.MissingParametersException;
+
+import co.edu.eafit.solver.lib.methods.EMethod;
+import co.edu.eafit.solver.lib.methods.EParameter;
+import co.edu.eafit.solver.lib.methods.EResultInfo;
+import co.edu.eafit.solver.lib.methods.EResults;
+import co.edu.eafit.solver.lib.methods.IncrementalSearch;
+import co.edu.eafit.solver.lib.methods.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.MethodFactory;
+import co.edu.eafit.solver.lib.methods.MissingParametersException;
 
 public class IncrementalSearchTest {
 

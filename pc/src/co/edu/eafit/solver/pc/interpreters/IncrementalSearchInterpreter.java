@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import org.json.JSONObject;
 
-import methods.EMethod;
-import methods.EParameter;
+import co.edu.eafit.solver.lib.methods.EMethod;
+import co.edu.eafit.solver.lib.methods.EParameter;
 
 public class IncrementalSearchInterpreter extends Interpreter {
 

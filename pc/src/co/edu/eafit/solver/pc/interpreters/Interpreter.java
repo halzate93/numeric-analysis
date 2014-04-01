@@ -5,11 +5,11 @@ import java.util.Scanner;
 import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONObject;
-import methods.EMethod;
-import methods.InvalidParameterException;
-import methods.MissingParametersException;
 
-import control.Solver;
+import co.edu.eafit.solver.lib.control.Solver;
+import co.edu.eafit.solver.lib.methods.EMethod;
+import co.edu.eafit.solver.lib.methods.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.MissingParametersException;
 
 public abstract class Interpreter {
 	private Scanner inputScanner;

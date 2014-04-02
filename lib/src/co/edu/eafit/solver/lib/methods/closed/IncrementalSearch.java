@@ -10,6 +10,7 @@ import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
+import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 
@@ -75,12 +76,12 @@ public class IncrementalSearch extends Method {
 		}
 		
 		JSONObject iteration = new JSONObject(); //Append first iteration
-		iteration.put(EIncrementalSearchProcess.X.toString(), Float.toString(xi));
+		iteration.put(EResultProcess.X.toString(), Float.toString(xi));
 		
-		iteration.put(EIncrementalSearchProcess.Fx.toString(), Float.toString(yi));
+		iteration.put(EResultProcess.Fx.toString(), Float.toString(yi));
 		
 		int i = 0;
-		iteration.put(EIncrementalSearchProcess.I.toString(), i+1);
+		iteration.put(EResultProcess.I.toString(), i+1);
 		process.put(iteration);
 		
 		float xf, yf;
@@ -103,10 +104,10 @@ public class IncrementalSearch extends Method {
 			i++;
 			
 			iteration = new JSONObject(); //Append this iteration
-			iteration.put(EIncrementalSearchProcess.I.toString(), i+1);
-			iteration.put(EIncrementalSearchProcess.X.toString(), Float.toString(xi));
-			iteration.put(EIncrementalSearchProcess.Fx.toString(), Float.toString(yi));
-			iteration.put(EIncrementalSearchProcess.Change.toString(), Float.toString(change));
+			iteration.put(EResultProcess.I.toString(), i+1);
+			iteration.put(EResultProcess.X.toString(), Float.toString(xi));
+			iteration.put(EResultProcess.Fx.toString(), Float.toString(yi));
+			iteration.put(EResultProcess.Change.toString(), Float.toString(change));
 			process.put(iteration);
 		}
 		

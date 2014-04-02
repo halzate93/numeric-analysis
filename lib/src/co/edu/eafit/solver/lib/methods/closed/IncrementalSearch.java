@@ -1,11 +1,17 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.closed;
 
 import net.sourceforge.jeval.EvaluationException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
+import co.edu.eafit.solver.lib.methods.Method;
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
+import co.edu.eafit.solver.lib.methods.enums.EResults;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 
 import java.util.ArrayList;
 
@@ -56,41 +62,59 @@ public class IncrementalSearch extends Method {
 	@Override
 	protected JSONObject solve() throws EvaluationException{
 		JSONObject result = new JSONObject();
+		JSONArray process = new JSONArray();
 		boolean root = false;
 		Function f = getFunction();
 		
 		float xi = x0;
 		float yi = f.evaluate(xi);
 		
-		if(yi == 0){
+		if(yi == 0){ //Check for root on start
 			root = true;
 			result.put(EResults.Root.toString(), x0);
 		}
 		
+		JSONObject iteration = new JSONObject(); //Append first iteration
+		iteration.put(EIncrementalSearchProcess.X.toString(), Float.toString(xi));
+		
+		iteration.put(EIncrementalSearchProcess.Fx.toString(), Float.toString(yi));
+		
 		int i = 0;
+		iteration.put(EIncrementalSearchProcess.I.toString(), i+1);
+		process.put(iteration);
+		
 		float xf, yf;
-		while(!root && i < n){
+		while(!root && i < n){ //Ends if a root is found or max count
 			xf = xi + dx;
 			yf = f.evaluate(xf);
 			
-			if(yf == 0){
+			float change = yf * yi; 
+			if(yf == 0){ //We found a root
 				root = true;
-				result.put(EResults.Root.toString(), xf);
-			}else if(yf * yi < 0){
+				result.put(EResults.Root.toString(), Float.toString(xf));
+			}else if(change < 0){ //We crossed the x axis
 				root = true;
-				result.append(EResults.Interval.toString(), xi);
-				result.append(EResults.Interval.toString(), xf);
+				result.append(EResults.Interval.toString(), Float.toString(xi));
+				result.append(EResults.Interval.toString(), Float.toString(xf));
 			}
 				
-			xi = xf;
+			xi = xf; //Update variables
 			yi = yf;
 			i++;
+			
+			iteration = new JSONObject(); //Append this iteration
+			iteration.put(EIncrementalSearchProcess.I.toString(), i+1);
+			iteration.put(EIncrementalSearchProcess.X.toString(), Float.toString(xi));
+			iteration.put(EIncrementalSearchProcess.Fx.toString(), Float.toString(yi));
+			iteration.put(EIncrementalSearchProcess.Change.toString(), Float.toString(change));
+			process.put(iteration);
 		}
 		
-		if(!root){
+		if(!root){ //If no root was found, max count was reached
 			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
 		}
 		
+		result.put(EResultInfo.Proccess.toString(), process);
 		result.put(EResultInfo.MaxAbsoluteError.toString(), dx);
 		result.put(EResultInfo.IterationCount.toString(), i);
 		return result;

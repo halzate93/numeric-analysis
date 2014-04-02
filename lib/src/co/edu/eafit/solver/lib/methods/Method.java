@@ -5,6 +5,10 @@ import net.sourceforge.jeval.EvaluationException;
 import org.json.*;
 
 import co.edu.eafit.solver.lib.functions.Function;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 
 /**
  * Serves as a template for any equation solving method.

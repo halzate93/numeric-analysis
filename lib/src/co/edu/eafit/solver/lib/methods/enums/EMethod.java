@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.enums;
 
 /**
  * Enumerator containing any possible method to solve equations.

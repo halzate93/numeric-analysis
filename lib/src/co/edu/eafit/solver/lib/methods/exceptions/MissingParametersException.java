@@ -1,4 +1,7 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.exceptions;
+
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
 
 /**
  * It is thrown if any configuration parameter is missing.

@@ -7,9 +7,9 @@ import net.sourceforge.jeval.EvaluationException;
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.control.Solver;
-import co.edu.eafit.solver.lib.methods.EMethod;
-import co.edu.eafit.solver.lib.methods.InvalidParameterException;
-import co.edu.eafit.solver.lib.methods.MissingParametersException;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 
 public abstract class Interpreter {
 	private Scanner inputScanner;

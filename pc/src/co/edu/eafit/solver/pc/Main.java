@@ -2,7 +2,7 @@ package co.edu.eafit.solver.pc;
 
 import java.util.Scanner;
 
-import co.edu.eafit.solver.lib.methods.EMethod;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.pc.interpreters.*;
 
 public class Main {

@@ -5,6 +5,9 @@ import net.sourceforge.jeval.EvaluationException;
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.methods.*;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 
 /**
  * This class handles the setup and usage of multiple equation solving methods,

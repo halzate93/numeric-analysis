@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.enums;
 
 /**
  * Contains all of the possible outcomes of executing a given method.

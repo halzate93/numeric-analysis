@@ -1,4 +1,6 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.exceptions;
+
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
 
 public class InvalidParameterException extends Exception {
 

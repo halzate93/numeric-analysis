@@ -8,14 +8,14 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import co.edu.eafit.solver.lib.methods.EMethod;
-import co.edu.eafit.solver.lib.methods.EParameter;
-import co.edu.eafit.solver.lib.methods.EResultInfo;
-import co.edu.eafit.solver.lib.methods.EResults;
-import co.edu.eafit.solver.lib.methods.IncrementalSearch;
-import co.edu.eafit.solver.lib.methods.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.MethodFactory;
-import co.edu.eafit.solver.lib.methods.MissingParametersException;
+import co.edu.eafit.solver.lib.methods.closed.IncrementalSearch;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
+import co.edu.eafit.solver.lib.methods.enums.EResults;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 
 public class IncrementalSearchTest {
 
@@ -207,6 +207,33 @@ public class IncrementalSearchTest {
 			fail("Should have thrown a invalid parameter exception.");
 		} catch (InvalidParameterException e) {
 			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void setProcessInformationTest(){
+		JSONObject parameters = new JSONObject();
+		String expression = "pow(x, 2) - 1";
+		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.Dx.toString(), 0.3f);
+		parameters.put(EParameter.N.toString(), 10);
+		parameters.put(EParameter.X0.toString(), 0f);
+		
+		try {
+			method.setup(parameters);
+			JSONObject result = method.run();
+			
+			assertTrue(
+					result.has(EResultInfo.Proccess.toString())
+					&& result.getJSONArray(
+							EResultInfo.Proccess.toString()).length() == 5
+							);
+		} catch (InvalidParameterException e) {
+			fail(e.getMessage());
+		} catch (MissingParametersException e) {
+			fail(e.getMessage());
+		} catch (EvaluationException e) {
+			fail(e.getMessage());
 		}
 	}
 }

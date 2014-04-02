@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.methods;
+package co.edu.eafit.solver.lib.methods.enums;
 
 /**
  * Contains all the info descriptors for any method run.
@@ -6,5 +6,5 @@ package co.edu.eafit.solver.lib.methods;
  *
  */
 public enum EResultInfo {
-	MaxAbsoluteError, IterationCount
+	MaxAbsoluteError, IterationCount, Proccess
 }

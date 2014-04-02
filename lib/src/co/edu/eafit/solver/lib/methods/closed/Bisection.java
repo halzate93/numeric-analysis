@@ -28,26 +28,65 @@ import java.util.Arrays;
 public class Bisection extends Method {
 
 	/**
-	 * The beginning x value to start searching for roots.
+	 * The initial point of the given interval.
 	 */
-	private float x0;
+	private float xI;
 	
 	/**
-	 * The change in x for each step, also know as step.
+	 * The final point of the given interval
 	 */
-	private float dx;
+	private float xS;
+	
+	/**
+	 * Maximum possible error
+	 */
+	private float tolerance;
+	
+	/**
+	 * Absolute or relative error
+	 */
+	private String errorType;
 	
 	/**
 	 * The max iteration count to stop the program if no root is found.
 	 */
 	private int n;
 		
-	public float getX0() {
-		return x0;
+
+	public float getxI() {
+		return xI;
 	}
 
-	public float getDx() {
-		return dx;
+	public void setxI(float xI) {
+		this.xI = xI;
+	}
+
+	public float getxS() {
+		return xS;
+	}
+
+	public void setxS(float xS) {
+		this.xS = xS;
+	}
+
+	public float getTolerance() {
+		return tolerance;
+	}
+
+	public void setTolerance(float tolerance) {
+		this.tolerance = tolerance;
+	}
+
+	public String getErrorType() {
+		return errorType;
+	}
+
+	public void setErrorType(String errorType) {
+		this.errorType = errorType;
+	}
+
+	public void setN(int n) {
+		this.n = n;
 	}
 
 	public int getN() {
@@ -61,16 +100,50 @@ public class Bisection extends Method {
 		boolean root = false;
 		Function f = getFunction();
 		
-		float xi = x0;
-		float yi = f.evaluate(xi);
+		float fxi = f.evaluate(xI);
+		float fxs = f.evaluate(xS);
+		float fxm;
+		float xm;
+		int counter;
+		float error;
+		float xaux;
 		
-		if(yi == 0){ //Check for root on start
+		if(fxi == 0){
 			root = true;
-			result.put(EResults.Root.toString(), x0);
+			result.put(EResults.Root.toString(), xI);
+		} else if(fxs == 0){
+			result.put(EResults.Root.toString(), xS);
+		} else if((fxi * fxs) < 0 ){
+			xm = (xI + xS)/2;
+			fxm = f.evaluate(xm);
+			counter = 1;
+			error = tolerance + 1;
+			
+			while(error > tolerance && fxm != 0 && counter < n){
+				if(fxi * fxm < 0){
+					xS = xm;
+					fxs = fxm;
+				}else{
+					xI = xm;
+					fxi = fxm;
+				}
+				xaux = xm;
+				xm = (xS + xS)/2;
+				fxm = f.evaluate(xm);
+				error = Math.abs(xm - xaux);
+				counter = counter + 1;
+			}
+			if(xm == 0){
+				result.put(EResults.Root.toString(), xm);
+			} else if(error < tolerance){
+				result.put(EResults.Approximation.toString(), xm);
+			}else{
+				result.put(EResults.Failure.toString(), xm);
+			}
 		}
 		
 		JSONObject iteration = new JSONObject(); //Append first iteration
-		iteration.put(EResultProcess.X.toString(), Float.toString(xi));
+		iteration.put(EResultProcess.I.toString(), Float.toString(xi));
 		
 		iteration.put(EResultProcess.Fx.toString(), Float.toString(yi));
 		

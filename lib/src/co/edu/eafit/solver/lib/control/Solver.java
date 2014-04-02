@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.methods.*;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 
@@ -67,5 +68,13 @@ public class Solver {
 	 */
 	public JSONObject solve() throws MissingParametersException, EvaluationException{
 		return method.run();
+	}
+	
+	/**
+	 * Returns the required parameters to run the selected method.
+	 * @return the array of parameters.
+	 */
+	public EParameter[] getRequiredParameters(){
+		return method.getRequiredParameters();
 	}
 }

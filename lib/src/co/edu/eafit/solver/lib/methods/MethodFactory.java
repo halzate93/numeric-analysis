@@ -2,8 +2,8 @@ package co.edu.eafit.solver.lib.methods;
 
 import org.json.*;
 
-import co.edu.eafit.solver.lib.methods.closed.IncrementalSearch;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
 /**
  * Creates and configures instances of Method, serves as a place to place similar
  * Method construction logic and also isolates it from other code.

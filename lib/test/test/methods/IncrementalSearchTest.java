@@ -9,13 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.methods.MethodFactory;
-import co.edu.eafit.solver.lib.methods.closed.IncrementalSearch;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
+import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
 
 public class IncrementalSearchTest {
 
@@ -29,7 +29,7 @@ public class IncrementalSearchTest {
 	public void configurationTest() {
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 100);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -52,7 +52,7 @@ public class IncrementalSearchTest {
 	public void findIntervalTest() {
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x + 0.5)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -81,7 +81,7 @@ public class IncrementalSearchTest {
 	public void findRootOnStartTest(){
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -106,7 +106,7 @@ public class IncrementalSearchTest {
 	public void findRootOnExecutionTest(){
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x - 5, 2)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -132,7 +132,7 @@ public class IncrementalSearchTest {
 	public void failByIterationCountTest(){
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -160,7 +160,7 @@ public class IncrementalSearchTest {
 	public void setResultInformationTest(){
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
@@ -214,7 +214,7 @@ public class IncrementalSearchTest {
 	public void setProcessInformationTest(){
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2) - 1";
-		parameters.put(EParameter.Function.toString(), expression);
+		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 0.3f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);

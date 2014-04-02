@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.methods.closed;
+package co.edu.eafit.solver.lib.methods.preliminary;
 
 import net.sourceforge.jeval.EvaluationException;
 
@@ -15,6 +15,7 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Starting with a given continuous function f(x) we will find and interval where it 
@@ -133,20 +134,20 @@ public class IncrementalSearch extends Method {
 						parameters.getString(EParameter.Dx.toString()));
 			}
 		}
-		if(parameters.has(EParameter.X0.toString())){
-			try{
-				x0 = (float) parameters.getDouble(EParameter.X0.toString());
-			}catch(JSONException e){
-				throw new InvalidParameterException(EParameter.X0, 
-						parameters.get(EParameter.X0.toString()).toString());
-			}
-		}
 		if(parameters.has(EParameter.N.toString())){
 			try{
 				n = parameters.getInt(EParameter.N.toString());
 			}catch(JSONException e){
 				throw new InvalidParameterException(EParameter.N, 
 						parameters.getString(EParameter.N.toString()));
+			}
+		}
+		if(parameters.has(EParameter.X0.toString())){
+			try{
+				x0 = (float) parameters.getDouble(EParameter.X0.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.X0, 
+						parameters.get(EParameter.X0.toString()).toString());
 			}
 		}
 	}
@@ -158,9 +159,18 @@ public class IncrementalSearch extends Method {
 	@Override
 	public EParameter[] checkParameters() {
 		ArrayList<EParameter> parameters = new ArrayList<EParameter>(2);
+		parameters.addAll(Arrays.asList(super.checkParameters()));
 		if(dx == 0) parameters.add(EParameter.Dx);
 		if(n == 0) parameters.add(EParameter.N);
 		EParameter[] returnArray = new EParameter[parameters.size()];
 		return parameters.toArray(returnArray);
+	}
+
+	@Override
+	public EParameter[] getRequiredParameters() {
+		EParameter[] required = {EParameter.N, EParameter.Dx, EParameter.X0};
+		ArrayList<EParameter> complete = new ArrayList<EParameter>(Arrays.asList(required));
+		complete.addAll(Arrays.asList(super.getRequiredParameters()));
+		return complete.toArray(required);
 	}
 }

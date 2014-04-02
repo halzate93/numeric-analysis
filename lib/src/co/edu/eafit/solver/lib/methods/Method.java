@@ -26,10 +26,10 @@ public abstract class Method {
 	/**
 	 * This is the function to work with while looking for roots. 
 	 */
-	private Function function;
+	private Function f;
 	
 	public Function getFunction(){
-		return function;
+		return f;
 	}
 	
 	public EMethod getMethodDescriptor(){
@@ -67,7 +67,11 @@ public abstract class Method {
 	 * Checks if all the required parameters are set.
 	 * @return all the missing parameters.
 	 */
-	public abstract EParameter[] checkParameters();
+	public EParameter[] checkParameters(){
+		EParameter[] missing = (f == null)? new EParameter[]{EParameter.F}:
+			new EParameter[]{};
+		return missing;
+	}
 	
 	/**
 	 * Configures the method according to the JSON description sent, only changes according
@@ -77,15 +81,24 @@ public abstract class Method {
 	 * @param parameters the JSONObject that contains the configuration.
 	 */
 	public void setup(JSONObject parameters) throws InvalidParameterException{
-		if(parameters.has(EParameter.Function.toString())){
-			String value = parameters.getString(EParameter.Function.toString());
+		if(parameters.has(EParameter.F.toString())){
+			String value = parameters.getString(EParameter.F.toString());
 			try {
-				function = new Function(value);
+				f = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			} catch (EvaluationException e) {
-				throw new InvalidParameterException(EParameter.Function, value);
+				throw new InvalidParameterException(EParameter.F, value);
 			}
 		}
+	}
+	
+	/**
+	 * Returns a complete list of any parameter required for the method execution,
+	 * each method should inherit it's parent's list and add the missing ones.
+	 * @return list of required parameters 
+	 */
+	public EParameter[] getRequiredParameters(){
+		return new EParameter[]{EParameter.F};
 	}
 }

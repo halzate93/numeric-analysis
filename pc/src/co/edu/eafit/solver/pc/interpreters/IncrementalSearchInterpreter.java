@@ -27,7 +27,7 @@ public class IncrementalSearchInterpreter extends Interpreter {
 		int n = inputScanner.nextInt();
 		
 		JSONObject parameters = new JSONObject();
-		parameters.put(EParameter.Function.toString(), f);
+		parameters.put(EParameter.F.toString(), f);
 		parameters.put(EParameter.Dx.toString(), dx);
 		parameters.put(EParameter.X0.toString(), x0);
 		parameters.put(EParameter.N.toString(), n);

@@ -7,5 +7,5 @@ package co.edu.eafit.solver.lib.methods.enums;
  *
  */
 public enum EParameter {
-	Function, Dx, X0, N
+	F, Dx, X0, N, G, Tolerance
 }

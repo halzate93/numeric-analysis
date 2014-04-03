@@ -4,19 +4,18 @@ import static org.junit.Assert.*;
 import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.methods.MethodFactory;
+import co.edu.eafit.solver.lib.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
-import co.edu.eafit.solver.lib.methods.open.EErrorType;
 import co.edu.eafit.solver.lib.methods.open.FixedPoint;
 
 public class FixedPointTest {
@@ -49,114 +48,63 @@ public class FixedPointTest {
 	}
 	
 	@Test
-	public void findApproximationTest(){
-		try {
-			JSONObject response = method.run();
-			assertEquals(-0.7998f, (float)response.getDouble(EResults.Root.toString()), 0.0001f);
-		} catch (MissingParametersException e) {
-			fail(e.toString());
-		} catch (EvaluationException e) {
-			fail(e.toString());
-		} catch (JSONException e){
-			fail(e.toString());
-		}
+	public void findApproximationTest() throws MissingParametersException, EvaluationException{
+		JSONObject response = method.run();
+		assertEquals(-0.7998f, (float)response.getDouble(EResults.Root.toString()), 0.0001f);
 	}
 	
 	@Test
-	public void convergenceTest(){
-		try {
-			JSONObject response = method.run();
-			assertEquals(9, response.getInt(EResultInfo.IterationCount.toString()));
-		} catch (MissingParametersException e) {
-			fail(e.toString());
-		} catch (EvaluationException e) {
-			fail(e.toString());
-		}
+	public void convergenceTest() throws MissingParametersException, EvaluationException{	
+		JSONObject response = method.run();
+		assertEquals(9, response.getInt(EResultInfo.IterationCount.toString()));
 	}
 	
 	@Test
-	public void failIterationCountTest(){
+	public void failIterationCountTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
 		JSONObject extraParams = new JSONObject();
 		extraParams.put(EParameter.N.toString(), 8);
-		try {
-			method.setup(extraParams);
-			JSONObject response = method.run();
-			assertEquals(EResultInfo.IterationCount.toString(), 
-					response.getString(EResults.Failure.toString()));
-		} catch (InvalidParameterException e) {
-			fail(e.toString());
-		} catch (MissingParametersException e) {
-			fail(e.toString());
-		} catch (EvaluationException e) {
-			fail(e.toString());
-		} catch (JSONException e){
-			fail(e.toString());
-		}
+		method.setup(extraParams);
+		JSONObject response = method.run();
+		assertEquals(EResultInfo.IterationCount.toString(), 
+				response.getString(EResults.Failure.toString()));
 	}
 	
 	@Test
-	public void findRootTest(){
+	public void findRootTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
 		JSONObject params = new JSONObject();
 		params.put(EParameter.G.toString(), "x+1");
 		params.put(EParameter.F.toString(), "x");
 		params.put(EParameter.X0.toString(), -1);
 		
-		try {
-			method.setup(params);
-			JSONObject response = method.run();
-			assertTrue(
-					response.getDouble(EResults.Root.toString()) == 0 &&
-					Float.parseFloat(response.getString(EResultInfo.Error.toString())) == 0
-					);
-		} catch (InvalidParameterException e) {
-			fail(e.toString());
-		} catch (MissingParametersException e) {
-			fail(e.toString());
-		} catch (EvaluationException e) {
-			fail(e.toString());
-		}
+		method.setup(params);
+		JSONObject response = method.run();
+		assertTrue(
+				response.getDouble(EResults.Root.toString()) == 0 &&
+				Float.parseFloat(response.getString(EResultInfo.Error.toString())) == 0
+				);
 	}
 	
 	@Test
-	public void setProcessInformationTest(){
-		try {
-			JSONObject result = method.run();
-			JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
-			assertEquals(9, process.length());
-		} catch (MissingParametersException e) {
-			fail(e.toString());
-		} catch (EvaluationException e) {
-			fail(e.toString());
-		} catch (JSONException e){
-			fail(e.toString());
-		}
+	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
+		JSONObject result = method.run();
+		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
+		assertEquals(9, process.length());
 	}
 	
-	@Test
-	public void missingParamsTest(){
-		try {
-			method = (FixedPoint) MethodFactory.build(EMethod.FixedPoint);
-			method.run();
-			fail("Shouldn't execute without parameters.");
-		}catch (MissingParametersException e){
-			assertTrue(true);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
+	@Test(expected = MissingParametersException.class)
+	public void missingParamsTest() throws Exception{
+		
+		method = (FixedPoint) MethodFactory.build(EMethod.FixedPoint);
+		method.run();
+		
 	}
 	
-	@Test
-	public void invalidParametersTest(){
+	@Test(expected = InvalidParameterException.class)
+	public void invalidParametersTest() throws InvalidParameterException{
 		JSONObject badParameter = new JSONObject();
 		badParameter.put(EParameter.ErrorType.toString(), true);
 		
-		try {
-			method.setup(badParameter);
-			fail("Should't accept this parameter." + badParameter.toString());
-		} catch (InvalidParameterException e) {
-			assertTrue(true);
-		}
-		
+		method.setup(badParameter);
 	}
 
 }

@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
+import co.edu.eafit.solver.lib.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
@@ -62,41 +63,43 @@ public class FixedPoint extends Method {
 		JSONObject result = new JSONObject();
 		JSONArray process = new JSONArray();
 		
-		//Preliminary setup and first iteration
-		float xi = x0;
-		float yi = getFunction().evaluate(xi);
-		
-		float error = tolerance + 1, xf, yf;
-		int i = 0;
 		JSONObject iteration = new JSONObject();
+		//Preliminary setup and first iteration
+		float xa = x0;
+		float ya = getNextApproximation(xa, new JSONObject[]{iteration});
+		
+		float error = tolerance + 1, xn, yn;
+		int i = 0;
+		
 		iteration.put(EResultProcess.I.toString(), i);
-		iteration.put(EResultProcess.X.toString(), xi);
-		iteration.put(EResultProcess.Fx.toString(), yi);
+		iteration.put(EResultProcess.X.toString(), xa);
+		iteration.put(EResultProcess.Fx.toString(), ya);
 		
 		/* Exits if we find a root, get to a good approximation or
 		 * max iteration count is reached. */
-		while(yi != 0f && error > tolerance && i < n){
-			xf = g.evaluate(xi);
-			yf = getFunction().evaluate(xf);
+		while(ya != 0f && error > tolerance && i < n){
+			iteration = new JSONObject();
 			
-			error = calculateError(xi, xf);
-			xi = xf;
-			yi = yf;
+			xn = g.evaluate(xa);
+			yn = getNextApproximation(xn, new JSONObject[]{iteration});
+			
+			error = calculateError(xa, xn);
+			xa = xn;
+			ya = yn;
 			i++;
 			
-			iteration = new JSONObject();
 			iteration.put(EResultProcess.I.toString(), i);
-			iteration.put(EResultProcess.X.toString(), xf);
-			iteration.put(EResultProcess.Fx.toString(), yf);
+			iteration.put(EResultProcess.X.toString(), xn);
+			iteration.put(EResultProcess.Fx.toString(), yn);
 			iteration.put(EResultProcess.Error.toString(), Float.toString(error));
 			process.put(iteration);
 		}
 		
-		if(yi == 0){
-			result.put(EResults.Root.toString(), xi);
+		if(ya == 0){
+			result.put(EResults.Root.toString(), xa);
 			result.put(EResultInfo.Error.toString(), "0");
 		} else if( error <= tolerance) {
-			result.put(EResults.Root.toString(), xi);
+			result.put(EResults.Root.toString(), xa);
 			result.put(EResultInfo.Error.toString(), Float.toString(error));
 		} else {
 			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
@@ -104,6 +107,19 @@ public class FixedPoint extends Method {
 		result.put(EResultInfo.IterationCount.toString(), i);
 		result.put(EResultInfo.Proccess.toString(), process);
 		return result;
+	}
+
+	/**
+	 * Evaluates the g function and gets the next approximation, any derivative of this
+	 * method only needs to override this method.
+	 * @param xn the actual value
+	 * @param info An array holding a single JSONObject to save information about that
+	 * step (Emulates the out parameter keyword from other languages).
+	 * @return the new approximation to xv (xa).
+	 * @throws EvaluationException if the evaluated function fails.
+	 */
+	protected float getNextApproximation(float xn, JSONObject[] info) throws EvaluationException {
+		return getFunction().evaluate(xn);
 	}
 
 	/**
@@ -207,17 +223,6 @@ public class FixedPoint extends Method {
 	public EErrorType getErrorType() {
 		return errorType;
 	}
-
-	/**
-	 * Any method that provides a function g can be considered as a derivative of
-	 * FixedPoint, so the classes that inherits from it can supply a function g and
-	 * use the same procedure.
-	 * @param g the function to generate new approximation based on a past one.
-	 */
-	protected void setG(Function g) {
-		this.g = g;
-	}
-
 	
 	@Override
 	public EMethod getMethodDescriptor() {

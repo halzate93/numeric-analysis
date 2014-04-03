@@ -4,6 +4,7 @@ import org.json.*;
 
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.open.FixedPoint;
+import co.edu.eafit.solver.lib.methods.open.Newton;
 import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
 /**
  * Creates and configures instances of Method, serves as a place to place similar
@@ -27,6 +28,9 @@ public class MethodFactory {
 			break;
 		case FixedPoint:
 			result = new FixedPoint();
+			break;
+		case Newton:
+			result = new Newton();
 			break;
 		default:
 			break;

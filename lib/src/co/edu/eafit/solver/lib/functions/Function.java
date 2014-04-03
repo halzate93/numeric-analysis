@@ -31,6 +31,7 @@ public class Function {
 	 */
 	public float evaluate(float x) throws EvaluationException{
 		evaluator.putVariable("x", x+"");
+		System.out.println(getExpression());
 		String resultString = evaluator.evaluate();
 		return Float.parseFloat(resultString);
 	}
@@ -46,6 +47,9 @@ public class Function {
 	 */
 	private static String parseExpression(String expression){
 		// The library uses this format for variables. #{x}
+		
+		//We must avoid -- when replacing in -x with a negative value of x
+		expression = expression.replaceAll("-\\s*x", "-1*x");
 		
 		// We put spaces around any x that doesn't have any letter or
 		// number exactly at his left, this is to avoid replacing function
@@ -71,8 +75,9 @@ public class Function {
 			m = p.matcher(expression);
 		}
 		
+		//Finally replace x with #{x}
 		expression = expression.replaceAll("\\sx\\s", "#{x}");
-		//System.out.println(expression);
+		System.out.println(expression);
 		return expression;
 	}
 }

@@ -26,7 +26,7 @@ public class IncrementalSearchTest {
 	}
 
 	@Test
-	public void configurationTest() {
+	public void configurationTest() throws InvalidParameterException {
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -34,51 +34,39 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 100);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			assertTrue(
-					method.getFunction().getExpression().equals(expression)
-					&& method.getDx() == 1f
-					&& method.getN() == 100
-					&& method.getX0() == 0f
-					&& method.getMethodDescriptor() == EMethod.IncrementalSearch
-					);
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		}
+		method.setup(parameters);
+		assertTrue(
+				method.getFunction().getExpression().equals(expression)
+				&& method.getDx() == 1f
+				&& method.getN() == 100
+				&& method.getX0() == 0f
+				&& method.getMethodDescriptor() == EMethod.IncrementalSearch
+				);
 	}
 	
 	@Test
-	public void findIntervalTest() {
+	public void findIntervalTest() throws MissingParametersException, EvaluationException, InvalidParameterException {
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x + 0.5)";
 		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
-		
-		try {
-			method.setup(parameters);
-			JSONObject result = method.run();
 			
-			boolean interval = result.has(EResults.Interval.toString());
-			if(interval){
-				JSONArray intervalArray = result.getJSONArray(EResults.Interval.toString());
-				interval = (float)intervalArray.getDouble(0) == 0f
-						&& (float)intervalArray.getDouble(1) == 1f; 
-			}
-			assertTrue(interval);
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
+		method.setup(parameters);
+		JSONObject result = method.run();
+		
+		boolean interval = result.has(EResults.Interval.toString());
+		if(interval){
+			JSONArray intervalArray = result.getJSONArray(EResults.Interval.toString());
+			interval = (float)intervalArray.getDouble(0) == 0f
+					&& (float)intervalArray.getDouble(1) == 1f; 
 		}
+		assertTrue(interval);
 	}
 	
 	@Test
-	public void findRootOnStartTest(){
+	public void findRootOnStartTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -86,24 +74,16 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			JSONObject response = method.run();
-			assertTrue(
-					response.has(EResults.Root.toString())
-					&& response.getDouble(EResults.Root.toString()) == 0f
-					);
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
-		}
+		method.setup(parameters);
+		JSONObject response = method.run();
+		assertTrue(
+				response.has(EResults.Root.toString())
+				&& response.getDouble(EResults.Root.toString()) == 0f
+				);
 	}
 	
 	@Test
-	public void findRootOnExecutionTest(){
+	public void findRootOnExecutionTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x - 5, 2)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -111,24 +91,16 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			JSONObject response = method.run();
-			assertTrue(
-					response.has(EResults.Root.toString())
-					&& response.getDouble(EResults.Root.toString()) == 5f
-					);
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
-		}
+		method.setup(parameters);
+		JSONObject response = method.run();
+		assertTrue(
+				response.has(EResults.Root.toString())
+				&& response.getDouble(EResults.Root.toString()) == 5f
+				);
 	}
 	
 	@Test
-	public void failByIterationCountTest(){
+	public void failByIterationCountTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -136,27 +108,18 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			JSONObject result = method.run();
-			
-			assertTrue(
-					result.has(EResults.Failure.toString())
-					&& result.getString(EResults.Failure.toString())
-						.equals(EResultInfo.IterationCount.toString())
-					);
-			
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
-		}
+		method.setup(parameters);
+		JSONObject result = method.run();
+		
+		assertTrue(
+				result.has(EResults.Failure.toString())
+				&& result.getString(EResults.Failure.toString())
+					.equals(EResultInfo.IterationCount.toString())
+				);
 	}
 	
 	@Test
-	public void setResultInformationTest(){
+	public void setResultInformationTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -164,53 +127,32 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			JSONObject result = method.run();
-			
-			assertTrue(
-					result.has(EResultInfo.IterationCount.toString())
-					&& result.getInt(EResultInfo.IterationCount.toString()) == 10
-					&& result.has(EResultInfo.Error.toString())
-					&& result.getDouble(EResultInfo.Error.toString()) == 1f
-					);
-			
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
-		}
+		method.setup(parameters);
+		JSONObject result = method.run();
+		
+		assertTrue(
+				result.has(EResultInfo.IterationCount.toString())
+				&& result.getInt(EResultInfo.IterationCount.toString()) == 10
+				&& result.has(EResultInfo.Error.toString())
+				&& result.getDouble(EResultInfo.Error.toString()) == 1f
+				);
 	}
 
-	@Test
-	public void missingParamsTest() {
-		try {
+	@Test(expected = MissingParametersException.class)
+	public void missingParamsTest() throws MissingParametersException, EvaluationException {
 			method.run();
-			fail("Should have thrown a missing param exception.");
-		} catch (MissingParametersException e) {
-			assertTrue(true);
-		} catch (EvaluationException e) {
-			fail();
-		}
 	}
 	
-	@Test
-	public void invalidParameterTest() {
+	@Test(expected = InvalidParameterException.class)
+	public void invalidParameterTest() throws InvalidParameterException {
 		JSONObject parameters = new JSONObject();
 		parameters.put(EParameter.X0.toString(), true);
 		
-		try {
-			method.setup(parameters);
-			fail("Should have thrown a invalid parameter exception.");
-		} catch (InvalidParameterException e) {
-			assertTrue(true);
-		}
+		method.setup(parameters);
 	}
 	
 	@Test
-	public void setProcessInformationTest(){
+	public void setProcessInformationTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
 		String expression = "pow(x, 2) - 1";
 		parameters.put(EParameter.F.toString(), expression);
@@ -218,21 +160,14 @@ public class IncrementalSearchTest {
 		parameters.put(EParameter.N.toString(), 10);
 		parameters.put(EParameter.X0.toString(), 0f);
 		
-		try {
-			method.setup(parameters);
-			JSONObject result = method.run();
-			
-			assertTrue(
-					result.has(EResultInfo.Proccess.toString())
-					&& result.getJSONArray(
-							EResultInfo.Proccess.toString()).length() == 5
-							);
-		} catch (InvalidParameterException e) {
-			fail(e.getMessage());
-		} catch (MissingParametersException e) {
-			fail(e.getMessage());
-		} catch (EvaluationException e) {
-			fail(e.getMessage());
-		}
+	
+		method.setup(parameters);
+		JSONObject result = method.run();
+		
+		assertTrue(
+				result.has(EResultInfo.Proccess.toString())
+				&& result.getJSONArray(
+						EResultInfo.Proccess.toString()).length() == 5
+						);
 	}
 }

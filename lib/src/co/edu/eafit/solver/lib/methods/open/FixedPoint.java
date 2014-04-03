@@ -65,41 +65,40 @@ public class FixedPoint extends Method {
 		
 		JSONObject iteration = new JSONObject();
 		//Preliminary setup and first iteration
-		float xa = x0;
-		float ya = getNextApproximation(xa, new JSONObject[]{iteration});
+		float xn = x0;
+		float y = getFunction().evaluate(xn);
 		
-		float error = tolerance + 1, xn, yn;
+		float error = tolerance + 1, xa;
 		int i = 0;
 		
 		iteration.put(EResultProcess.I.toString(), i);
-		iteration.put(EResultProcess.X.toString(), xa);
-		iteration.put(EResultProcess.Fx.toString(), ya);
-		
+		iteration.put(EResultProcess.X.toString(), xn);
+		iteration.put(EResultProcess.Fx.toString(), y);
+		process.put(iteration);
 		/* Exits if we find a root, get to a good approximation or
 		 * max iteration count is reached. */
-		while(ya != 0f && error > tolerance && i < n){
+		while(y != 0f && error > tolerance && i < n){
 			iteration = new JSONObject();
 			
-			xn = g.evaluate(xa);
-			yn = getNextApproximation(xn, new JSONObject[]{iteration});
+			xa = getNextApproximation(xn, new JSONObject[]{iteration});
+			y = getFunction().evaluate(xa);
 			
-			error = calculateError(xa, xn);
-			xa = xn;
-			ya = yn;
+			error = calculateError(xn, xa);
+			xn = xa;
+
 			i++;
-			
 			iteration.put(EResultProcess.I.toString(), i);
-			iteration.put(EResultProcess.X.toString(), xn);
-			iteration.put(EResultProcess.Fx.toString(), yn);
+			iteration.put(EResultProcess.X.toString(), xa);
+			iteration.put(EResultProcess.Fx.toString(), y);
 			iteration.put(EResultProcess.Error.toString(), Float.toString(error));
 			process.put(iteration);
 		}
 		
-		if(ya == 0){
-			result.put(EResults.Root.toString(), xa);
+		if(y == 0){
+			result.put(EResults.Root.toString(), xn);
 			result.put(EResultInfo.Error.toString(), "0");
 		} else if( error <= tolerance) {
-			result.put(EResults.Root.toString(), xa);
+			result.put(EResults.Root.toString(), xn);
 			result.put(EResultInfo.Error.toString(), Float.toString(error));
 		} else {
 			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
@@ -119,7 +118,7 @@ public class FixedPoint extends Method {
 	 * @throws EvaluationException if the evaluated function fails.
 	 */
 	protected float getNextApproximation(float xn, JSONObject[] info) throws EvaluationException {
-		return getFunction().evaluate(xn);
+		return g.evaluate(xn);
 	}
 
 	/**

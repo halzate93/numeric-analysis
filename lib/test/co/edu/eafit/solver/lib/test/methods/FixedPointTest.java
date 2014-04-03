@@ -23,28 +23,49 @@ public class FixedPointTest {
 	private FixedPoint method;
 	private static final String f = "x * exp(x) - pow(x, 2) - 5*x - 3";
 	private static final String g = "(x * exp(x)- pow(x, 2) - 3)/5";
+	private static final float x0 = -0.5f;
+	private static final float tolerance = 0.0001f; //Tolerance 1x10^-4
+	private static final EErrorType errorType = EErrorType.Relative;
+	private static final int n = 10;
+	
+	private static final float MAXERROR = 0.00000000001f;
+	
 	@Before
 	public void setUp() throws Exception {
 		method = (FixedPoint) MethodFactory.build(EMethod.FixedPoint);
 		JSONObject params = new JSONObject();
-		params.put(EParameter.X0.toString(), -0.5f);
+		params.put(EParameter.X0.toString(), x0);
 		params.put(EParameter.F.toString(), f);
-		params.put(EParameter.Tolerance.toString(), 0.0001f); //Tolerance 1x10^-4
-		params.put(EParameter.ErrorType.toString(), EErrorType.Relative.toString());
+		params.put(EParameter.Tolerance.toString(), tolerance);
+		params.put(EParameter.ErrorType.toString(), errorType.toString());
 		params.put(EParameter.G.toString(), g);
-		params.put(EParameter.N.toString(), 10);
+		params.put(EParameter.N.toString(), n);
 		method.setup(params);
 	}
 
 	@Test
-	public void configurationTest() {
-		assertTrue(
-				method.getFunction().getExpression().equals(f) &&
-				method.getG().getExpression().equals(g) &&
-				method.getX0() == -0.5f &&
-				method.getTolerance() == 0.0001f &&
-				method.getErrorType() == EErrorType.Relative
-				);
+	public void configureFTest() {
+		assertEquals(f, method.getFunction().getExpression());
+	}
+	
+	@Test
+	public void configureGTest(){
+		assertEquals(g, method.getG().getExpression());
+	}
+	
+	@Test
+	public void configureX0Test(){
+		assertEquals(x0, method.getX0(), MAXERROR);
+	}
+	
+	@Test
+	public void configureToleranceTest(){
+		assertEquals(tolerance, method.getTolerance(), MAXERROR);
+	}
+	
+	@Test
+	public void configureErrorTypeTest(){
+		assertEquals(errorType, method.getErrorType());
 	}
 	
 	@Test
@@ -88,7 +109,7 @@ public class FixedPointTest {
 	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
 		JSONObject result = method.run();
 		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
-		assertEquals(9, process.length());
+		assertEquals(10, process.length());
 	}
 	
 	@Test(expected = MissingParametersException.class)

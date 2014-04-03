@@ -14,6 +14,7 @@ import co.edu.eafit.solver.lib.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
+import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
@@ -29,7 +30,9 @@ public class NewtonTest {
 	private static final float tolerance = 0.00001f;
 	private static final EErrorType errorType = EErrorType.Absolute;
 	private static final float x0 = -1;
-	private static final float root = 0.0000015458f;
+	
+	private static final float root = -0.787820f;
+	private static final int i = 3;
 	
 	private static float MAXERROR = 0.00000000001f;
 	
@@ -47,12 +50,12 @@ public class NewtonTest {
 	}
 
 	@Test
-	public void configureFtionTest() {
+	public void configureFTest() {
 		assertEquals(f, method.getFunction().getExpression());
 	}
 	
 	@Test
-	public void configureDftionTest() {
+	public void configureDfTest() {
 		assertEquals(df, method.getDerivative().getExpression());
 	}
 	
@@ -78,29 +81,55 @@ public class NewtonTest {
 	
 	@Test
 	public void findApproximationTest() throws JSONException, Exception{
-		System.out.print("This -> ");
 		method.run();
-		assertEquals(root, method.getLastResult().getDouble(EResults.Root.toString()), MAXERROR);
+		assertEquals(root, method.getLastResult().getDouble(EResults.Root.toString()), tolerance);
 	}
 	
 	@Test
-	public void convergenceTest(){
-		fail("Not implemented.");
+	public void convergenceTest() throws JSONException, Exception{
+		method.run();
+		assertEquals(i, method.getLastResult().get(EResultInfo.IterationCount.toString()));
 	}
 	
 	@Test
-	public void failIterationCountTest(){
-		fail("Not implemented.");
+	public void failIterationCountTest() throws JSONException, Exception{
+		JSONObject lessIterations = new JSONObject();
+		lessIterations.put(EParameter.N.toString(), 2);
+		
+		method.setup(lessIterations);
+		method.run();
+		
+		assertEquals(EResultInfo.IterationCount.toString(), 
+				method.getLastResult().get(EResults.Failure.toString()));
 	}
 	
 	@Test
-	public void findRootTest(){
-		fail("Not implemented.");
+	public void findRootTest() throws NumberFormatException, JSONException, Exception{
+		JSONObject easyParams = new JSONObject();
+		easyParams.put(EParameter.F.toString(), "x + 1");
+		easyParams.put(EParameter.Df.toString(), "1");
+		easyParams.put(EParameter.X0.toString(), -1f);
+		
+		method.setup(easyParams);
+		method.run();
+		
+		assertEquals(0f, Float.parseFloat(method.getLastResult()
+				.getString(EResultInfo.Error.toString())), MAXERROR);
 	}
 	
 	@Test
-	public void setProcessInformationTest(){
-		fail("Not implemented.");
+	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
+		JSONObject result = method.run();
+		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
+		assertEquals(i+1, process.length());
+	}
+	
+	@Test
+	public void setDfProcessInformation() throws JSONException, Exception{
+		method.run();
+		assertEquals(5.805646f, method.getLastResult()
+				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(3)
+				.getDouble(EResultProcess.Dfx.toString()), tolerance);
 	}
 	
 	@Test(expected = MissingParametersException.class)

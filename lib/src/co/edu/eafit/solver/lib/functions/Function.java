@@ -31,7 +31,6 @@ public class Function {
 	 */
 	public float evaluate(float x) throws EvaluationException{
 		evaluator.putVariable("x", x+"");
-		System.out.println(getExpression());
 		String resultString = evaluator.evaluate();
 		return Float.parseFloat(resultString);
 	}
@@ -65,9 +64,7 @@ public class Function {
 		
 		Pattern p = Pattern.compile("\\Wx");
 		Matcher m = p.matcher(expression);
-		//System.out.println("------------------------");
 		while(i < expression.length() && m.find(i)){
-			//System.out.println(expression + " " + i + " " + m.start() + " " + m.end() + " " + m.group());
 			expression = expression.substring(0, m.start())+
 					m.group().replace("x", " x ")+
 					expression.substring(m.end());
@@ -77,7 +74,6 @@ public class Function {
 		
 		//Finally replace x with #{x}
 		expression = expression.replaceAll("\\sx\\s", "#{x}");
-		System.out.println(expression);
 		return expression;
 	}
 }

@@ -2,8 +2,12 @@ package co.edu.eafit.solver.pc;
 
 import java.util.Scanner;
 
+import org.json.JSONObject;
+
+import co.edu.eafit.solver.lib.control.Solver;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
-import co.edu.eafit.solver.pc.interpreters.*;
+import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.pc.configurators.*;
 
 public class Main {
 
@@ -11,8 +15,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 		int method = 0;
+		Scanner sc = new Scanner(System.in);
 		if(args.length == 0){
 			method = -1;
 			while(method == -1){
@@ -26,24 +30,36 @@ public class Main {
 			method = Integer.parseInt(args[0]);
 		}
 		EMethod methodEnum = EMethod.values()[method];
+		
 		try {
-			run(sc, methodEnum);
+			run(methodEnum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		sc.close();
 	}
 	
-	private static void run(Scanner sc, EMethod method) throws Exception{
-		Interpreter i = null;
-		switch (method) {
-		case IncrementalSearch:
-			i = new IncrementalSearchInterpreter(sc, EMethod.IncrementalSearch);
-			break;
-
-		default:
-			break;
+	private static void run(EMethod method) throws Exception {
+		
+		Solver s = new Solver();
+		s.setMethodPrototype(method);
+		
+		MethodConfigurator cf = new InputReaderConfigurator();
+		
+		JSONObject params = cf.getConfiguration(s.getRequiredParameters());
+		
+		boolean ready = false;
+		while(!ready){
+			try{
+				s.setMethodParams(params);
+				ready = true;
+			} catch(InvalidParameterException e){
+				e.printStackTrace();
+			}
 		}
-		if(i != null) i.run();
+		
+		s.solve();
+		System.out.println(s.getLastResult().toString(2));
 	}
 
 }

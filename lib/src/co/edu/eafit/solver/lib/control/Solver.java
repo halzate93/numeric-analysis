@@ -77,4 +77,13 @@ public class Solver {
 	public EParameter[] getRequiredParameters(){
 		return method.getRequiredParameters();
 	}
+
+	/**
+	 * Returns the result of the last execution, throws an exception if none.
+	 * @return the result.
+	 * @throws Exception if no execution has happened. 
+	 */
+	public JSONObject getLastResult() throws Exception {
+		return method.getLastResult();
+	}
 }

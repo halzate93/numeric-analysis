@@ -1,4 +1,4 @@
-package test.methods;
+package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
 import net.sourceforge.jeval.EvaluationException;
@@ -114,7 +114,6 @@ public class IncrementalSearchTest {
 		try {
 			method.setup(parameters);
 			JSONObject response = method.run();
-			
 			assertTrue(
 					response.has(EResults.Root.toString())
 					&& response.getDouble(EResults.Root.toString()) == 5f
@@ -172,8 +171,8 @@ public class IncrementalSearchTest {
 			assertTrue(
 					result.has(EResultInfo.IterationCount.toString())
 					&& result.getInt(EResultInfo.IterationCount.toString()) == 10
-					&& result.has(EResultInfo.MaxAbsoluteError.toString())
-					&& result.getDouble(EResultInfo.MaxAbsoluteError.toString()) == 1f
+					&& result.has(EResultInfo.Error.toString())
+					&& result.getDouble(EResultInfo.Error.toString()) == 1f
 					);
 			
 		} catch (InvalidParameterException e) {

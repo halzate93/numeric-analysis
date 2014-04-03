@@ -6,5 +6,6 @@ package co.edu.eafit.solver.lib.methods.enums;
  *
  */
 public enum EMethod {
-	IncrementalSearch
+	IncrementalSearch,
+	FixedPoint
 }

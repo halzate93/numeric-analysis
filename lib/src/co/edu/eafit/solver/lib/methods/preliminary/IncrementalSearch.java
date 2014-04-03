@@ -117,7 +117,7 @@ public class IncrementalSearch extends Method {
 		}
 		
 		result.put(EResultInfo.Proccess.toString(), process);
-		result.put(EResultInfo.MaxAbsoluteError.toString(), dx);
+		result.put(EResultInfo.Error.toString(), dx);
 		result.put(EResultInfo.IterationCount.toString(), i);
 		return result;
 	}

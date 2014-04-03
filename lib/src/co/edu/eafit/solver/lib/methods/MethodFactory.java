@@ -3,6 +3,7 @@ package co.edu.eafit.solver.lib.methods;
 import org.json.*;
 
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.methods.open.FixedPoint;
 import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
 /**
  * Creates and configures instances of Method, serves as a place to place similar
@@ -23,6 +24,10 @@ public class MethodFactory {
 		switch (method) {
 		case IncrementalSearch:
 			result = new IncrementalSearch();
+			break;
+		case FixedPoint:
+			result = new FixedPoint();
+			break;
 		default:
 			break;
 		}

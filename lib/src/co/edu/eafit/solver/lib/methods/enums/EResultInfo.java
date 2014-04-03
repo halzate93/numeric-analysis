@@ -6,5 +6,5 @@ package co.edu.eafit.solver.lib.methods.enums;
  *
  */
 public enum EResultInfo {
-	MaxAbsoluteError, IterationCount, Proccess
+	Error, IterationCount, Proccess
 }

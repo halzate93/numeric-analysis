@@ -19,6 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:text="@string/tv_choosemethod" />
 
         <Spinner
@@ -34,10 +35,10 @@
             android:id="@+id/viewLine"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_alignBottom="@+id/spinnerMetodos"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/spinnerMetodos"
             android:layout_alignParentLeft="true"
-            android:background="@android:color/darker_gray" />
+            android:background="#0066FF" />
         
 		<TextView
             android:id="@+id/textView2"
@@ -47,6 +48,7 @@
             android:layout_below="@+id/viewLine"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:text="@string/tv_setdata" />
 		
 		
@@ -122,6 +124,31 @@
                 android:layout_height="wrap_content" />
         </TableLayout>
         
+		<EditText
+		    android:id="@+id/mathinput"
+		    android:layout_width="300dp"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@+id/TableIncremental"
+		    android:layout_marginTop="44dp"
+		    android:ems="10"
+		    android:inputType="text"
+		    android:paddingLeft="10dp"
+		    android:paddingRight="10dp"
+		    android:textColor="#ff6601"
+		    android:textSize="24sp"
+		    android:textStyle="bold" />
+		
+		<Button
+		    android:id="@+id/btnBorrar"
+		    style="?android:attr/buttonStyleSmall"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/mathinput"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignTop="@+id/mathinput"
+		    android:text="@string/btn_delete" />
+        
 		<Button
 		    android:id="@+id/calculatedBbutton"
 		    android:layout_width="match_parent"
@@ -136,40 +163,13 @@
 		    android:id="@+id/maintable"
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
-		    android:layout_below="@+id/TableIncremental"
+		    android:layout_below="@+id/mathinput"
 		    android:layout_alignParentRight="true"
 		    android:layout_marginTop="5dp"
 		    android:layout_marginLeft="5dp"
 		    android:shrinkColumns="*"
 		    android:stretchColumns="*" >
 
-	        <TableRow  
-	         android:id="@+id/row1"
-	         tools:ignore="UselessParent"
-	        android:layout_marginBottom="5dp"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent">
-	            <TextView
-            android:id="@+id/tvFuncion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Entra una ecuación" />
-
-	        <EditText
-	            android:id="@+id/mathinput"
-	            android:layout_width="300dp"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@+id/tvTitulo"
-	            android:layout_centerHorizontal="true"
-	            android:ems="10"
-	            android:inputType="text"
-	            android:paddingLeft="10dp"
-	            android:paddingRight="10dp"
-	            android:textColor="#ff6601"
-	            android:textSize="24sp"
-	            android:textStyle="bold" />
-	        </TableRow>
-	        
 		    <TableRow
 		        android:id="@+id/row1"
 		        android:layout_width="match_parent"
@@ -183,7 +183,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="1"
+		            android:text="@string/n1"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -194,7 +194,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="2"
+		            android:text="@string/n2"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -205,7 +205,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="3"
+		            android:text="@string/n3"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -216,7 +216,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="+"
+		            android:text="@string/smas"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -227,7 +227,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="-"
+		            android:text="@string/smenos"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -238,7 +238,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="^"
+		            android:text="@string/spow"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -249,7 +249,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="exp"
+		            android:text="@string/sexp"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -268,7 +268,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="4"
+		            android:text="@string/n4"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -279,7 +279,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="5"
+		            android:text="@string/n5"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -290,7 +290,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="6"
+		            android:text="@string/n6"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -301,7 +301,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="*"
+		            android:text="@string/spor"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -312,7 +312,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="/"
+		            android:text="@string/sdiv"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -323,7 +323,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="cos"
+		            android:text="@string/scos"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -334,7 +334,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="sin"
+		            android:text="@string/ssin"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -353,7 +353,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="7"
+		            android:text="@string/n7"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -364,7 +364,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="8"
+		            android:text="@string/n8"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -375,7 +375,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="9"
+		            android:text="@string/n9"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -386,7 +386,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="tan"
+		            android:text="@string/stan"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -397,7 +397,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="log"
+		            android:text="@string/slog"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -408,7 +408,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="ln"
+		            android:text="@string/sln"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -419,7 +419,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="del"
+		            android:text="@string/delete"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -449,7 +449,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="0"
+		            android:text="@string/n0"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -460,7 +460,7 @@
 		            android:layout_weight="1"
 		            android:background="#309BFF"
 		            android:gravity="center"
-		            android:text="."
+		            android:text="@string/sdot"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -471,7 +471,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="X"
+		            android:text="@string/sx"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -482,7 +482,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="("
+		            android:text="@string/sbraa"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -493,7 +493,7 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text=")"
+		            android:text="@string/sbrac"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
@@ -504,12 +504,32 @@
 		            android:layout_weight="1"
 		            android:background="#0084FF"
 		            android:gravity="center"
-		            android:text="Pi"
+		            android:text="@string/spi"
 		            android:textColor="#ffffff"
 		            android:textSize="16sp"
 		            android:textStyle="bold" />
 		    </TableRow>
 		</TableLayout>
+
+		<TextView
+		    android:id="@+id/tvFuncion"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignLeft="@+id/textView2"
+		    android:layout_below="@+id/View01"
+		    android:layout_marginTop="10dp"
+		    android:text="@string/tv_enterecuation"
+		    android:textStyle="bold"
+		    android:textSize="18sp" />
+
+		<View
+		    android:id="@+id/View01"
+		    android:layout_width="fill_parent"
+		    android:layout_height="2dp"
+		    android:layout_alignParentLeft="true"
+		    android:layout_below="@+id/TableIncremental"
+		    android:layout_marginTop="15dp"
+		    android:background="#0066FF" />
 
     </android.widget.RelativeLayout>
 

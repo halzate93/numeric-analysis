@@ -18,14 +18,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This method consist in dividing the given interval that contains a root, in two
- * subintervals of the same size.
- * with the sign of the function evaluated in the limits of the interval, and the sign
+ * Similar to the Bisection method.
+ * The middle point is calculated with the given function: xm= a-((fa*(b-a))/(fb-fa))
  * @author prestrepoh
  * of the found middle point evaluated in the function, we decide an interval to continue evaluating
  * https://github.com/halzate93/solver/wiki/Incremental-Search
  */
-public class Bisection extends Method {
+public class FakeRule extends Method {
 
 	/**
 	 * The initial point of the given interval.
@@ -114,7 +113,7 @@ public class Bisection extends Method {
 		} else if(fxs == 0){
 			result.put(EResults.Root.toString(), xS);
 		} else if((fxi * fxs) < 0 ){
-			xm = (xI + xS)/2;
+			xm = xI-((fxi*(xS-xI))/(fxs-fxi));
 			fxm = f.evaluate(xm);
 			error = tolerance + 1;
 			
@@ -127,7 +126,7 @@ public class Bisection extends Method {
 					fxi = fxm;
 				}
 				xaux = xm;
-				xm = (xS + xS)/2;
+				xm = xI-((fxi*(xS-xI))/(fxs-fxi));
 				fxm = f.evaluate(xm);
 				error = Math.abs(xm - xaux);
 				counter = counter + 1;
@@ -175,3 +174,4 @@ public class Bisection extends Method {
 		return null;
 	}
 }
+

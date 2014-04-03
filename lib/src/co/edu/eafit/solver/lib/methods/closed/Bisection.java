@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This method consist in to divide the given interval that contains a root, in two
+ * This method consist in dividing the given interval that contains a root, in two
  * subintervals of the same size.
  * with the sign of the function evaluated in the limits of the interval, and the sign
- * of the found middle point evaluated in the function, we decide an interval to continue evaluating
  * @author prestrepoh
+ * of the found middle point evaluated in the function, we decide an interval to continue evaluating
  * https://github.com/halzate93/solver/wiki/Incremental-Search
  */
 public class Bisection extends Method {
@@ -108,6 +108,8 @@ public class Bisection extends Method {
 		float error;
 		float xaux;
 		
+		JSONObject iteration = new JSONObject();
+		
 		if(fxi == 0){
 			root = true;
 			result.put(EResults.Root.toString(), xI);
@@ -132,6 +134,15 @@ public class Bisection extends Method {
 				fxm = f.evaluate(xm);
 				error = Math.abs(xm - xaux);
 				counter = counter + 1;
+				
+				//Get iteration info and append it to the results table
+				iteration.put(EResultProcess.I.toString(), Float.toString(counter));
+				iteration.put(EResultProcess.Xinf.toString(), Float.toString(xI));
+				iteration.put(EResultProcess.Xsup.toString(), Float.toString(xS));
+				iteration.put(EResultProcess.Xmi.toString(), Float.toString(xm));
+				iteration.put(EResultProcess.Fxmi.toString(), Float.toString(fxm));
+				iteration.put(EResultProcess.Error.toString(), Float.toString(error));
+				process.put(iteration);
 			}
 			if(xm == 0){
 				result.put(EResults.Root.toString(), xm);
@@ -140,82 +151,17 @@ public class Bisection extends Method {
 			}else{
 				result.put(EResults.Failure.toString(), xm);
 			}
+		}else{
+			result.put(EResults.IncorrectInterval.toString(), "");
 		}
-		
-		JSONObject iteration = new JSONObject(); //Append first iteration
-		iteration.put(EResultProcess.I.toString(), Float.toString(xi));
-		
-		iteration.put(EResultProcess.Fx.toString(), Float.toString(yi));
-		
-		int i = 0;
-		iteration.put(EResultProcess.I.toString(), i+1);
-		process.put(iteration);
-		
-		float xf, yf;
-		while(!root && i < n){ //Ends if a root is found or max count
-			xf = xi + dx;
-			yf = f.evaluate(xf);
-			
-			float change = yf * yi; 
-			if(yf == 0){ //We found a root
-				root = true;
-				result.put(EResults.Root.toString(), Float.toString(xf));
-			}else if(change < 0){ //We crossed the x axis
-				root = true;
-				result.append(EResults.Interval.toString(), Float.toString(xi));
-				result.append(EResults.Interval.toString(), Float.toString(xf));
-			}
-				
-			xi = xf; //Update variables
-			yi = yf;
-			i++;
-			
-			iteration = new JSONObject(); //Append this iteration
-			iteration.put(EResultProcess.I.toString(), i+1);
-			iteration.put(EResultProcess.X.toString(), Float.toString(xi));
-			iteration.put(EResultProcess.Fx.toString(), Float.toString(yi));
-			iteration.put(EResultProcess.Change.toString(), Float.toString(change));
-			process.put(iteration);
-		}
-		
-		if(!root){ //If no root was found, max count was reached
-			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
-		}
-		
 		result.put(EResultInfo.Proccess.toString(), process);
-		result.put(EResultInfo.MaxAbsoluteError.toString(), dx);
-		result.put(EResultInfo.IterationCount.toString(), i);
+		result.put(EResultInfo.IterationCount.toString(), counter);
 		return result;
 	}
 	
 	@Override
 	public void setup(JSONObject parameters) throws InvalidParameterException{
 		super.setup(parameters);
-		
-		if(parameters.has(EParameter.Dx.toString())){
-			try{
-				dx = (float) parameters.getDouble(EParameter.Dx.toString());
-			}catch(JSONException e){
-				throw new InvalidParameterException(EParameter.Dx, 
-						parameters.getString(EParameter.Dx.toString()));
-			}
-		}
-		if(parameters.has(EParameter.N.toString())){
-			try{
-				n = parameters.getInt(EParameter.N.toString());
-			}catch(JSONException e){
-				throw new InvalidParameterException(EParameter.N, 
-						parameters.getString(EParameter.N.toString()));
-			}
-		}
-		if(parameters.has(EParameter.X0.toString())){
-			try{
-				x0 = (float) parameters.getDouble(EParameter.X0.toString());
-			}catch(JSONException e){
-				throw new InvalidParameterException(EParameter.X0, 
-						parameters.get(EParameter.X0.toString()).toString());
-			}
-		}
 	}
 
 	/**
@@ -224,19 +170,11 @@ public class Bisection extends Method {
 	 */
 	@Override
 	public EParameter[] checkParameters() {
-		ArrayList<EParameter> parameters = new ArrayList<EParameter>(2);
-		parameters.addAll(Arrays.asList(super.checkParameters()));
-		if(dx == 0) parameters.add(EParameter.Dx);
-		if(n == 0) parameters.add(EParameter.N);
-		EParameter[] returnArray = new EParameter[parameters.size()];
-		return parameters.toArray(returnArray);
+		return null;
 	}
 
 	@Override
 	public EParameter[] getRequiredParameters() {
-		EParameter[] required = {EParameter.N, EParameter.Dx, EParameter.X0};
-		ArrayList<EParameter> complete = new ArrayList<EParameter>(Arrays.asList(required));
-		complete.addAll(Arrays.asList(super.getRequiredParameters()));
-		return complete.toArray(required);
+		return null;
 	}
 }

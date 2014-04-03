@@ -6,5 +6,5 @@ package co.edu.eafit.solver.lib.methods.enums;
  *
  */
 public enum EResults {
-	Interval, Root, Failure, Approximation
+	Interval, Root, Failure, Approximation, IncorrectInterval
 }

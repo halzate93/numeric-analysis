@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
@@ -172,5 +173,10 @@ public class IncrementalSearch extends Method {
 		ArrayList<EParameter> complete = new ArrayList<EParameter>(Arrays.asList(required));
 		complete.addAll(Arrays.asList(super.getRequiredParameters()));
 		return complete.toArray(required);
+	}
+
+	@Override
+	public EMethod getMethodDescriptor() {
+		return EMethod.IncrementalSearch;
 	}
 }

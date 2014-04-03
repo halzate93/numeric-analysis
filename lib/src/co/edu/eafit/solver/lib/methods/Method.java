@@ -18,27 +18,14 @@ import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 public abstract class Method {
 	
 	/**
-	 * Is the unique EMethod value associated with an implementation
-	 * of this abstract class. 
-	 */
-	private EMethod methodDescriptor;
-	
-	/**
 	 * This is the function to work with while looking for roots. 
 	 */
 	private Function f;
 	
-	public Function getFunction(){
-		return f;
-	}
-	
-	public EMethod getMethodDescriptor(){
-		return methodDescriptor;
-	}
-	
-	public void setMethodDescriptor(EMethod descriptor){
-		this.methodDescriptor = descriptor;
-	}
+	/**
+	 * Holds the result of the last execution, null if none.
+	 */
+	private JSONObject lastResult;
 	
 	/**
 	 * Verifies the current setup for the method and then runs the specific
@@ -52,8 +39,10 @@ public abstract class Method {
 		EParameter[] missingParams = checkParameters();
 		if(missingParams.length > 0)
 			throw new MissingParametersException(missingParams, getMethodDescriptor());
-		else
-			return solve();
+		else{
+			lastResult = solve();
+			return lastResult;
+		}
 	}
 	
 	/**
@@ -100,5 +89,20 @@ public abstract class Method {
 	 */
 	public EParameter[] getRequiredParameters(){
 		return new EParameter[]{EParameter.F};
+	}
+	
+	public Function getFunction(){
+		return f;
+	}
+	
+	/**
+	 * Returns the descriptor associated with this Method.
+	 * @return the descriptor.
+	 */
+	public abstract EMethod getMethodDescriptor();
+
+	public JSONObject getLastResult() throws Exception {
+		if(lastResult == null) throw new Exception("No result has been executed");
+		return lastResult;
 	}
 }

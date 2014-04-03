@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
@@ -173,5 +174,10 @@ public class Bisection extends Method {
 	@Override
 	public EParameter[] getRequiredParameters() {
 		return null;
+	}
+
+	@Override
+	public EMethod getMethodDescriptor() {
+		return EMethod.Bisection;
 	}
 }

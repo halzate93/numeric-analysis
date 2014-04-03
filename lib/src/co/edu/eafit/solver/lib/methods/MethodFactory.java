@@ -32,7 +32,6 @@ public class MethodFactory {
 			break;
 		}
 		if(result != null){
-			result.setMethodDescriptor(method);
 			return result;
 		} else
 			throw new Exception("Invalid method descriptor.");

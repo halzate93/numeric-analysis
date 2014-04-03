@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
+import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
@@ -215,6 +216,12 @@ public class FixedPoint extends Method {
 	 */
 	protected void setG(Function g) {
 		this.g = g;
+	}
+
+	
+	@Override
+	public EMethod getMethodDescriptor() {
+		return EMethod.FixedPoint;
 	}
 
 	

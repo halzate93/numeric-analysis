@@ -6,9 +6,22 @@
     <string name="action_settings">Help</string>
 	<string name="tv_choosemethod">Choose the method you want to prove:</string>
 	<string name="tv_setdata">Insert info for the method:</string>
+	<!-- vars for incremental search -->
 	<string name="tv_xo">Xo :</string>
 	<string name="tv_deltax">Delta X :</string>
 	<string name="tv_iterations">Iter:</string>
+	<!-- vars for bisection and fake rule -->
+	<string name="tv_xi">Xi :</string>
+	<string name="tv_xs">Xs :</string>
+	<string name="tv_tole">Tol:</string>
+	<!-- vars for fixed point search -->
+	<string name="tv_X">X:</string>
+	<!-- vars for newton search -->
+	<string name="tv_fp">f`</string>
+	<!-- vars for Multiple Roots search -->
+	<string name="tv_x0">X0 :</string>
+	<string name="tv_x1">X1 :</string>
+	<!-- vars for incremental search -->
 	<string name="tv_enterecuation">Insert ecuation:</string>
 	<string name="btn_delete">&lt;</string>
 	<string name="btn_solve">solve</string>

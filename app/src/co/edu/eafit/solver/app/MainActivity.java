@@ -20,11 +20,18 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class MainActivity extends Activity {
 	
 	Spinner spinner;
+	private View view1;
+	private TableLayout tableIncremental; 
+	private TableLayout tableBisection;
+	private TableLayout tableFixedpoint;
+	private TableLayout tableNewton;
+	private TableLayout tableSecant;
 	private int actualMethod;
 	private EditText mathExpression;
 	private EditText x0;
 	private EditText d0;
 	private EditText ite;
+	private EditText mathExpressionXFixedPoint;
 	private Button one;
 	private Button two;
 	private Button three;
@@ -58,6 +65,7 @@ public class MainActivity extends Activity {
     private Button pi;
     
     private String userInput = "";
+    private String userInputXfixedpoint = "";
     private Button borrar;
 
 	@Override
@@ -79,19 +87,65 @@ public class MainActivity extends Activity {
 		        	case 0:
 		        		Toast.makeText(MainActivity.this, "Incremental Search", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.VISIBLE);
+		        		tableBisection.setVisibility(View.INVISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 1:
 		        		Toast.makeText(MainActivity.this, "Bisection", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.VISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 2:
-		        		
+		        		Toast.makeText(MainActivity.this, "Fake Rule", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.VISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 3:
+		        		Toast.makeText(MainActivity.this, "Fixed Point", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.INVISIBLE);
+		        		tableFixedpoint.setVisibility(View.VISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 4:
+		        		Toast.makeText(MainActivity.this, "Newton", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.INVISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.VISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 5:
+		        		Toast.makeText(MainActivity.this, "Secant", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.INVISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 6:
+		        		Toast.makeText(MainActivity.this, "Multiple Roots", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		tableIncremental.setVisibility(View.INVISIBLE);
+		        		tableBisection.setVisibility(View.INVISIBLE);
+		        		tableFixedpoint.setVisibility(View.INVISIBLE);
+		        		tableNewton.setVisibility(View.INVISIBLE);
+		        		tableSecant.setVisibility(View.INVISIBLE);
 		        		break;
 		        }
 		    }
@@ -102,9 +156,16 @@ public class MainActivity extends Activity {
 		    }
 
 		});
+		tableIncremental = (TableLayout)findViewById(R.id.TableIncremental);
+		tableBisection = (TableLayout)findViewById(R.id.TableBisection);
+		tableFixedpoint = (TableLayout)findViewById(R.id.TableFixedpoint);
+		tableNewton = (TableLayout)findViewById(R.id.TableNewton);
+		tableSecant = (TableLayout)findViewById(R.id.TableSecant);
+		
+		mathExpressionXFixedPoint = (EditText)findViewById(R.id.etX);
+		hideSoftKeyboard(mathExpressionXFixedPoint);
 		
 		mathExpression = (EditText)findViewById(R.id.mathinput);
-		mathExpression.setCursorVisible(false);
 		hideSoftKeyboard(mathExpression);
 		
 		x0 = (EditText)findViewById(R.id.etXo);
@@ -186,12 +247,26 @@ public class MainActivity extends Activity {
 				borrar.setOnClickListener(new OnClickListener(){
 					@Override
 					public void onClick(View arg0) {
-						if(userInput.equals("")){
-							userInput = "";
-						}else{
-							userInput = userInput.substring(0, userInput.length() - 1);; 
+						
+						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput.substring(0, userInput.length() - 1);; 
+							}
+							mathExpression.setText(userInput);
 						}
-						mathExpression.setText(userInput);
+							
+						if (mathExpressionXFixedPoint.isFocused())
+						{
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "";
+							}else{
+								userInputXfixedpoint = userInputXfixedpoint.substring(0, userInputXfixedpoint.length() - 1);; 
+							}
+							mathExpressionXFixedPoint.setText(userInput);
+						}
 					}
 				});
 				one.setOnClickListener(new OnClickListener(){
@@ -199,12 +274,16 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
+						hideSoftKeyboard(mathExpressionXFixedPoint);
 						if(userInput.equals("")){
 							userInput = "1";
 						}else{
 							userInput = userInput + "1"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);
 					}
 					
 				});				
@@ -218,7 +297,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "2"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -234,7 +316,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "3"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -249,7 +334,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "+"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -264,7 +352,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "-"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);				
 					}
 					
 				});
@@ -279,7 +370,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "^"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -294,7 +388,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "exp("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -309,7 +406,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "4"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -324,7 +424,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "5"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -339,7 +442,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "6"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -354,7 +460,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "*"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -369,7 +478,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "/"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -384,7 +496,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "cos("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -399,7 +514,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "sin("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -414,7 +532,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "7"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);				
 					}
 					
 				});
@@ -429,7 +550,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "8"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);				
 					}
 					
 				});
@@ -444,7 +568,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "9"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -459,7 +586,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "tan("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -474,7 +604,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "logs("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -489,7 +622,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "ln("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -504,7 +640,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = ""; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);				
 					}
 					
 				});
@@ -519,7 +658,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "0"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -534,7 +676,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "."; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);				
 					}
 					
 				});
@@ -549,7 +694,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "X"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);		
 					}
 					
 				});
@@ -564,7 +712,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "("; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -579,7 +730,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + ")"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});
@@ -594,7 +748,10 @@ public class MainActivity extends Activity {
 						}else{
 							userInput = userInput + "π"; 
 						}
-						mathExpression.setText(userInput);				
+						if (mathExpression.isFocused())
+							mathExpression.setText(userInput);
+						if (mathExpressionXFixedPoint.isFocused())
+							mathExpressionXFixedPoint.setText(userInput);			
 					}
 					
 				});

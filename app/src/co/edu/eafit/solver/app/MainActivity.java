@@ -1,6 +1,7 @@
 package co.edu.eafit.solver.app;
 
 import java.util.*;
+
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 
 import android.os.Bundle;
@@ -19,7 +20,11 @@ import android.widget.AdapterView.OnItemSelectedListener;
 public class MainActivity extends Activity {
 	
 	Spinner spinner;
+	private int actualMethod;
 	private EditText mathExpression;
+	private EditText x0;
+	private EditText d0;
+	private EditText ite;
 	private Button one;
 	private Button two;
 	private Button three;
@@ -73,12 +78,14 @@ public class MainActivity extends Activity {
 		        {
 		        	case 0:
 		        		Toast.makeText(MainActivity.this, "Incremental Search", Toast.LENGTH_LONG).show();
-
+		        		actualMethod = selected;
 		        		break;
 		        	case 1:
 		        		Toast.makeText(MainActivity.this, "Bisection", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
 		        		break;
 		        	case 2:
+		        		
 		        		break;
 		        	case 3:
 		        		break;
@@ -99,7 +106,11 @@ public class MainActivity extends Activity {
 		mathExpression = (EditText)findViewById(R.id.mathinput);
 		mathExpression.setCursorVisible(false);
 		hideSoftKeyboard(mathExpression);
-
+		
+		x0 = (EditText)findViewById(R.id.etXo);
+		d0 = (EditText)findViewById(R.id.etDelta);
+		ite = (EditText)findViewById(R.id.etIterations);
+		
 		one = (Button)findViewById(R.id.button1);
 		two = (Button)findViewById(R.id.button2);
 		three = (Button)findViewById(R.id.button3);
@@ -130,6 +141,44 @@ public class MainActivity extends Activity {
 		pi = (Button)findViewById(R.id.button28);
 		pi.setText("π");
 		borrar = (Button)findViewById(R.id.btnBorrar);
+		
+		Button solve  = (Button)findViewById(R.id.calculatedBbutton);
+		
+		solve.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				switch (actualMethod)
+				{
+					case 0:
+						if (isEmpty(x0))
+						{
+							Toast.makeText(MainActivity.this, "Hey! Please Check de Xo Field. It couldn´t be empty", Toast.LENGTH_LONG).show();
+							return;
+						}
+						else if (isEmpty(d0))
+						{
+							Toast.makeText(MainActivity.this, "Hey! Please Check de Delta X Field. It couldn´t be empty", Toast.LENGTH_LONG).show();
+							return;
+						}
+						else if (isEmpty(ite))
+						{
+							Toast.makeText(MainActivity.this, "Hey! Please Check de Iter Field. It couldn´t be empty", Toast.LENGTH_LONG).show();
+							return;
+						}
+						else
+						{
+							if(userInput.equals("")){
+								
+								Toast.makeText(MainActivity.this, "Ups! You need to insert ecuation to evaluate", Toast.LENGTH_LONG).show();
+								return;
+							}
+						}
+						break;
+					case 1:
+						break;
+				}
+			}
+		});
 		
 		/// single button event ///////////////////////////////////
 		
@@ -597,5 +646,9 @@ public class MainActivity extends Activity {
 		 imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
 
 	}
+	
+	private boolean isEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
+    }
 
 }

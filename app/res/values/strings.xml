@@ -14,14 +14,15 @@
 	<string name="tv_xi">Xi :</string>
 	<string name="tv_xs">Xs :</string>
 	<string name="tv_tole">Tol:</string>
-	<!-- vars for fixed point search -->
+	<!-- vars for fixed point -->
 	<string name="tv_X">X:</string>
-	<!-- vars for newton search -->
-	<string name="tv_fp">f`</string>
-	<!-- vars for Multiple Roots search -->
+	<!-- vars for newton  -->
+	<string name="tv_fp">f´</string>
+	<!-- vars for Secant -->
 	<string name="tv_x0">X0 :</string>
 	<string name="tv_x1">X1 :</string>
-	<!-- vars for incremental search -->
+	<!-- vars for Multiple Roots -->
+	<string name="tv_fp2">f´´</string>
 	<string name="tv_enterecuation">Insert ecuation:</string>
 	<string name="btn_delete">&lt;</string>
 	<string name="btn_solve">solve</string>

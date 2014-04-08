@@ -26,12 +26,16 @@ public class MainActivity extends Activity {
 	private TableLayout tableFixedpoint;
 	private TableLayout tableNewton;
 	private TableLayout tableSecant;
+	private TableLayout tableMultipleroots;
 	private int actualMethod;
 	private EditText mathExpression;
 	private EditText x0;
 	private EditText d0;
 	private EditText ite;
 	private EditText mathExpressionXFixedPoint;
+	private EditText mathExpressionFpNewton;
+	private EditText mathExpressionFpMultipleroots;
+	private EditText mathExpressionF2pMultipleroots;
 	private Button one;
 	private Button two;
 	private Button three;
@@ -66,6 +70,9 @@ public class MainActivity extends Activity {
     
     private String userInput = "";
     private String userInputXfixedpoint = "";
+    private String userInputFpnewton = "";
+    private String userInputFpMultipleroots = "";
+    private String userInputF2pMultipleroots = "";
     private Button borrar;
 
 	@Override
@@ -92,6 +99,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 1:
 		        		Toast.makeText(MainActivity.this, "Bisection", Toast.LENGTH_LONG).show();
@@ -101,6 +109,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 2:
 		        		Toast.makeText(MainActivity.this, "Fake Rule", Toast.LENGTH_LONG).show();
@@ -110,6 +119,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 3:
 		        		Toast.makeText(MainActivity.this, "Fixed Point", Toast.LENGTH_LONG).show();
@@ -119,6 +129,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.VISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 4:
 		        		Toast.makeText(MainActivity.this, "Newton", Toast.LENGTH_LONG).show();
@@ -128,6 +139,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.VISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 5:
 		        		Toast.makeText(MainActivity.this, "Secant", Toast.LENGTH_LONG).show();
@@ -137,6 +149,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.VISIBLE);
+		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 6:
 		        		Toast.makeText(MainActivity.this, "Multiple Roots", Toast.LENGTH_LONG).show();
@@ -146,6 +159,7 @@ public class MainActivity extends Activity {
 		        		tableFixedpoint.setVisibility(View.INVISIBLE);
 		        		tableNewton.setVisibility(View.INVISIBLE);
 		        		tableSecant.setVisibility(View.INVISIBLE);
+		        		tableMultipleroots.setVisibility(View.VISIBLE);
 		        		break;
 		        }
 		    }
@@ -156,14 +170,25 @@ public class MainActivity extends Activity {
 		    }
 
 		});
+		
 		tableIncremental = (TableLayout)findViewById(R.id.TableIncremental);
 		tableBisection = (TableLayout)findViewById(R.id.TableBisection);
 		tableFixedpoint = (TableLayout)findViewById(R.id.TableFixedpoint);
 		tableNewton = (TableLayout)findViewById(R.id.TableNewton);
 		tableSecant = (TableLayout)findViewById(R.id.TableSecant);
+		tableMultipleroots = (TableLayout)findViewById(R.id.TableMultipleroots);
 		
 		mathExpressionXFixedPoint = (EditText)findViewById(R.id.etX);
 		hideSoftKeyboard(mathExpressionXFixedPoint);
+		
+		mathExpressionFpNewton = (EditText)findViewById(R.id.etFpn);
+		hideSoftKeyboard(mathExpressionFpNewton);
+		
+		mathExpressionFpMultipleroots = (EditText)findViewById(R.id.etFpr);
+		hideSoftKeyboard(mathExpressionFpMultipleroots);
+		
+		mathExpressionF2pMultipleroots = (EditText)findViewById(R.id.etFp2r);
+		hideSoftKeyboard(mathExpressionF2pMultipleroots);
 		
 		mathExpression = (EditText)findViewById(R.id.mathinput);
 		hideSoftKeyboard(mathExpression);
@@ -265,7 +290,35 @@ public class MainActivity extends Activity {
 							}else{
 								userInputXfixedpoint = userInputXfixedpoint.substring(0, userInputXfixedpoint.length() - 1);; 
 							}
-							mathExpressionXFixedPoint.setText(userInput);
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "";
+							}else{
+								userInputFpnewton = userInputFpnewton.substring(0, userInputFpnewton.length() - 1);; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "";
+							}else{
+								userInputFpMultipleroots = userInputFpMultipleroots.substring(0, userInputFpMultipleroots.length() - 1);; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "";
+							}else{
+								userInputF2pMultipleroots = userInputF2pMultipleroots.substring(0, userInputF2pMultipleroots.length() - 1);; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}
 					}
 				});
@@ -275,15 +328,56 @@ public class MainActivity extends Activity {
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
 						hideSoftKeyboard(mathExpressionXFixedPoint);
-						if(userInput.equals("")){
-							userInput = "1";
-						}else{
-							userInput = userInput + "1"; 
-						}
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "1";
+							}else{
+								userInput = userInput + "1"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);
+						{
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "1";
+							}else{
+								userInputXfixedpoint = userInputXfixedpoint + "1"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInputFpnewton = "1";
+							}else{
+								userInputFpnewton = userInputFpnewton + "1"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "1";
+							}else{
+								userInputFpMultipleroots = userInputFpMultipleroots + "1"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "1";
+							}else{
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "1"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}
 					}
 					
 				});				
@@ -292,15 +386,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "2";
-						}else{
-							userInput = userInput + "2"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "2";
+							}else{
+								userInput = userInput + "2"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "2";
+							}else{
+								userInput = userInput + "2"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "2";
+							}else{
+								userInput = userInput + "2"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "2";
+							}else{
+								userInput = userInput + "2"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "2";
+							}else{
+								userInput = userInput + "2"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -309,17 +445,58 @@ public class MainActivity extends Activity {
 
 					@Override
 					public void onClick(View arg0) {
-
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "3";
-						}else{
-							userInput = userInput + "3"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "3";
+							}else{
+								userInput = userInput + "3"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "3";
+							}else{
+								userInput = userInput + "3"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "3";
+							}else{
+								userInput = userInput + "3"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "3";
+							}else{
+								userInput = userInput + "3"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "3";
+							}else{
+								userInput = userInput + "3"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -329,17 +506,58 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "+";
-						}else{
-							userInput = userInput + "+"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "+";
+							}else{
+								userInput = userInput + "+"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "+";
+							}else{
+								userInput = userInput + "+"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "+";
+							}else{
+								userInput = userInput + "+"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "+";
+							}else{
+								userInput = userInput + "+"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "+";
+							}else{
+								userInput = userInput + "+"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
-					
 				});
 				
 				minus.setOnClickListener(new OnClickListener(){
@@ -347,15 +565,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "-";
-						}else{
-							userInput = userInput + "-"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "-";
+							}else{
+								userInput = userInput + "-"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);				
+						{
+							if(userInput.equals("")){
+								userInput = "-";
+							}else{
+								userInput = userInput + "-"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "-";
+							}else{
+								userInput = userInput + "-"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "-";
+							}else{
+								userInput = userInput + "-"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "-";
+							}else{
+								userInput = userInput + "-"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -365,15 +625,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "^";
-						}else{
-							userInput = userInput + "^"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "^";
+							}else{
+								userInput = userInput + "^"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "^";
+							}else{
+								userInput = userInput + "^"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "^";
+							}else{
+								userInput = userInput + "^"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "^";
+							}else{
+								userInput = userInput + "^"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "^";
+							}else{
+								userInput = userInput + "^"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -383,15 +685,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "exp(";
-						}else{
-							userInput = userInput + "exp("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "exp(";
+							}else{
+								userInput = userInput + "exp("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "exp(";
+							}else{
+								userInput = userInput + "exp("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "exp(";
+							}else{
+								userInput = userInput + "exp("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "exp(";
+							}else{
+								userInput = userInput + "exp("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "exp(";
+							}else{
+								userInput = userInput + "exp("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -401,15 +745,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "4";
-						}else{
-							userInput = userInput + "4"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "4";
+							}else{
+								userInput = userInput + "4"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "4";
+							}else{
+								userInput = userInput + "4"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "4";
+							}else{
+								userInput = userInput + "4"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "4";
+							}else{
+								userInput = userInput + "4"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "4";
+							}else{
+								userInput = userInput + "4"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -419,15 +805,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "5";
-						}else{
-							userInput = userInput + "5"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "5";
+							}else{
+								userInput = userInput + "5"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "5";
+							}else{
+								userInput = userInput + "5"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "5";
+							}else{
+								userInput = userInput + "5"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "5";
+							}else{
+								userInput = userInput + "5"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "5";
+							}else{
+								userInput = userInput + "5"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -437,15 +865,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "6";
-						}else{
-							userInput = userInput + "6"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "6";
+							}else{
+								userInput = userInput + "6"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "6";
+							}else{
+								userInput = userInput + "6"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "6";
+							}else{
+								userInput = userInput + "6"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "6";
+							}else{
+								userInput = userInput + "6"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "6";
+							}else{
+								userInput = userInput + "6"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -455,15 +925,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "*";
-						}else{
-							userInput = userInput + "*"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "*";
+							}else{
+								userInput = userInput + "*"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "*";
+							}else{
+								userInput = userInput + "*"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "*";
+							}else{
+								userInput = userInput + "*"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "*";
+							}else{
+								userInput = userInput + "*"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "*";
+							}else{
+								userInput = userInput + "*"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -473,15 +985,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "/";
-						}else{
-							userInput = userInput + "/"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "/";
+							}else{
+								userInput = userInput + "/"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "/";
+							}else{
+								userInput = userInput + "/"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "/";
+							}else{
+								userInput = userInput + "/"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "/";
+							}else{
+								userInput = userInput + "/"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "/";
+							}else{
+								userInput = userInput + "/"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -491,15 +1045,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "cos(";
-						}else{
-							userInput = userInput + "cos("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "cos(";
+							}else{
+								userInput = userInput + "cos("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "cos(";
+							}else{
+								userInput = userInput + "cos("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "cos(";
+							}else{
+								userInput = userInput + "cos("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "cos(";
+							}else{
+								userInput = userInput + "cos("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "cos(";
+							}else{
+								userInput = userInput + "cos("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -509,15 +1105,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "sin(";
-						}else{
-							userInput = userInput + "sin("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "sin(";
+							}else{
+								userInput = userInput + "sin("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "sin(";
+							}else{
+								userInput = userInput + "sin("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "sin(";
+							}else{
+								userInput = userInput + "sin("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "sin(";
+							}else{
+								userInput = userInput + "sin("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "sin(";
+							}else{
+								userInput = userInput + "sin("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -527,15 +1165,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "7";
-						}else{
-							userInput = userInput + "7"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "7";
+							}else{
+								userInput = userInput + "7"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);				
+						{
+							if(userInput.equals("")){
+								userInput = "7";
+							}else{
+								userInput = userInput + "7"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "7";
+							}else{
+								userInput = userInput + "7"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "7";
+							}else{
+								userInput = userInput + "7"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "7";
+							}else{
+								userInput = userInput + "7"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}				
 					}
 					
 				});
@@ -545,15 +1225,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "8";
-						}else{
-							userInput = userInput + "8"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "8";
+							}else{
+								userInput = userInput + "8"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);				
+						{
+							if(userInput.equals("")){
+								userInput = "8";
+							}else{
+								userInput = userInput + "8"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "8";
+							}else{
+								userInput = userInput + "8"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "8";
+							}else{
+								userInput = userInput + "8"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "8";
+							}else{
+								userInput = userInput + "8"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}				
 					}
 					
 				});
@@ -563,15 +1285,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "9";
-						}else{
-							userInput = userInput + "9"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "9";
+							}else{
+								userInput = userInput + "9"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "9";
+							}else{
+								userInput = userInput + "9"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "9";
+							}else{
+								userInput = userInput + "9"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "9";
+							}else{
+								userInput = userInput + "9"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "9";
+							}else{
+								userInput = userInput + "9"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -581,15 +1345,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "tan(";
-						}else{
-							userInput = userInput + "tan("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "tan(";
+							}else{
+								userInput = userInput + "tan("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "tan(";
+							}else{
+								userInput = userInput + "tan("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "tan(";
+							}else{
+								userInput = userInput + "tan("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "tan(";
+							}else{
+								userInput = userInput + "tan("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "tan(";
+							}else{
+								userInput = userInput + "tan("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -599,15 +1405,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "logs(";
-						}else{
-							userInput = userInput + "logs("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "logs(";
+							}else{
+								userInput = userInput + "logs("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "logs(";
+							}else{
+								userInput = userInput + "logs("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "logs(";
+							}else{
+								userInput = userInput + "logs("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "logs(";
+							}else{
+								userInput = userInput + "logs("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "logs(";
+							}else{
+								userInput = userInput + "logs("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}	
 					}
 					
 				});
@@ -617,15 +1465,58 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "ln(";
-						}else{
-							userInput = userInput + "ln("; 
-						}
+						hideSoftKeyboard(mathExpression);
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "ln(";
+							}else{
+								userInput = userInput + "ln("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "ln(";
+							}else{
+								userInput = userInput + "ln("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "ln(";
+							}else{
+								userInput = userInput + "ln("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "ln(";
+							}else{
+								userInput = userInput + "ln("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "ln(";
+							}else{
+								userInput = userInput + "ln("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -635,15 +1526,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "";
-						}else{
-							userInput = ""; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput + ""; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);				
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput + ""; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput + ""; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput + ""; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "";
+							}else{
+								userInput = userInput + ""; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}				
 					}
 					
 				});
@@ -653,15 +1586,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "0";
-						}else{
-							userInput = userInput + "0"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "0";
+							}else{
+								userInput = userInput + "0"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "0";
+							}else{
+								userInput = userInput + "0"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "0";
+							}else{
+								userInput = userInput + "0"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "0";
+							}else{
+								userInput = userInput + "0"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "0";
+							}else{
+								userInput = userInput + "0"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -671,15 +1646,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = ".";
-						}else{
-							userInput = userInput + "."; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ".";
+							}else{
+								userInput = userInput + "."; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);				
+						{
+							if(userInput.equals("")){
+								userInput = ".";
+							}else{
+								userInput = userInput + "."; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ".";
+							}else{
+								userInput = userInput + "."; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ".";
+							}else{
+								userInput = userInput + "."; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ".";
+							}else{
+								userInput = userInput + "."; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}				
 					}
 					
 				});
@@ -689,15 +1706,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "X";
-						}else{
-							userInput = userInput + "X"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "X";
+							}else{
+								userInput = userInput + "X"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);		
+						{
+							if(userInput.equals("")){
+								userInput = "X";
+							}else{
+								userInput = userInput + "X"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "X";
+							}else{
+								userInput = userInput + "X"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "X";
+							}else{
+								userInput = userInput + "X"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "X";
+							}else{
+								userInput = userInput + "X"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}		
 					}
 					
 				});
@@ -707,15 +1766,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "(";
-						}else{
-							userInput = userInput + "("; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "(";
+							}else{
+								userInput = userInput + "("; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "(";
+							}else{
+								userInput = userInput + "("; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "(";
+							}else{
+								userInput = userInput + "("; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "(";
+							}else{
+								userInput = userInput + "("; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "(";
+							}else{
+								userInput = userInput + "("; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -725,15 +1826,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = ")";
-						}else{
-							userInput = userInput + ")"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ")";
+							}else{
+								userInput = userInput + ")"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = ")";
+							}else{
+								userInput = userInput + ")"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ")";
+							}else{
+								userInput = userInput + ")"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ")";
+							}else{
+								userInput = userInput + ")"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = ")";
+							}else{
+								userInput = userInput + ")"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}			
 					}
 					
 				});
@@ -743,15 +1886,57 @@ public class MainActivity extends Activity {
 					@Override
 					public void onClick(View arg0) {
 						hideSoftKeyboard(mathExpression);
-						if(userInput.equals("")){
-							userInput = "π";
-						}else{
-							userInput = userInput + "π"; 
-						}
+						hideSoftKeyboard(mathExpressionXFixedPoint);
+						hideSoftKeyboard(mathExpressionFpNewton);
+						hideSoftKeyboard(mathExpressionFpMultipleroots);
+						hideSoftKeyboard(mathExpressionF2pMultipleroots);
 						if (mathExpression.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "π";
+							}else{
+								userInput = userInput + "π"; 
+							}
 							mathExpression.setText(userInput);
+						}
+							
 						if (mathExpressionXFixedPoint.isFocused())
-							mathExpressionXFixedPoint.setText(userInput);			
+						{
+							if(userInput.equals("")){
+								userInput = "π";
+							}else{
+								userInput = userInput + "π"; 
+							}
+							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
+						}
+						
+						if (mathExpressionFpNewton.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "π";
+							}else{
+								userInput = userInput + "π"; 
+							}
+							mathExpressionFpNewton.setText(userInputFpnewton);
+						}
+						if (mathExpressionFpMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "π";
+							}else{
+								userInput = userInput + "π"; 
+							}
+							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
+						}
+						if (mathExpressionF2pMultipleroots.isFocused())
+						{
+							if(userInput.equals("")){
+								userInput = "π";
+							}else{
+								userInput = userInput + "π"; 
+							}
+							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
+						}
 					}
 					
 				});

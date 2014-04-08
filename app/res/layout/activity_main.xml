@@ -367,6 +367,90 @@
             </TableRow>
         </TableLayout>
         
+        <TableLayout
+            android:id="@+id/TableMultipleroots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView2"
+            android:visibility="invisible" >
+
+            <TableRow
+                android:id="@+id/tablerRow1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center" >
+				<TextView
+                    android:id="@+id/textView3r"
+                    android:text="@string/tv_xo" />
+
+                <EditText
+                    android:id="@+id/etXor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="numberDecimal" >
+
+                    <requestFocus />
+                </EditText>
+                <TextView
+                    android:id="@+id/textView5r"
+                    android:text="@string/tv_iterations" />
+
+                <EditText
+                    android:id="@+id/etIterationsr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="number" />
+				<TextView
+                    android:id="@+id/textView6r"
+                    android:text="@string/tv_tole" />
+
+                <EditText
+                    android:id="@+id/etTolr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="3"
+                    android:inputType="number" />
+            </TableRow>
+            <TableRow android:id="@+id/tablerRow2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center">
+                
+                <TextView
+                    android:id="@+id/textView7r"
+                    android:text="@string/tv_fp" />
+
+                <EditText
+                    android:id="@+id/etFpr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="60"
+                    android:layout_span="5"
+                    android:inputType="text" />
+            </TableRow>
+            <TableRow android:id="@+id/tablerRow3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center">
+                
+                <TextView
+                    android:id="@+id/textView8r"
+                    android:text="@string/tv_fp2" />
+
+                <EditText
+                    android:id="@+id/etFp2r"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="60"
+                    android:layout_span="5"
+                    android:inputType="text" />
+            </TableRow>
+        </TableLayout>
+        
 		<EditText
 		    android:id="@+id/mathinput"
 		    android:layout_width="300dp"

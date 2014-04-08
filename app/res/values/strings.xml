@@ -53,4 +53,13 @@
 	<string name="sbraa">(</string>
 	<string name="sbrac">)</string>
 	<string name="spi">Pi</string>
+	<!-- vars for Help -->
+	<string name="help">Help</string>
+	<string name="incremental">Incremental Search</string>
+	<string name="bisection">Bisection</string>
+	<string name="fakerule">Fake Rule</string>
+	<string name="fixedpoint">Fixed Point</string>
+	<string name="newton">Newton</string>
+	<string name="secant">Secant</string>
+	<string name="multipleroots">Multiple Roots</string>
 </resources>

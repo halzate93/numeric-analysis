@@ -80,9 +80,9 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		if(!userInput.equals("")){
-			userInput = "";
-		}
+			if(!userInput.equals("")){
+				userInput = "";
+			}
 		spinner = (Spinner) findViewById(R.id.spinnerMetodos);
 		createMethodList();
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -353,7 +353,7 @@ public class MainActivity extends Activity {
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
+							if(userInputFpnewton.equals("")){
 								userInputFpnewton = "1";
 							}else{
 								userInputFpnewton = userInputFpnewton + "1"; 
@@ -402,38 +402,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "2";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "2";
 							}else{
-								userInput = userInput + "2"; 
+								userInputXfixedpoint = userInputXfixedpoint + "2"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "2";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "2";
 							}else{
-								userInput = userInput + "2"; 
+								userInputFpnewton = userInputFpnewton + "2"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "2";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "2";
 							}else{
-								userInput = userInput + "2"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "2"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "2";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "2";
 							}else{
-								userInput = userInput + "2"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "2"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -462,38 +462,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "3";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "3";
 							}else{
-								userInput = userInput + "3"; 
+								userInputXfixedpoint = userInputXfixedpoint + "3"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "3";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "3";
 							}else{
-								userInput = userInput + "3"; 
+								userInputFpnewton = userInputFpnewton + "3"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "3";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "3";
 							}else{
-								userInput = userInput + "3"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "3"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "3";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "3";
 							}else{
-								userInput = userInput + "3"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "3"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -522,38 +522,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "+";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "+";
 							}else{
-								userInput = userInput + "+"; 
+								userInputXfixedpoint = userInputXfixedpoint + "+"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "+";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "+";
 							}else{
-								userInput = userInput + "+"; 
+								userInputFpnewton = userInputFpnewton + "+"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "+";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "+";
 							}else{
-								userInput = userInput + "+"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "+"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "+";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "+";
 							}else{
-								userInput = userInput + "+"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "+"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -581,41 +581,41 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "-";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "-";
 							}else{
-								userInput = userInput + "-"; 
+								userInputXfixedpoint = userInputXfixedpoint + "-"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "-";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "-";
 							}else{
-								userInput = userInput + "-"; 
+								userInputFpnewton = userInputFpnewton + "-"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "-";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "-";
 							}else{
-								userInput = userInput + "-"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "-"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "-";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "-";
 							}else{
-								userInput = userInput + "-"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "-"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
-						}			
+						}		
 					}
 					
 				});
@@ -641,38 +641,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "^";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "^";
 							}else{
-								userInput = userInput + "^"; 
+								userInputXfixedpoint = userInputXfixedpoint + "^"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "^";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "^";
 							}else{
-								userInput = userInput + "^"; 
+								userInputFpnewton = userInputFpnewton + "^"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "^";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "^";
 							}else{
-								userInput = userInput + "^"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "^"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "^";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "^";
 							}else{
-								userInput = userInput + "^"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "^"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -701,41 +701,41 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "exp(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "exp(";
 							}else{
-								userInput = userInput + "exp("; 
+								userInputXfixedpoint = userInputXfixedpoint + "exp("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "exp(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "exp(";
 							}else{
-								userInput = userInput + "exp("; 
+								userInputFpnewton = userInputFpnewton + "exp("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "exp(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "exp(";
 							}else{
-								userInput = userInput + "exp("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "exp("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "exp(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "exp(";
 							}else{
-								userInput = userInput + "exp("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "exp("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
-						}			
+						}		
 					}
 					
 				});
@@ -761,38 +761,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "4";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "4";
 							}else{
-								userInput = userInput + "4"; 
+								userInputXfixedpoint = userInputXfixedpoint + "4"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "4";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "4";
 							}else{
-								userInput = userInput + "4"; 
+								userInputFpnewton = userInputFpnewton + "4"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "4";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "4";
 							}else{
-								userInput = userInput + "4"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "4"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "4";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "4";
 							}else{
-								userInput = userInput + "4"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "4"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -821,41 +821,41 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "5";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "5";
 							}else{
-								userInput = userInput + "5"; 
+								userInputXfixedpoint = userInputXfixedpoint + "5"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "5";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "5";
 							}else{
-								userInput = userInput + "5"; 
+								userInputFpnewton = userInputFpnewton + "5"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "5";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "5";
 							}else{
-								userInput = userInput + "5"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "5"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "5";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "5";
 							}else{
-								userInput = userInput + "5"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "5"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
-						}			
+						}		
 					}
 					
 				});
@@ -881,38 +881,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "6";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "6";
 							}else{
-								userInput = userInput + "6"; 
+								userInputXfixedpoint = userInputXfixedpoint + "6"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "6";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "6";
 							}else{
-								userInput = userInput + "6"; 
+								userInputFpnewton = userInputFpnewton + "6"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "6";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "6";
 							}else{
-								userInput = userInput + "6"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "6"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "6";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "6";
 							}else{
-								userInput = userInput + "6"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "6"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -941,38 +941,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "*";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "*";
 							}else{
-								userInput = userInput + "*"; 
+								userInputXfixedpoint = userInputXfixedpoint + "*"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "*";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "*";
 							}else{
-								userInput = userInput + "*"; 
+								userInputFpnewton = userInputFpnewton + "*"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "*";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "*";
 							}else{
-								userInput = userInput + "*"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "*"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "*";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "*";
 							}else{
-								userInput = userInput + "*"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "*"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -1001,38 +1001,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "/";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "/";
 							}else{
-								userInput = userInput + "/"; 
+								userInputXfixedpoint = userInputXfixedpoint + "/"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "/";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "/";
 							}else{
-								userInput = userInput + "/"; 
+								userInputFpnewton = userInputFpnewton + "/"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "/";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "/";
 							}else{
-								userInput = userInput + "/"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "/"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "/";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "/";
 							}else{
-								userInput = userInput + "/"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "/"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -1061,41 +1061,41 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "cos(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "cos(";
 							}else{
-								userInput = userInput + "cos("; 
+								userInputXfixedpoint = userInputXfixedpoint + "cos("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "cos(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "cos(";
 							}else{
-								userInput = userInput + "cos("; 
+								userInputFpnewton = userInputFpnewton + "cos("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "cos(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "cos(";
 							}else{
-								userInput = userInput + "cos("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "cos("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "cos(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "cos(";
 							}else{
-								userInput = userInput + "cos("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "cos("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
-						}			
+						}		
 					}
 					
 				});
@@ -1121,38 +1121,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "sin(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "sin(";
 							}else{
-								userInput = userInput + "sin("; 
+								userInputXfixedpoint = userInputXfixedpoint + "sin("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "sin(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "sin(";
 							}else{
-								userInput = userInput + "sin("; 
+								userInputFpnewton = userInputFpnewton + "sin("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "sin(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "sin(";
 							}else{
-								userInput = userInput + "sin("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "sin("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "sin(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "sin(";
 							}else{
-								userInput = userInput + "sin("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "sin("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -1181,38 +1181,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "7";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "7";
 							}else{
-								userInput = userInput + "7"; 
+								userInputXfixedpoint = userInputXfixedpoint + "7"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "7";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "7";
 							}else{
-								userInput = userInput + "7"; 
+								userInputFpnewton = userInputFpnewton + "7"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "7";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "7";
 							}else{
-								userInput = userInput + "7"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "7"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "7";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "7";
 							}else{
-								userInput = userInput + "7"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "7"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}				
@@ -1241,38 +1241,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "8";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "8";
 							}else{
-								userInput = userInput + "8"; 
+								userInputXfixedpoint = userInputXfixedpoint + "8"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "8";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "8";
 							}else{
-								userInput = userInput + "8"; 
+								userInputFpnewton = userInputFpnewton + "8"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "8";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "8";
 							}else{
-								userInput = userInput + "8"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "8"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "8";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "8";
 							}else{
-								userInput = userInput + "8"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "8"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}				
@@ -1301,38 +1301,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "9";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "9";
 							}else{
-								userInput = userInput + "9"; 
+								userInputXfixedpoint = userInputXfixedpoint + "9"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "9";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "9";
 							}else{
-								userInput = userInput + "9"; 
+								userInputFpnewton = userInputFpnewton + "9"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "9";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "9";
 							}else{
-								userInput = userInput + "9"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "9"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "9";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "9";
 							}else{
-								userInput = userInput + "9"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "9"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -1361,38 +1361,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "tan(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "tan(";
 							}else{
-								userInput = userInput + "tan("; 
+								userInputXfixedpoint = userInputXfixedpoint + "tan("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "tan(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "tan(";
 							}else{
-								userInput = userInput + "tan("; 
+								userInputFpnewton = userInputFpnewton + "tan("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "tan(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "tan(";
 							}else{
-								userInput = userInput + "tan("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "tan("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "tan(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "tan(";
 							}else{
-								userInput = userInput + "tan("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "tan("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -1421,38 +1421,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "logs(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "logs(";
 							}else{
-								userInput = userInput + "logs("; 
+								userInputXfixedpoint = userInputXfixedpoint + "logs("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "logs(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "logs(";
 							}else{
-								userInput = userInput + "logs("; 
+								userInputFpnewton = userInputFpnewton + "logs("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "logs(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "logs(";
 							}else{
-								userInput = userInput + "logs("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "logs("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "logs(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "logs(";
 							}else{
-								userInput = userInput + "logs("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "logs("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}	
@@ -1482,38 +1482,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "ln(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "ln(";
 							}else{
-								userInput = userInput + "ln("; 
+								userInputXfixedpoint = userInputXfixedpoint + "ln("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "ln(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "ln(";
 							}else{
-								userInput = userInput + "ln("; 
+								userInputFpnewton = userInputFpnewton + "ln("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "ln(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "ln(";
 							}else{
-								userInput = userInput + "ln("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "ln("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "ln(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "ln(";
 							}else{
-								userInput = userInput + "ln("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "ln("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -1535,45 +1535,45 @@ public class MainActivity extends Activity {
 							if(userInput.equals("")){
 								userInput = "";
 							}else{
-								userInput = userInput + ""; 
+								userInput =  ""; 
 							}
 							mathExpression.setText(userInput);
 						}
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "";
 							}else{
-								userInput = userInput + ""; 
+								userInputXfixedpoint =  ""; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "";
 							}else{
-								userInput = userInput + ""; 
+								userInputFpnewton =  ""; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "";
 							}else{
-								userInput = userInput + ""; 
+								userInputFpMultipleroots =  ""; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "";
 							}else{
-								userInput = userInput + ""; 
+								userInputF2pMultipleroots =  ""; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}				
@@ -1602,38 +1602,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "0";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "0";
 							}else{
-								userInput = userInput + "0"; 
+								userInputXfixedpoint = userInputXfixedpoint + "0"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "0";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "0";
 							}else{
-								userInput = userInput + "0"; 
+								userInputFpnewton = userInputFpnewton + "0"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "0";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "0";
 							}else{
-								userInput = userInput + "0"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "0"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "0";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "0";
 							}else{
-								userInput = userInput + "0"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "0"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -1662,38 +1662,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ".";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = ".";
 							}else{
-								userInput = userInput + "."; 
+								userInputXfixedpoint = userInputXfixedpoint + "."; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ".";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = ".";
 							}else{
-								userInput = userInput + "."; 
+								userInputFpnewton = userInputFpnewton + "."; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ".";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = ".";
 							}else{
-								userInput = userInput + "."; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "."; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ".";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = ".";
 							}else{
-								userInput = userInput + "."; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "."; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}				
@@ -1722,38 +1722,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "X";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "X";
 							}else{
-								userInput = userInput + "X"; 
+								userInputXfixedpoint = userInputXfixedpoint + "X"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "X";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "X";
 							}else{
-								userInput = userInput + "X"; 
+								userInputFpnewton = userInputFpnewton + "X"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "X";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "X";
 							}else{
-								userInput = userInput + "X"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "X"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "X";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "X";
 							}else{
-								userInput = userInput + "X"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "X"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		
@@ -1782,38 +1782,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "(";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "(";
 							}else{
-								userInput = userInput + "("; 
+								userInputXfixedpoint = userInputXfixedpoint + "("; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "(";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "(";
 							}else{
-								userInput = userInput + "("; 
+								userInputFpnewton = userInputFpnewton + "("; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "(";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "(";
 							}else{
-								userInput = userInput + "("; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "("; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "(";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "(";
 							}else{
-								userInput = userInput + "("; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "("; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -1842,38 +1842,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ")";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = ")";
 							}else{
-								userInput = userInput + ")"; 
+								userInputXfixedpoint = userInputXfixedpoint + ")"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ")";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = ")";
 							}else{
-								userInput = userInput + ")"; 
+								userInputFpnewton = userInputFpnewton + ")"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ")";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = ")";
 							}else{
-								userInput = userInput + ")"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + ")"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = ")";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = ")";
 							}else{
-								userInput = userInput + ")"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + ")"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}			
@@ -1902,38 +1902,38 @@ public class MainActivity extends Activity {
 							
 						if (mathExpressionXFixedPoint.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "π";
+							if(userInputXfixedpoint.equals("")){
+								userInputXfixedpoint = "π";
 							}else{
-								userInput = userInput + "π"; 
+								userInputXfixedpoint = userInputXfixedpoint + "π"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
 						
 						if (mathExpressionFpNewton.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "π";
+							if(userInputFpnewton.equals("")){
+								userInputFpnewton = "π";
 							}else{
-								userInput = userInput + "π"; 
+								userInputFpnewton = userInputFpnewton + "π"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "π";
+							if(userInputFpMultipleroots.equals("")){
+								userInputFpMultipleroots = "π";
 							}else{
-								userInput = userInput + "π"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "π"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
-							if(userInput.equals("")){
-								userInput = "π";
+							if(userInputF2pMultipleroots.equals("")){
+								userInputF2pMultipleroots = "π";
 							}else{
-								userInput = userInput + "π"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "π"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}
@@ -1959,7 +1959,8 @@ public class MainActivity extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			//Navego a la página de Ayuda
-			
+			Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}

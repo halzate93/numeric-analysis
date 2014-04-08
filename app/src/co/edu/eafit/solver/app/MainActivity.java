@@ -112,7 +112,7 @@ public class MainActivity extends Activity {
 		        		tableMultipleroots.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 2:
-		        		Toast.makeText(MainActivity.this, "Fake Rule", Toast.LENGTH_LONG).show();
+		        		Toast.makeText(MainActivity.this, "False Position", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
 		        		tableIncremental.setVisibility(View.INVISIBLE);
 		        		tableBisection.setVisibility(View.VISIBLE);
@@ -1970,7 +1970,7 @@ public class MainActivity extends Activity {
 		List<String> SpinnerList = new ArrayList<String>();
 		SpinnerList.add("Incremental Search");
 		SpinnerList.add("Bisection");
-		SpinnerList.add("Fake Rule");
+		SpinnerList.add("False Position");
 		SpinnerList.add("Fixed Point");
 		SpinnerList.add("Newton");
 		SpinnerList.add("Secant");

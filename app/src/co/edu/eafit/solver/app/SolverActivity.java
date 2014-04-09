@@ -16,7 +16,6 @@ import co.edu.eafit.solver.lib.control.Solver;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
-import co.edu.eafit.solver.app.configurators.MethodConfigurator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,7 +26,6 @@ import android.widget.LinearLayout;
 
 public class SolverActivity extends Activity {
 	//
-	Solver slv;
 	//Creation of the Chart
 	private GraphicalView mChartView;
 	
@@ -108,12 +106,12 @@ public class SolverActivity extends Activity {
 	      }
 	    
 	    //Solver
-	    EMethod methodEnum = EMethod.values()[Integer.parseInt(getMethod())];
+	    /*EMethod methodEnum = EMethod.values()[Integer.parseInt(getMethod())];
 	    try {
 			run(methodEnum);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	private void run(EMethod method) throws Exception {

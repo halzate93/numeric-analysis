@@ -3,6 +3,7 @@
 	<name>app</name>
 	<comment></comment>
 	<projects>
+		<project>SolverLib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -1,5 +1,6 @@
 package co.edu.eafit.solver.lib.methods.open;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,7 +11,9 @@ import net.sourceforge.jeval.EvaluationException;
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
+import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 
 /**
@@ -30,17 +33,42 @@ public class Newton extends FixedPoint {
 	 */
 	private Function df;
 	
+	//Execution values
+	protected float dfx;
 	/**
 	 * Uses the function g(x) = x - f(x)/f'(x) to calculate the next approximation.
 	 */
 	@Override
-	protected float getNextApproximation(float xn, JSONObject[] info)
+	protected float getNextApproximation(JSONObject[] info)
 			throws EvaluationException{
-		float dfx = df.evaluate(xn);
-		float fx = getFunction().evaluate(xn);
 		
 		info[0].put(EResultProcess.Dfx.toString(), dfx);
-		return xn - (fx/dfx);
+		return xn - (y/dfx);
+	}
+	
+	@Override
+	protected void firstStep() throws EvaluationException{
+		super.firstStep();
+		dfx = df.evaluate(xn);
+	}
+	
+	@Override
+	protected void updateStatus() throws EvaluationException{
+		super.updateStatus();
+		dfx = df.evaluate(xn);
+	}
+	
+	@Override
+	protected boolean checkExit(){
+		if(!super.checkExit())
+			return false;
+		else if(dfx == 0){
+			result = new SimpleEntry<EResults, String>(EResults.Failure,
+					EResultProcess.Dfx.toString());
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override

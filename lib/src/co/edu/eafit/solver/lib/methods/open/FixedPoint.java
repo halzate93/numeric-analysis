@@ -2,6 +2,7 @@ package co.edu.eafit.solver.lib.methods.open;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.AbstractMap.SimpleEntry;
 
 import net.sourceforge.jeval.EvaluationException;
 
@@ -58,69 +59,107 @@ public class FixedPoint extends Method {
 	 */
 	private EErrorType errorType;
 	
+	protected SimpleEntry<EResults, String> result;
+	
+	//Execution values
+	protected float xn;
+	protected float y;
+	protected float error;
+	protected float xa;
+	protected int i;
+	
 	@Override
 	protected JSONObject solve() throws EvaluationException {
-		JSONObject result = new JSONObject();
+		JSONObject response = new JSONObject();
 		JSONArray process = new JSONArray();
 		
 		JSONObject iteration = new JSONObject();
-		//Preliminary setup and first iteration
-		float xn = x0;
-		float y = getFunction().evaluate(xn);
 		
-		float error = tolerance + 1, xa;
-		int i = 0;
+		//Sets variables
+		firstStep();
 		
 		iteration.put(EResultProcess.I.toString(), i);
 		iteration.put(EResultProcess.X.toString(), xn);
 		iteration.put(EResultProcess.Fx.toString(), y);
 		process.put(iteration);
-		/* Exits if we find a root, get to a good approximation or
-		 * max iteration count is reached. */
-		while(y != 0f && error > tolerance && i < n){
+		
+		//Checks if the method can and should continue.
+		while(checkExit()){
 			iteration = new JSONObject();
 			
-			xa = getNextApproximation(xn, new JSONObject[]{iteration});
-			y = getFunction().evaluate(xa);
-			
-			error = calculateError(xn, xa);
-			xn = xa;
-
-			i++;
-			iteration.put(EResultProcess.I.toString(), i);
-			iteration.put(EResultProcess.X.toString(), xa);
-			iteration.put(EResultProcess.Fx.toString(), y);
+			xa = getNextApproximation(new JSONObject[]{iteration});
+			updateStatus();
+			iteration.put(EResultProcess.I.toString(), Integer.toString(i));
+			iteration.put(EResultProcess.X.toString(), Float.toString(xa));
+			iteration.put(EResultProcess.Fx.toString(), Float.toString(y));
 			iteration.put(EResultProcess.Error.toString(), Float.toString(error));
 			process.put(iteration);
 		}
 		
-		if(y == 0){
-			result.put(EResults.Root.toString(), xn);
-			result.put(EResultInfo.Error.toString(), "0");
-		} else if( error <= tolerance) {
-			result.put(EResults.Root.toString(), xn);
-			result.put(EResultInfo.Error.toString(), Float.toString(error));
-		} else {
-			result.put(EResults.Failure.toString(), EResultInfo.IterationCount.toString());
+		response.put(result.getKey().toString(), result.getValue());
+		
+		if(y == 0f) error = 0f;
+		response.put(EResultInfo.Error.toString(), error + "");
+		response.put(EResultInfo.IterationCount.toString(), i);
+		response.put(EResultInfo.Proccess.toString(), process);
+		return response;
+	}
+	/**
+	 * This functions checks if the search must end by any cause.
+	 * Exits if we find a root, get to a good approximation or
+	 * max iteration count is reached. 
+	 * @return if the search must stop.
+	 */
+	protected boolean checkExit(){
+		boolean nextIteration = true;
+		if (y == 0f || error <= tolerance){
+			nextIteration = false;
+			result = new SimpleEntry<>(EResults.Root, Float.toString(xn));
+		} else if (i >= n){
+			nextIteration = false;
+			result = new SimpleEntry<>(EResults.Failure,
+					EResultInfo.IterationCount.toString());
 		}
-		result.put(EResultInfo.IterationCount.toString(), i);
-		result.put(EResultInfo.Proccess.toString(), process);
-		return result;
+		return nextIteration;
 	}
 
 	/**
 	 * Evaluates the g function and gets the next approximation, any derivative of this
 	 * method only needs to override this method.
-	 * @param xn the actual value
 	 * @param info An array holding a single JSONObject to save information about that
 	 * step (Emulates the out parameter keyword from other languages).
 	 * @return the new approximation to xv (xa).
 	 * @throws EvaluationException if the evaluated function fails.
 	 */
-	protected float getNextApproximation(float xn, JSONObject[] info) throws EvaluationException {
+	protected float getNextApproximation(JSONObject[] info) throws EvaluationException {
 		return g.evaluate(xn);
 	}
 
+	/**
+	 * Updates the values for any variable used in the iteration.
+	 * @throws EvaluationException
+	 */
+	protected void updateStatus () throws EvaluationException{
+		y = getFunction().evaluate(xa);
+		
+		error = calculateError(xn, xa);
+		xn = xa;
+
+		i++;
+	}
+	
+	/**
+	 * Sets variables and makes preliminary calculations.
+	 * @throws EvaluationException
+	 */
+	protected void firstStep() throws EvaluationException{
+		xn = x0;
+		y = getFunction().evaluate(xn);
+		
+		error = tolerance + 1;
+		i = 0;
+	}
+	
 	/**
 	 * Calculates the error depending on which is the current errorType set in this
 	 * moment for the method.
@@ -214,7 +253,6 @@ public class FixedPoint extends Method {
 		return tolerance;
 	}
 
-	
 	public int getN() {
 		return n;
 	}

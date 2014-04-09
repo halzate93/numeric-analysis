@@ -116,12 +116,12 @@ public class SolverActivity extends Activity {
 		}
 	}
 	
-	private static void run(EMethod method) throws Exception {
+	private void run(EMethod method) throws Exception {
 		
 		Solver s = new Solver();
 		s.setMethodPrototype(method);
 		
-		JSONObject cf = getConfiguration(EParameter[] required);
+		JSONObject params = getConfiguration(s.getRequiredParameters(), method);
 		
 		boolean ready = false;
 		while(!ready){
@@ -137,14 +137,33 @@ public class SolverActivity extends Activity {
 		System.out.println(s.getLastResult().toString(2));
 	}
 	
-	public JSONObject getConfiguration(EParameter[] required) throws JSONException {
+	public JSONObject getConfiguration(EParameter[] required, EMethod method) throws JSONException {
 		JSONObject parameters = new JSONObject();
-		
-		Scanner sc = new Scanner(System.in);
 		
 		for(EParameter p : required){
 			System.out.println("Input value for " + p.toString() + ":");
-			parameters.put(p.toString(), sc.nextLine());
+			if (p.toString() == "F")
+			parameters.put(p.toString(), getF());
+			if (p.toString() == "Dx")
+				parameters.put(p.toString(), getdx());
+			if (p.toString() == "X0")
+				parameters.put(p.toString(), getXo());
+			if (p.toString() == "N")
+				parameters.put(p.toString(), getiter());
+			if (p.toString() == "G")
+				parameters.put(p.toString(), getx());
+			if (p.toString() == "Tolerance")
+				parameters.put(p.toString(), gettol());
+			if (p.toString() == "ErrorType")
+				parameters.put(p.toString(), getdx());
+			if (p.toString() == "Df")
+				parameters.put(p.toString(), getfp());
+			if (p.toString() == "Xi")
+				parameters.put(p.toString(), getxi());
+			if (p.toString() == "Xs")
+				parameters.put(p.toString(), getxs());
+			if (p.toString() == "LastX")
+				parameters.put(p.toString(), getXo());
 		}
 		
 		return parameters;

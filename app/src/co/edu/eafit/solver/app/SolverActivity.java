@@ -1,6 +1,5 @@
 package co.edu.eafit.solver.app;
 
-import java.util.Scanner;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -144,7 +143,12 @@ public class SolverActivity extends Activity {
 			if (p.toString() == "Dx")
 				parameters.put(p.toString(), getdx());
 			if (p.toString() == "X0")
-				parameters.put(p.toString(), getXo());
+			{
+				if(getMethod() != "5")
+					parameters.put(p.toString(), getXo());
+				else
+					parameters.put(p.toString(), getx1());
+			}
 			if (p.toString() == "N")
 				parameters.put(p.toString(), getiter());
 			if (p.toString() == "G")
@@ -216,6 +220,7 @@ public class SolverActivity extends Activity {
 		}
 		return topicid;
 	}
+	
 	//Get Extras from MainActivity
 	public String getMethod(){
 		String topicid = "";

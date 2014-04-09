@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberDecimal|numberSigned" >
 
                     <requestFocus />
                 </EditText>
@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberDecimal|numberSigned" >
 
                     <requestFocus />
                 </EditText>
@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal|numberSigned" />
 
                 <TextView
                     android:id="@+id/textView5b"
@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal|numberSigned" />
             </TableRow>
 
             <TableRow
@@ -263,7 +263,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberDecimal|numberSigned" >
 
                     <requestFocus />
                 </EditText>
@@ -330,7 +330,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberDecimal|numberSigned" >
 
                     <requestFocus />
                 </EditText>
@@ -343,7 +343,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal|numberSigned" />
                 <TextView
                     android:id="@+id/textView7s"
                     android:text="@string/tv_iterations" />
@@ -363,7 +363,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal|numberSigned" />
             </TableRow>
         </TableLayout>
         
@@ -390,7 +390,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="numberDecimal" >
+                    android:inputType="numberDecimal|numberSigned" >
 
                     <requestFocus />
                 </EditText>
@@ -413,7 +413,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="3"
-                    android:inputType="number" />
+                    android:inputType="numberDecimal|numberSigned" />
             </TableRow>
             <TableRow android:id="@+id/tablerRow2"
                 android:layout_width="match_parent"

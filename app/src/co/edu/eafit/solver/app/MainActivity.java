@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
 	
 	private Evaluator evalutor;
 	Spinner spinner;
-	private View view1;
 	private TableLayout tableIncremental; 
 	private TableLayout tableBisection;
 	private TableLayout tableFixedpoint;
@@ -61,8 +60,6 @@ public class MainActivity extends Activity {
 	private EditText x0m;
 	private EditText item;
 	private EditText tolm;
-	private EditText fpm;
-	private EditText f2pm;
 	
 	private EditText mathExpressionXFixedPoint;
 	
@@ -305,7 +302,6 @@ public class MainActivity extends Activity {
 				String fps = "";
 				String x1s = "";
 				String f2ps = "";
-				String fs = "";
 				switch (actualMethod)
 				{
 					case 0:

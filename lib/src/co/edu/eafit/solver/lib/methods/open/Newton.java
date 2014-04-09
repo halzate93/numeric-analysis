@@ -9,9 +9,9 @@ import org.json.JSONObject;
 
 import net.sourceforge.jeval.EvaluationException;
 import co.edu.eafit.solver.lib.functions.Function;
+import co.edu.eafit.solver.lib.methods.enums.EFailureCauses;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
-import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
@@ -64,7 +64,7 @@ public class Newton extends FixedPoint {
 			return false;
 		else if(dfx == 0){
 			result = new SimpleEntry<EResults, String>(EResults.Failure,
-					EResultProcess.Dfx.toString());
+					EFailureCauses.Dfx.toString());
 			return false;
 		} else {
 			return true;

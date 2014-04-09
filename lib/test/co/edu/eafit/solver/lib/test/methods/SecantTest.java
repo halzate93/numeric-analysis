@@ -19,28 +19,29 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.open.Newton;
+import co.edu.eafit.solver.lib.methods.open.Secant;
 
-public class NewtonTest {
+public class SecantTest {
 
-	private Newton method;
-	private static final String f = "exp(-x) - pow(x, 2) * cos(2*x - 4) + 6*x + 3";
-	private static final String df = "-exp(-x) - 2*x*cos(2*x - 4) + 2*pow(x, 2)*sin(2*x - 4) + 6";
-	private static final int n = 5;
+	private static final String f = "exp(x) - 5*x + 2";
+	private static final float lastX = 0.5f;
+	private static final int n = 10;
 	private static final float tolerance = 0.00001f;
-	private static final EErrorType errorType = EErrorType.Absolute;
-	private static final float x0 = -1;
+	private static final EErrorType errorType = EErrorType.Relative;
+	private static final float x0 = 1;
 	
-	private static final float root = -0.787820f;
-	private static final int i = 3;
+	private static final float root = 0.88421814f;
+	private static final int i = 4;
+	private static float MAXERROR = 0.0000000001f;
 	
-	private static float MAXERROR = 0.00000000001f;
+	private Secant method;
 	
 	@Before
 	public void setUp() throws Exception {
-		method = (Newton) MethodFactory.build(EMethod.Newton);
+		method = (Secant) MethodFactory.build(EMethod.Secant);
 		JSONObject params = new JSONObject();
 		params.put(EParameter.F.toString(), f);
-		params.put(EParameter.Df.toString(), df);
+		params.put(EParameter.LastX.toString(), lastX);
 		params.put(EParameter.N.toString(), n);
 		params.put(EParameter.Tolerance.toString(), tolerance); //Tolerance 1x10^-5
 		params.put(EParameter.ErrorType.toString(), errorType.toString());
@@ -54,8 +55,8 @@ public class NewtonTest {
 	}
 	
 	@Test
-	public void configureDfTest() {
-		assertEquals(df, method.getDerivative().getExpression());
+	public void configureLastXTest() {
+		assertEquals(lastX, method.getFirstX(), MAXERROR);
 	}
 	
 	@Test
@@ -104,14 +105,13 @@ public class NewtonTest {
 	
 	@Test
 	public void findRootTest() throws NumberFormatException, JSONException, Exception{
-		JSONObject easyParams = new JSONObject();
-		easyParams.put(EParameter.F.toString(), "x + 1");
-		easyParams.put(EParameter.Df.toString(), "1");
-		easyParams.put(EParameter.X0.toString(), -1f);
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
 		
-		method.setup(easyParams);
+		method.setup(moreIterations);
 		method.run();
-		
+		System.out.println(method.getLastResult().toString(2));
 		assertEquals(0f, Float.parseFloat(method.getLastResult()
 				.getString(EResultInfo.Error.toString())), MAXERROR);
 	}
@@ -122,27 +122,31 @@ public class NewtonTest {
 		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
 		assertEquals(i+1, process.length());
 	}
-	
+
 	@Test
-	public void setDfProcessInformation() throws JSONException, Exception{
+	public void setDenominatorProcessInformation() throws JSONException, Exception{
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
+		method.setup(moreIterations);
+		
 		method.run();
-		assertEquals(5.805646f, method.getLastResult()
-				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(3)
-				.getDouble(EResultProcess.Dfx.toString()), tolerance);
+		assertEquals(0.000022281685f, method.getLastResult()
+				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(5)
+				.getDouble(EResultProcess.Denominator.toString()), MAXERROR);
 	}
 	
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
-		method = (Newton) MethodFactory.build(EMethod.Newton);
+		method = (Secant) MethodFactory.build(EMethod.Secant);
 		method.run();
 	}
 	
 	@Test(expected = InvalidParameterException.class)
 	public void invalidParametersTest() throws InvalidParameterException{
 		JSONObject badParam = new JSONObject();
-		badParam.put(EParameter.Df.toString(), "sox(x)");
+		badParam.put(EParameter.LastX.toString(), "sox(x)");
 		
 		method.setup(badParam);
 	}
-
 }

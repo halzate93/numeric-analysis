@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.Method;
 import co.edu.eafit.solver.lib.methods.enums.EErrorType;
+import co.edu.eafit.solver.lib.methods.enums.EFailureCauses;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
@@ -118,7 +119,7 @@ public class FixedPoint extends Method {
 		} else if (i >= n){
 			nextIteration = false;
 			result = new SimpleEntry<>(EResults.Failure,
-					EResultInfo.IterationCount.toString());
+					EFailureCauses.IterationCount.toString());
 		}
 		return nextIteration;
 	}

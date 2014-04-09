@@ -85,11 +85,11 @@ public class FunctionTest {
 	
 	@Test
 	public void binaryMissingTest() throws EvaluationException{
-		Function res = new Function("x - + ");
+		new Function("x - + ");
 	}
 	
 	@Test(expected = StringIndexOutOfBoundsException.class)
 	public void missingTest() throws EvaluationException{
-		Function miss = new Function("");
+		new Function("");
 	}
 }

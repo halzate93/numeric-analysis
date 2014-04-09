@@ -30,7 +30,7 @@ public class Function {
 	 * if the provided value is invalid.
 	 */
 	public float evaluate(float x) throws EvaluationException{
-		evaluator.putVariable("x", x+"");
+		evaluator.putVariable("x", Float.toString(x));
 		String resultString = evaluator.evaluate();
 		return Float.parseFloat(resultString);
 	}

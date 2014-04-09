@@ -2,8 +2,11 @@ package co.edu.eafit.solver.lib.methods;
 
 import org.json.*;
 
+import co.edu.eafit.solver.lib.methods.closed.Bisection;
+import co.edu.eafit.solver.lib.methods.closed.FakeRule;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.open.FixedPoint;
+import co.edu.eafit.solver.lib.methods.open.MultipleRoots;
 import co.edu.eafit.solver.lib.methods.open.Newton;
 import co.edu.eafit.solver.lib.methods.open.Secant;
 import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
@@ -35,6 +38,15 @@ public class MethodFactory {
 			break;
 		case Secant:
 			result = new Secant();
+			break;
+		case MultipleRoots:
+			result = new MultipleRoots();
+			break;
+		case Bisection:
+			result = new Bisection();
+			break;
+		case FakeRule:
+			result = new FakeRule();
 			break;
 		default:
 			break;

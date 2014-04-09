@@ -141,6 +141,7 @@ public class FixedPoint extends Method {
 	 * @throws EvaluationException
 	 */
 	protected void updateStatus () throws EvaluationException{
+		System.out.println(xa);
 		y = getFunction().evaluate(xa);
 		
 		error = calculateError(xn, xa);

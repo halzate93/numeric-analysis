@@ -62,4 +62,6 @@
 	<string name="newton">Newton</string>
 	<string name="secant">Secant</string>
 	<string name="multipleroots">Multiple Roots</string>
+	<!-- vars for Solve -->
+	<string name="solveHead">Solver for this Function:</string>
 </resources>

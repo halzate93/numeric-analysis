@@ -16,13 +16,13 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 
 /**
- * Secants method is a derivative from FixedPoint, as Newton's it has a supplementary G function
+ * Secant method is a derivative from FixedPoint, as Newton's it has a supplementary G function
  * to calculate approximations for the next xa value; but it works a little different, instead of
  * using the first derivative for fx, we will use an approximation to it, exactly we will use
  * secants instead of tangents, this method convergence is 1.7, it is almost as fast as Newton's
  * but you don't have to derive.
  * @author halzate93
- *
+ * https://github.com/halzate93/solver/wiki/Secant
  */
 public class Secant extends FixedPoint {
 
@@ -65,7 +65,7 @@ public class Secant extends FixedPoint {
 	
 	/**
 	 * If the denominator reaches zero, we have a failure and the
-	 * method sould end.
+	 * method should end.
 	 */
 	@Override
 	protected boolean checkExit(){
@@ -74,6 +74,10 @@ public class Secant extends FixedPoint {
 		else if(denominator == 0){
 			result = new SimpleEntry<>(EResults.Failure,
 					EFailureCauses.Denominator.toString());
+			return false;
+		} else if(lastY == 0){
+			result = new SimpleEntry<>(EResults.Root, Float.toString(lastX));
+			error = 0;
 			return false;
 		} else
 			return true;

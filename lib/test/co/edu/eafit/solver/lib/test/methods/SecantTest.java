@@ -18,7 +18,6 @@ import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
-import co.edu.eafit.solver.lib.methods.open.Newton;
 import co.edu.eafit.solver.lib.methods.open.Secant;
 
 public class SecantTest {
@@ -111,7 +110,6 @@ public class SecantTest {
 		
 		method.setup(moreIterations);
 		method.run();
-		System.out.println(method.getLastResult().toString(2));
 		assertEquals(0f, Float.parseFloat(method.getLastResult()
 				.getString(EResultInfo.Error.toString())), MAXERROR);
 	}

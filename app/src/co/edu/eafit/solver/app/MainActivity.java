@@ -430,7 +430,6 @@ public class MainActivity extends Activity {
 					userInput = EvaluationHelper.replaceAll(userInput, "ln", "log");
 					userInput = EvaluationHelper.replaceAll(userInput, "log10", "logs");
 					userInput = EvaluationHelper.replaceAll(userInput, "π", "3.14159265359");
-					
 					if(!userInput.contains("x")){
 						
 						Toast.makeText(MainActivity.this, "Equation must contain x variable which is used for solving equations and graph plotting", Toast.LENGTH_LONG).show();

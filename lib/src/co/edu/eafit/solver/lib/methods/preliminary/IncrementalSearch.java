@@ -97,8 +97,10 @@ public class IncrementalSearch extends Method {
 				result.put(EResults.Root.toString(), Float.toString(xf));
 			}else if(change < 0){ //We crossed the x axis
 				root = true;
-				result.append(EResults.Interval.toString(), Float.toString(xi));
-				result.append(EResults.Interval.toString(), Float.toString(xf));
+				JSONArray interval = new JSONArray();
+				interval.put(Float.toString(xi));
+				interval.put(Float.toString(xf));
+				result.put(EResults.Interval.toString(), interval);
 			}
 				
 			xi = xf; //Update variables

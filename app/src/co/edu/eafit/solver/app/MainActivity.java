@@ -6,8 +6,6 @@ import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.EvaluationHelper;
 import net.sourceforge.jeval.Evaluator;
 
-import co.edu.eafit.solver.lib.methods.enums.EMethod;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -437,7 +435,7 @@ public class MainActivity extends Activity {
 					userInput = EvaluationHelper.replaceAll(userInput, "log10", "logs");
 					userInput = EvaluationHelper.replaceAll(userInput, "π", "3.14159265359");
 					
-					if(!userInput.contains("X")){
+					if(!userInput.contains("x")){
 						
 						Toast.makeText(MainActivity.this, "Equation must contain x variable which is used for solving equations and graph plotting", Toast.LENGTH_LONG).show();
 						return;
@@ -461,7 +459,7 @@ public class MainActivity extends Activity {
 					
 					System.out.println("New Expression is = : " + userInput);
 					
-					if(userInput.contains("X")){
+					if(userInput.contains("x")){
 						
 						allSeries = new ArrayList<String>();
 						allSeries.clear();						
@@ -472,7 +470,7 @@ public class MainActivity extends Activity {
 						for(int i = -10; i < 10; i++){						
 							
 							
-							if(userInput.contains("X^")){
+							if(userInput.contains("x^")){
 								
 								int indexs = userInput.indexOf("^");
 								threeString = userInput.substring(indexs - 1, indexs + 2);;
@@ -500,7 +498,7 @@ public class MainActivity extends Activity {
 							
 							evalutor.putVariable("a", String.valueOf(i));							
 							//System.out.println("Variable = : " + "#{a}"wink;
-							userInput = EvaluationHelper.replaceAll(userInput, "X", "#{a}");							
+							userInput = EvaluationHelper.replaceAll(userInput, "x", "#{a}");							
 							
 							System.out.println("New Expression =  : " + userInput);								
 							
@@ -541,9 +539,9 @@ public class MainActivity extends Activity {
     			mIntent.putExtra("xaxis", xAxis);
     			mIntent.putExtra("yaxis", yAxis);
     			//method type
-    			mIntent.putExtra("method", actualMethod);
+    			mIntent.putExtra("method", String.valueOf(actualMethod));
     			//method's vars
-    			mIntent.putExtra("f", userInput);
+    			mIntent.putExtra("f", mathExpression.getText().toString());
 				mIntent.putExtra("x0", x0s);
     			mIntent.putExtra("dx", dxs);
     			mIntent.putExtra("iter", iters);
@@ -2005,9 +2003,9 @@ public class MainActivity extends Activity {
 						if (mathExpression.isFocused())
 						{
 							if(userInput.equals("")){
-								userInput = "X";
+								userInput = "x";
 							}else{
-								userInput = userInput + "X"; 
+								userInput = userInput + "x"; 
 							}
 							mathExpression.setText(userInput);
 						}
@@ -2015,9 +2013,9 @@ public class MainActivity extends Activity {
 						if (mathExpressionXFixedPoint.isFocused())
 						{
 							if(userInputXfixedpoint.equals("")){
-								userInputXfixedpoint = "X";
+								userInputXfixedpoint = "x";
 							}else{
-								userInputXfixedpoint = userInputXfixedpoint + "X"; 
+								userInputXfixedpoint = userInputXfixedpoint + "x"; 
 							}
 							mathExpressionXFixedPoint.setText(userInputXfixedpoint);
 						}
@@ -2025,27 +2023,27 @@ public class MainActivity extends Activity {
 						if (mathExpressionFpNewton.isFocused())
 						{
 							if(userInputFpnewton.equals("")){
-								userInputFpnewton = "X";
+								userInputFpnewton = "x";
 							}else{
-								userInputFpnewton = userInputFpnewton + "X"; 
+								userInputFpnewton = userInputFpnewton + "x"; 
 							}
 							mathExpressionFpNewton.setText(userInputFpnewton);
 						}
 						if (mathExpressionFpMultipleroots.isFocused())
 						{
 							if(userInputFpMultipleroots.equals("")){
-								userInputFpMultipleroots = "X";
+								userInputFpMultipleroots = "x";
 							}else{
-								userInputFpMultipleroots = userInputFpMultipleroots + "X"; 
+								userInputFpMultipleroots = userInputFpMultipleroots + "x"; 
 							}
 							mathExpressionFpMultipleroots.setText(userInputFpMultipleroots);
 						}
 						if (mathExpressionF2pMultipleroots.isFocused())
 						{
 							if(userInputF2pMultipleroots.equals("")){
-								userInputF2pMultipleroots = "X";
+								userInputF2pMultipleroots = "x";
 							}else{
-								userInputF2pMultipleroots = userInputF2pMultipleroots + "X"; 
+								userInputF2pMultipleroots = userInputF2pMultipleroots + "x"; 
 							}
 							mathExpressionF2pMultipleroots.setText(userInputF2pMultipleroots);
 						}		

@@ -2,6 +2,10 @@ package co.edu.eafit.solver.app;
 
 import java.util.*;
 
+import net.sourceforge.jeval.EvaluationException;
+import net.sourceforge.jeval.EvaluationHelper;
+import net.sourceforge.jeval.Evaluator;
+
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 
 import android.os.Bundle;
@@ -19,6 +23,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class MainActivity extends Activity {
 	
+	private Evaluator evalutor;
 	Spinner spinner;
 	private View view1;
 	private TableLayout tableIncremental; 
@@ -32,7 +37,37 @@ public class MainActivity extends Activity {
 	private EditText x0;
 	private EditText d0;
 	private EditText ite;
+	//bisection
+	private EditText xi;
+	private EditText xs;
+	private EditText iteb;
+	private EditText tolb;
+	//false position
+	private EditText xif;
+	private EditText xsf;
+	private EditText itef;
+	private EditText tolf;
+	//fixed point
+	private EditText itep;
+	private EditText tolp;
+	//newton
+	private EditText x0n;
+	private EditText iten;
+	private EditText toln;
+	//secant
+	private EditText x0se;
+	private EditText x1se;
+	private EditText ites;
+	private EditText tolse;
+	//multiple roots
+	private EditText x0m;
+	private EditText item;
+	private EditText tolm;
+	private EditText fpm;
+	private EditText f2pm;
+	
 	private EditText mathExpressionXFixedPoint;
+	
 	private EditText mathExpressionFpNewton;
 	private EditText mathExpressionFpMultipleroots;
 	private EditText mathExpressionF2pMultipleroots;
@@ -74,6 +109,9 @@ public class MainActivity extends Activity {
     private String userInputFpMultipleroots = "";
     private String userInputF2pMultipleroots = "";
     private Button borrar;
+    
+    private ArrayList<String> allSeries;
+    private double powerNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +121,7 @@ public class MainActivity extends Activity {
 			if(!userInput.equals("")){
 				userInput = "";
 			}
+		evalutor = new Evaluator();		
 		spinner = (Spinner) findViewById(R.id.spinnerMetodos);
 		createMethodList();
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -178,24 +217,48 @@ public class MainActivity extends Activity {
 		tableSecant = (TableLayout)findViewById(R.id.TableSecant);
 		tableMultipleroots = (TableLayout)findViewById(R.id.TableMultipleroots);
 		
-		mathExpressionXFixedPoint = (EditText)findViewById(R.id.etX);
-		hideSoftKeyboard(mathExpressionXFixedPoint);
-		
-		mathExpressionFpNewton = (EditText)findViewById(R.id.etFpn);
-		hideSoftKeyboard(mathExpressionFpNewton);
-		
-		mathExpressionFpMultipleroots = (EditText)findViewById(R.id.etFpr);
-		hideSoftKeyboard(mathExpressionFpMultipleroots);
-		
-		mathExpressionF2pMultipleroots = (EditText)findViewById(R.id.etFp2r);
-		hideSoftKeyboard(mathExpressionF2pMultipleroots);
-		
 		mathExpression = (EditText)findViewById(R.id.mathinput);
 		hideSoftKeyboard(mathExpression);
 		
 		x0 = (EditText)findViewById(R.id.etXo);
 		d0 = (EditText)findViewById(R.id.etDelta);
 		ite = (EditText)findViewById(R.id.etIterations);
+		//bisection
+		xi = (EditText)findViewById(R.id.etXi);
+		xs = (EditText)findViewById(R.id.etXs);
+		iteb = (EditText)findViewById(R.id.etIterationsb);
+		tolb = (EditText)findViewById(R.id.etTolb);
+		//false position
+		xif = (EditText)findViewById(R.id.etXi);
+		xsf = (EditText)findViewById(R.id.etXs);
+		itef = (EditText)findViewById(R.id.etIterationsb);
+		tolf = (EditText)findViewById(R.id.etTolb);
+		//fixed point
+		mathExpressionXFixedPoint = (EditText)findViewById(R.id.etX);
+		hideSoftKeyboard(mathExpressionXFixedPoint);
+		hideSoftKeyboard(mathExpressionXFixedPoint);
+		itep = (EditText)findViewById(R.id.etIterationsf);
+		tolp = (EditText)findViewById(R.id.etTolf);
+		//newton
+		x0n = (EditText)findViewById(R.id.etXon);
+		iten = (EditText)findViewById(R.id.etIterationsn);
+		toln = (EditText)findViewById(R.id.etToln);
+		mathExpressionFpNewton = (EditText)findViewById(R.id.etFpn);
+		hideSoftKeyboard(mathExpressionFpNewton);
+		//secant
+		x0se = (EditText)findViewById(R.id.etXos);
+		x1se = (EditText)findViewById(R.id.etX1s);
+		ites = (EditText)findViewById(R.id.etIterationss);
+		tolse = (EditText)findViewById(R.id.etTols);
+		//multiple roots
+		x0m = (EditText)findViewById(R.id.etXor);
+		item = (EditText)findViewById(R.id.etIterationsr);
+		tolm = (EditText)findViewById(R.id.etTolr);
+		mathExpressionFpMultipleroots = (EditText)findViewById(R.id.etFpr);
+		hideSoftKeyboard(mathExpressionFpMultipleroots);		
+		mathExpressionF2pMultipleroots = (EditText)findViewById(R.id.etFp2r);
+		hideSoftKeyboard(mathExpressionF2pMultipleroots);
+		
 		
 		one = (Button)findViewById(R.id.button1);
 		two = (Button)findViewById(R.id.button2);
@@ -233,6 +296,18 @@ public class MainActivity extends Activity {
 		solve.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				
+				String x0s = "";
+				String dxs = "";
+				String iters = "";
+				String tols = "";
+				String xis = "";
+				String xss = "";
+				String xst = "";
+				String fps = "";
+				String x1s = "";
+				String f2ps = "";
+				String fs = "";
 				switch (actualMethod)
 				{
 					case 0:
@@ -259,10 +334,227 @@ public class MainActivity extends Activity {
 								return;
 							}
 						}
+						x0s = x0.getText().toString();
+						dxs = d0.getText().toString();
+						iters = ite.getText().toString();
+						tols = "";
+						xis = "";
+						xss = "";
+						xst = "";
+						fps = "";
+						x1s = "";
+						f2ps = "";
 						break;
 					case 1:
+						x0s = "";
+						dxs = "";
+						iters = iteb.getText().toString();
+						tols = tolb.getText().toString();
+						xis = xi.getText().toString();
+						xss = xs.getText().toString();
+						xst = "";
+						fps = "";
+						x1s = "";
+						f2ps = "";
+						break;
+					case 2:
+						x0s = "";
+						dxs = "";
+						iters = itef.getText().toString();
+						tols = tolf.getText().toString();
+						xis = xif.getText().toString();
+						xss = xsf.getText().toString();
+						xst = "";
+						fps = "";
+						x1s = "";
+						f2ps = "";
+						break;
+					case 3:
+						x0s = "";
+						dxs = "";
+						iters = itep.getText().toString();
+						tols = tolp.getText().toString();
+						xis = "";
+						xss = "";
+						xst = mathExpressionXFixedPoint.getText().toString();
+						fps = "";
+						x1s = "";
+						f2ps = "";
+						break;
+					case 4:
+						x0s = x0n.getText().toString();
+						dxs = "";
+						iters = iten.getText().toString();
+						tols = toln.getText().toString();
+						xis = "";
+						xss = "";
+						xst = "";
+						fps = mathExpressionFpNewton.getText().toString();
+						x1s = "";
+						f2ps = "";
+						break;
+					case 5:
+						x0s = x0se.getText().toString();
+						dxs = "";
+						iters = ites.getText().toString();
+						tols = tolse.getText().toString();
+						xis = "";
+						xss = "";
+						xst = "";
+						fps = "";
+						x1s = x1se.getText().toString();
+						f2ps = "";
+						break;
+					case 6:
+						x0s = x0m.getText().toString();
+						dxs = "";
+						iters = item.getText().toString();
+						tols = tolm.getText().toString();
+						xis = "";
+						xss = "";
+						xst = "";
+						fps = mathExpressionFpMultipleroots.getText().toString();
+						x1s = "";
+						f2ps = mathExpressionF2pMultipleroots.getText().toString();
 						break;
 				}
+				//Evaluate ecuation for get axis X and Y
+				evalutor.clearFunctions();
+				String xAxis = "";
+				String yAxis = "";
+				userInput = mathExpression.getText().toString();
+				
+				if(userInput.equals("")){
+					
+					Toast.makeText(MainActivity.this, "Input field must be filled", Toast.LENGTH_LONG).show();
+					return;
+				}
+                
+				try {
+					
+					// replace some string with new ones in the expression string
+					userInput = EvaluationHelper.replaceAll(userInput, "ln", "log");
+					userInput = EvaluationHelper.replaceAll(userInput, "log10", "logs");
+					userInput = EvaluationHelper.replaceAll(userInput, "π", "3.14159265359");
+					
+					if(!userInput.contains("X")){
+						
+						Toast.makeText(MainActivity.this, "Equation must contain x variable which is used for solving equations and graph plotting", Toast.LENGTH_LONG).show();
+						return;
+					}
+					
+					// add some new functions to the evalutor					
+					//evalutor.putFunction(new LogTen());
+					//evalutor.putFunction(new Ep());
+	                
+	                if(!isXLog(userInput) && userInput.contains("logs"))
+	                {
+	                	userInput = replaceCaratLogWithMath(userInput);
+						System.out.println("inner test = : " + userInput);
+	                }
+					
+					if(!isXPower(userInput) && userInput.contains("^")){
+						userInput = replaceCaratWithMath(userInput);
+						System.out.println("inner test = : " + replaceCaratWithMath(userInput));
+					}
+					
+					
+					System.out.println("New Expression is = : " + userInput);
+					
+					if(userInput.contains("X")){
+						
+						allSeries = new ArrayList<String>();
+						allSeries.clear();						
+						
+						String threeString = "";						
+						double powerOfValue = 0;
+			
+						for(int i = -10; i < 10; i++){						
+							
+							
+							if(userInput.contains("X^")){
+								
+								int indexs = userInput.indexOf("^");
+								threeString = userInput.substring(indexs - 1, indexs + 2);;
+													
+								powerNumber = Double.parseDouble(String.valueOf(userInput.charAt(indexs + 1)));	
+								
+								powerOfValue = Math.pow(i, powerNumber);
+								
+								System.out.println("math pow = : " + powerOfValue);
+								
+								evalutor.putVariable("p", String.valueOf(powerOfValue));
+								
+								userInput = EvaluationHelper.replaceAll(userInput, threeString, "#{p}");
+								
+								System.out.println("Value of userinput = : " + userInput + " " + "#{p}");
+															
+							}
+							if(userInput.contains("#{p}")){
+								
+								powerOfValue = Math.pow(i, powerNumber);
+								evalutor.putVariable("p", String.valueOf(powerOfValue));
+							}
+				
+							/////////////////////////////////////////////////////////////////
+							
+							evalutor.putVariable("a", String.valueOf(i));							
+							//System.out.println("Variable = : " + "#{a}"wink;
+							userInput = EvaluationHelper.replaceAll(userInput, "X", "#{a}");							
+							
+							System.out.println("New Expression =  : " + userInput);								
+							
+							String resultInString = evalutor.evaluate(userInput);
+							
+							
+							//System.out.println("Real Values =  : " + resultInString);		
+							
+							xAxis = xAxis + String.valueOf(i) + ",";
+							yAxis = yAxis + resultInString + ",";
+							
+							//evalutor.clearVariables();
+													
+						}
+						System.out.println("Size of x =  : " + xAxis + "size of y : " +   yAxis);
+						evalutor.clearFunctions();
+						
+					}else{
+						
+						Toast.makeText(MainActivity.this, "Please enter x in the input field function to plot a graph", Toast.LENGTH_SHORT).show();
+						evalutor.clearFunctions();						
+						return;
+					}
+					
+					
+				} catch (EvaluationException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(MainActivity.this, "Make sure the equation is correct and add multiplication sign where necessary", Toast.LENGTH_LONG).show();
+					e.printStackTrace();
+				}
+				if(xAxis.equals("") || xAxis.equals("")){
+					Toast.makeText(MainActivity.this, "Make sure the equation is correct and add multiplication sign where necessary", Toast.LENGTH_LONG).show();
+					return;
+				}
+				evalutor.clearFunctions();
+				//mathExpression.setText("");
+				Intent mIntent = new Intent(MainActivity.this, SolverActivity.class);
+    			mIntent.putExtra("xaxis", xAxis);
+    			mIntent.putExtra("yaxis", yAxis);
+    			//method type
+    			mIntent.putExtra("method", actualMethod);
+    			//method's vars
+    			mIntent.putExtra("f", userInput);
+				mIntent.putExtra("x0", x0s);
+    			mIntent.putExtra("dx", dxs);
+    			mIntent.putExtra("iter", iters);
+    			mIntent.putExtra("tol", tols);
+    			mIntent.putExtra("xi", xis);
+    			mIntent.putExtra("xs", xss);
+    			mIntent.putExtra("x", xst);
+    			mIntent.putExtra("fp", fps);
+    			mIntent.putExtra("x1", x1s);
+    			mIntent.putExtra("f2p", f2ps);
+    			startActivity(mIntent);
 			}
 		});
 		
@@ -1993,5 +2285,50 @@ public class MainActivity extends Activity {
 	private boolean isEmpty(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }
+
+	private boolean isXPower(String expression){
+
+		 //int powerIndex = expression.indexOf("x^"wink;
+		 if(expression.contains("X^")){
+		 return true;
+		 } 
+		 return false;
+	}
+	private boolean isXLog(String expression){
+
+		 //int powerIndex = expression.indexOf("x^"wink;
+		 if(expression.contains("xlogs")){
+		 return true;
+		 } 
+		 return false;
+	}
+	private String replaceCaratWithMath(String expression){
+
+		 String newString = "";
+		 int powerIndex = expression.indexOf("^");
+		 String powerOfString = expression.substring(powerIndex - 1, powerIndex + 2); 
+
+		 double powerNumber = Double.parseDouble(String.valueOf(expression.charAt(powerIndex + 1))); 
+		 double baseNumber = Double.parseDouble(String.valueOf(expression.charAt(powerIndex - 1)));
+
+		 double rootOfPower = Math.pow(baseNumber, powerNumber); 
+		 newString = expression.replace(powerOfString, String.valueOf(rootOfPower));
+
+
+		 return newString; 
+	 }
+	private String replaceCaratLogWithMath(String expression){
+
+		 String newString = "";
+		 String number = expression.substring(expression.indexOf("logs(")+5,expression.indexOf(")"));
+
+		 double numberd = Double.parseDouble(number); 
+
+		 double lognumber = Math.log10(numberd); 
+		 newString = String.valueOf(lognumber);
+
+
+		 return newString;
+	 }
 
 }

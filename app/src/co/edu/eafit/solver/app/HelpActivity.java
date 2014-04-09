@@ -44,32 +44,50 @@ public class HelpActivity extends Activity {
 		btnBisection.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Bisection";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		
 		btnFakerule.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Fake-Rule";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		btnFixedpoint.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Fixed-Point";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		btnNewton.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Newton's";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		btnSecant.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Secant";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		btnMultipleroots.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
+				String url = "https://github.com/halzate93/solver/wiki/Secant";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		

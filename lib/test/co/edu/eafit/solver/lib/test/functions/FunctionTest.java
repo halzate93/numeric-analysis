@@ -92,4 +92,10 @@ public class FunctionTest {
 	public void missingTest() throws EvaluationException{
 		new Function("");
 	}
+	
+	@Test
+	public void smallNumber() throws EvaluationException{
+		Function f = new Function("x * exp(x) - exp(x) + 1");
+		assertEquals(0f, f.evaluate(-2.71201133854352E-6f), MAXERROR);
+	}
 }

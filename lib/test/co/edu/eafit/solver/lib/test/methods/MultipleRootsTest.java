@@ -83,11 +83,11 @@ public class MultipleRootsTest {
 		assertEquals(x0, method.getX0(), MAXERROR);
 	}
 
-	/*@Test
+	@Test
 	public void findApproximationTest() throws JSONException, Exception{
 		method.run();
 		assertEquals(root, method.getLastResult().getDouble(EResults.Root.toString()), tolerance);
-	}*/
+	}
 	
 	
 	@Test(expected = MissingParametersException.class)

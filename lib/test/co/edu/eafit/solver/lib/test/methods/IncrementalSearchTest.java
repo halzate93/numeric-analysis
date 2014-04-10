@@ -1,7 +1,6 @@
 package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
-import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +15,7 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.preliminary.IncrementalSearch;
+import expr.SyntaxException;
 
 public class IncrementalSearchTest {
 
@@ -28,7 +28,7 @@ public class IncrementalSearchTest {
 	@Test
 	public void configurationTest() throws InvalidParameterException {
 		JSONObject parameters = new JSONObject();
-		String expression = "pow(x, 2)";
+		String expression = "x^2";
 		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 100);
@@ -45,7 +45,7 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void findIntervalTest() throws MissingParametersException, EvaluationException, InvalidParameterException {
+	public void findIntervalTest() throws MissingParametersException, SyntaxException, InvalidParameterException {
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x + 0.5)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -66,9 +66,9 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void findRootOnStartTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
+	public void findRootOnStartTest() throws InvalidParameterException, MissingParametersException, SyntaxException{
 		JSONObject parameters = new JSONObject();
-		String expression = "pow(x, 2)";
+		String expression = "x^2";
 		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
@@ -83,9 +83,9 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void findRootOnExecutionTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
+	public void findRootOnExecutionTest() throws InvalidParameterException, MissingParametersException, SyntaxException{
 		JSONObject parameters = new JSONObject();
-		String expression = "pow(x - 5, 2)";
+		String expression = "(x - 5)^2";
 		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 1f);
 		parameters.put(EParameter.N.toString(), 10);
@@ -100,7 +100,7 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void failByIterationCountTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
+	public void failByIterationCountTest() throws MissingParametersException, SyntaxException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -119,7 +119,7 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void setResultInformationTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
+	public void setResultInformationTest() throws MissingParametersException, SyntaxException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
 		String expression = "log(x - 10)";
 		parameters.put(EParameter.F.toString(), expression);
@@ -139,7 +139,7 @@ public class IncrementalSearchTest {
 	}
 
 	@Test(expected = MissingParametersException.class)
-	public void missingParamsTest() throws MissingParametersException, EvaluationException {
+	public void missingParamsTest() throws MissingParametersException, SyntaxException {
 			method.run();
 	}
 	
@@ -152,9 +152,9 @@ public class IncrementalSearchTest {
 	}
 	
 	@Test
-	public void setProcessInformationTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
+	public void setProcessInformationTest() throws MissingParametersException, SyntaxException, InvalidParameterException{
 		JSONObject parameters = new JSONObject();
-		String expression = "pow(x, 2) - 1";
+		String expression = "x^2 - 1";
 		parameters.put(EParameter.F.toString(), expression);
 		parameters.put(EParameter.Dx.toString(), 0.3f);
 		parameters.put(EParameter.N.toString(), 10);

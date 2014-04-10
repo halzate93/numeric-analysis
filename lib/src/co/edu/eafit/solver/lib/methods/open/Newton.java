@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import net.sourceforge.jeval.EvaluationException;
 import co.edu.eafit.solver.lib.functions.Function;
 import co.edu.eafit.solver.lib.methods.enums.EFailureCauses;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
@@ -15,6 +14,7 @@ import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import expr.SyntaxException;
 
 /**
  * Newton's method is a derivative from the Fixed Point method, with a preset
@@ -40,20 +40,20 @@ public class Newton extends FixedPoint {
 	 */
 	@Override
 	protected float getNextApproximation(JSONObject[] info)
-			throws EvaluationException{
+			throws SyntaxException{
 		
 		info[0].put(EResultProcess.Dfx.toString(), dfx);
 		return xn - (y/dfx);
 	}
 	
 	@Override
-	protected void firstStep() throws EvaluationException{
+	protected void firstStep() throws SyntaxException{
 		super.firstStep();
 		dfx = df.evaluate(xn);
 	}
 	
 	@Override
-	protected void updateStatus() throws EvaluationException{
+	protected void updateStatus() throws SyntaxException{
 		super.updateStatus();
 		dfx = df.evaluate(xn);
 	}
@@ -90,7 +90,7 @@ public class Newton extends FixedPoint {
 				df = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch (EvaluationException e) {
+			} catch (SyntaxException e) {
 				throw new InvalidParameterException(EParameter.Df, value);
 			}
 		}

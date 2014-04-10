@@ -1,7 +1,6 @@
 package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
-import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +18,7 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.open.Secant;
+import expr.SyntaxException;
 
 public class SecantTest {
 
@@ -31,7 +31,7 @@ public class SecantTest {
 	
 	private static final float root = 0.88421814f;
 	private static final int i = 4;
-	private static float MAXERROR = 0.0000000001f;
+	private static float MAXERROR = 0.0000001f;
 	
 	private Secant method;
 	
@@ -115,7 +115,7 @@ public class SecantTest {
 	}
 	
 	@Test
-	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
+	public void setProcessInformationTest() throws MissingParametersException, SyntaxException{
 		JSONObject result = method.run();
 		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
 		assertEquals(i+1, process.length());

@@ -1,7 +1,6 @@
 package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
-import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,12 +18,13 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.open.Newton;
+import expr.SyntaxException;
 
 public class NewtonTest {
 
 	private Newton method;
-	private static final String f = "exp(-x) - pow(x, 2) * cos(2*x - 4) + 6*x + 3";
-	private static final String df = "-exp(-x) - 2*x*cos(2*x - 4) + 2*pow(x, 2)*sin(2*x - 4) + 6";
+	private static final String f = "exp(-x) - x^2 * cos(2*x - 4) + 6*x + 3";
+	private static final String df = "-exp(-x) - 2*x*cos(2*x - 4) + 2*x^2*sin(2*x - 4) + 6";
 	private static final int n = 5;
 	private static final float tolerance = 0.00001f;
 	private static final EErrorType errorType = EErrorType.Absolute;
@@ -117,7 +117,7 @@ public class NewtonTest {
 	}
 	
 	@Test
-	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
+	public void setProcessInformationTest() throws MissingParametersException, SyntaxException{
 		JSONObject result = method.run();
 		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
 		assertEquals(i+1, process.length());

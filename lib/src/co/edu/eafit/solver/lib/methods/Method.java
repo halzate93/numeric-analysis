@@ -1,7 +1,5 @@
 package co.edu.eafit.solver.lib.methods;
 
-import net.sourceforge.jeval.EvaluationException;
-
 import org.json.*;
 
 import co.edu.eafit.solver.lib.functions.Function;
@@ -9,6 +7,7 @@ import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
+import expr.SyntaxException;
 
 /**
  * Serves as a template for any equation solving method.
@@ -33,9 +32,9 @@ public abstract class Method {
 	 * @return a JSONObject containing the information of this run.
 	 * @throws MissingParametersException If any required parameter is missing the 
 	 * execution fails.
-	 * @throws EvaluationException 
+	 * @throws SyntaxException 
 	 */
-	public JSONObject run() throws MissingParametersException, EvaluationException{
+	public JSONObject run() throws MissingParametersException, SyntaxException{
 		EParameter[] missingParams = checkParameters();
 		if(missingParams.length > 0)
 			throw new MissingParametersException(missingParams, getMethodDescriptor());
@@ -48,9 +47,9 @@ public abstract class Method {
 	/**
 	 * Runs the determined equation solving method.
 	 * @return A JSONObject containing the specific output for this run and method.
-	 * @throws EvaluationException 
+	 * @throws SyntaxException 
 	 */
-	protected abstract JSONObject solve() throws EvaluationException;
+	protected abstract JSONObject solve() throws SyntaxException;
 	
 	/**
 	 * Checks if all the required parameters are set.
@@ -76,7 +75,7 @@ public abstract class Method {
 				f = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch (EvaluationException e) {
+			} catch (SyntaxException e) {
 				throw new InvalidParameterException(EParameter.F, value);
 			}
 		}

@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SolverLib"/>
+	<classpathentry kind="lib" path="C:/Users/lenovo/Code/solver/lib/lib/expr.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

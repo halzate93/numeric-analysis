@@ -2,6 +2,7 @@ package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -11,12 +12,15 @@ import co.edu.eafit.solver.lib.methods.MethodFactory;
 import co.edu.eafit.solver.lib.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
+import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.open.MultipleRoots;
 import co.edu.eafit.solver.lib.methods.open.Newton;
 import co.edu.eafit.solver.lib.methods.open.Secant;
+import expr.SyntaxException;
 
 public class MultipleRootsTest {
 
@@ -29,7 +33,7 @@ public class MultipleRootsTest {
 	private static final EErrorType errorType = EErrorType.Relative;
 	
 	private static final float root = -0.0000002712011338543152f;
-	private static final int i = 3;
+	private static final int i = 4;
 	private static final float MAXERROR = 0.00000000000001f;
 	
 	private MultipleRoots method;
@@ -89,12 +93,88 @@ public class MultipleRootsTest {
 		assertEquals(root, method.getLastResult().getDouble(EResults.Root.toString()), tolerance);
 	}
 	
+	@Test
+	public void convergenceTest() throws JSONException, Exception{
+		method.run();
+		assertEquals(i, method.getLastResult().get(EResultInfo.IterationCount.toString()));
+	}
+	
+	@Test
+	public void failIterationCountTest() throws JSONException, Exception{
+		JSONObject lessIterations = new JSONObject();
+		lessIterations.put(EParameter.N.toString(), 2);
+		
+		method.setup(lessIterations);
+		method.run();
+		
+		assertEquals(EResultInfo.IterationCount.toString(), 
+				method.getLastResult().get(EResults.Failure.toString()));
+	}
+	
+	@Test
+	public void findRootTest() throws NumberFormatException, JSONException, Exception{
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
+		
+		method.setup(moreIterations);
+		method.run();
+		assertEquals(0f, Float.parseFloat(method.getLastResult()
+				.getString(EResultInfo.Error.toString())), MAXERROR);
+	}
+	
+	@Test
+	public void setProcessInformationTest() throws MissingParametersException, SyntaxException{
+		JSONObject result = method.run();
+		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
+		assertEquals(i+1, process.length());
+	}
+	
+	@Test
+	public void setDenominatorProcessInformation() throws JSONException, Exception{
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
+		method.setup(moreIterations);
+		
+		method.run();
+		assertEquals(2.9029745187564293E-12, method.getLastResult()
+				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(4)
+				.getDouble(EResultProcess.Denominator.toString()), MAXERROR);
+	}
+
+	@Test
+	public void setDerivativeProcessInformation() throws JSONException, Exception{
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
+		method.setup(moreIterations);
+		
+		method.run();
+		assertEquals(-2.4095584194583353E-6, method.getLastResult()
+				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(4)
+				.getDouble(EResultProcess.Dfx.toString()), MAXERROR);
+	}
+	
+	@Test
+	public void setSecondDerivativeProcessInformation() throws JSONException, Exception{
+		JSONObject moreIterations = new JSONObject();
+		moreIterations.put(EParameter.N.toString(), 6);
+		moreIterations.put(EParameter.Tolerance.toString(), 0.00000000001f);
+		method.setup(moreIterations);
+		
+		method.run();
+		assertEquals(0.9999951720237732, method.getLastResult()
+				.getJSONArray(EResultInfo.Proccess.toString()).getJSONObject(4)
+				.getDouble(EResultProcess.D2fx.toString()), MAXERROR);
+	}
 	
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
 		method = (MultipleRoots) MethodFactory.build(EMethod.MultipleRoots);
 		method.run();
 	}
+	
 	
 	@Test(expected = InvalidParameterException.class)
 	public void invalidParametersTest() throws InvalidParameterException{

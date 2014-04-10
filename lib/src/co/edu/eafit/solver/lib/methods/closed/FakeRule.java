@@ -1,6 +1,10 @@
 package co.edu.eafit.solver.lib.methods.closed;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;

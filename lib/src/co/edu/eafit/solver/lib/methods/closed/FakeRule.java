@@ -157,22 +157,60 @@ public class FakeRule extends Method {
 	}
 	
 	@Override
+	public EParameter[] checkParameters() {
+		ArrayList<EParameter> missing = new ArrayList<EParameter>();
+		if(xI == 0) missing.add(EParameter.Xi);
+		if(xS == 0) missing.add(EParameter.Xs);
+		if(tolerance <= 0) missing.add(EParameter.Tolerance);
+		if(n == 0) missing.add(EParameter.N);
+		missing.addAll(Arrays.asList(super.checkParameters()));
+		return missing.toArray(new EParameter[]{});
+	}
+	
+	@Override
+	public EParameter[] getRequiredParameters(){
+		EParameter[] required = new EParameter[]{EParameter.Xi, EParameter.Xs,
+				EParameter.Tolerance, EParameter.N};
+		ArrayList<EParameter> complete = new ArrayList<EParameter>(Arrays.asList(required));
+		complete.addAll(Arrays.asList(super.getRequiredParameters()));
+		return complete.toArray(required);
+	}
+	
+	@Override
 	public void setup(JSONObject parameters) throws InvalidParameterException{
 		super.setup(parameters);
-	}
-
-	/**
-	 * Only dx and n are absolutely necessary for the execution, it's
-	 * ok if x0's value is 0.
-	 */
-	@Override
-	public EParameter[] checkParameters() {
-		return null;
-	}
-
-	@Override
-	public EParameter[] getRequiredParameters() {
-		return null;
+		if(parameters.has(EParameter.Xi.toString())){
+			try{
+				xI = (float) parameters.getDouble(EParameter.Xi.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.Xi, 
+						parameters.get(EParameter.Xi.toString()).toString());
+			}
+		}
+		if(parameters.has(EParameter.Xs.toString())){
+			try{
+				xS = (float) parameters.getDouble(EParameter.Xs.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.Xs, 
+						parameters.get(EParameter.Xs.toString()).toString());
+			}
+		}
+		if(parameters.has(EParameter.Tolerance.toString())){
+			try{
+				tolerance = (float) parameters.getDouble(EParameter.Tolerance.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.Tolerance, 
+						parameters.get(EParameter.Tolerance.toString()).toString());
+			}
+		}
+		if(parameters.has(EParameter.N.toString())){
+			try{
+				n = parameters.getInt(EParameter.N.toString());
+			}catch(JSONException e){
+				throw new InvalidParameterException(EParameter.N, 
+						parameters.get(EParameter.N.toString()).toString());
+			}
+		}
 	}
 
 	@Override

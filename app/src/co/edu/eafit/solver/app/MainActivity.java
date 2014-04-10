@@ -2,10 +2,10 @@ package co.edu.eafit.solver.app;
 
 import java.util.*;
 
+import co.edu.eafit.solver.lib.functions.Function;
 import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.EvaluationHelper;
 import net.sourceforge.jeval.Evaluator;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
 	
 	private Evaluator evalutor;
 	Spinner spinner;
-	private View view1;
 	private TableLayout tableIncremental; 
 	private TableLayout tableBisection;
 	private TableLayout tableFixedpoint;
@@ -61,8 +60,6 @@ public class MainActivity extends Activity {
 	private EditText x0m;
 	private EditText item;
 	private EditText tolm;
-	private EditText fpm;
-	private EditText f2pm;
 	
 	private EditText mathExpressionXFixedPoint;
 	
@@ -305,7 +302,6 @@ public class MainActivity extends Activity {
 				String fps = "";
 				String x1s = "";
 				String f2ps = "";
-				String fs = "";
 				switch (actualMethod)
 				{
 					case 0:
@@ -434,7 +430,6 @@ public class MainActivity extends Activity {
 					userInput = EvaluationHelper.replaceAll(userInput, "ln", "log");
 					userInput = EvaluationHelper.replaceAll(userInput, "log10", "logs");
 					userInput = EvaluationHelper.replaceAll(userInput, "π", "3.14159265359");
-					
 					if(!userInput.contains("x")){
 						
 						Toast.makeText(MainActivity.this, "Equation must contain x variable which is used for solving equations and graph plotting", Toast.LENGTH_LONG).show();
@@ -466,7 +461,7 @@ public class MainActivity extends Activity {
 						
 						String threeString = "";						
 						double powerOfValue = 0;
-			
+						
 						for(int i = -10; i < 10; i++){						
 							
 							
@@ -498,8 +493,9 @@ public class MainActivity extends Activity {
 							
 							evalutor.putVariable("a", String.valueOf(i));							
 							//System.out.println("Variable = : " + "#{a}"wink;
+							userInput = EvaluationHelper.replaceAll(userInput, "exp", "ep");
 							userInput = EvaluationHelper.replaceAll(userInput, "x", "#{a}");							
-							
+							userInput = EvaluationHelper.replaceAll(userInput, "ep", "exp");
 							System.out.println("New Expression =  : " + userInput);								
 							
 							String resultInString = evalutor.evaluate(userInput);

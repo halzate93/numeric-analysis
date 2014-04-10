@@ -85,7 +85,9 @@ public class HelpActivity extends Activity {
 		btnMultipleroots.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				
+				String url = "https://github.com/halzate93/solver/wiki/Multiple-Roots";
+				final Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(url));
+				startActivity(intent);
 			}
 		});
 		

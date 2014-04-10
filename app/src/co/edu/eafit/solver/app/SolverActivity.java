@@ -1,6 +1,5 @@
 package co.edu.eafit.solver.app;
 
-import java.util.Scanner;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -21,12 +20,16 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class SolverActivity extends Activity {
 	//
 	//Creation of the Chart
 	private GraphicalView mChartView;
+	
+	private TextView result;
 	
 	private XYSeries graphSeries ;
 	private XYMultipleSeriesDataset xyMultipleSeriesDataset;
@@ -74,7 +77,8 @@ public class SolverActivity extends Activity {
 		setContentView(R.layout.activity_solver);		
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
-
+		result = (TextView)findViewById(R.id.tvResult);
+		
 		chartInitialization();
 		
 		if(xyDataSeries != null){
@@ -132,6 +136,7 @@ public class SolverActivity extends Activity {
 		
 		s.solve();
 		System.out.println(s.getLastResult().toString(2));
+		result.setText(s.getLastResult().toString(2));
 	}
 	
 	public JSONObject getConfiguration(EParameter[] required, EMethod method) throws JSONException {
@@ -144,7 +149,12 @@ public class SolverActivity extends Activity {
 			if (p.toString() == "Dx")
 				parameters.put(p.toString(), getdx());
 			if (p.toString() == "X0")
-				parameters.put(p.toString(), getXo());
+			{
+				if(getMethod() != "5")
+					parameters.put(p.toString(), getXo());
+				else
+					parameters.put(p.toString(), getx1());
+			}
 			if (p.toString() == "N")
 				parameters.put(p.toString(), getiter());
 			if (p.toString() == "G")
@@ -161,6 +171,8 @@ public class SolverActivity extends Activity {
 				parameters.put(p.toString(), getxs());
 			if (p.toString() == "LastX")
 				parameters.put(p.toString(), getXo());
+			if (p.toString() == "D2f")
+				parameters.put(p.toString(), getf2p());
 		}
 		
 		return parameters;
@@ -216,6 +228,7 @@ public class SolverActivity extends Activity {
 		}
 		return topicid;
 	}
+	
 	//Get Extras from MainActivity
 	public String getMethod(){
 		String topicid = "";

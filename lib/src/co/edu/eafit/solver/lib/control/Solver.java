@@ -1,7 +1,5 @@
 package co.edu.eafit.solver.lib.control;
 
-import net.sourceforge.jeval.EvaluationException;
-
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.methods.*;
@@ -9,6 +7,7 @@ import co.edu.eafit.solver.lib.methods.enums.EMethod;
 import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
+import expr.SyntaxException;
 
 /**
  * This class handles the setup and usage of multiple equation solving methods,
@@ -66,7 +65,7 @@ public class Solver {
 	 * to execute the solving is missing the method can't continue.
 	 * @throws EvaluationException 
 	 */
-	public JSONObject solve() throws MissingParametersException, EvaluationException{
+	public JSONObject solve() throws MissingParametersException, SyntaxException{
 		return method.run();
 	}
 	

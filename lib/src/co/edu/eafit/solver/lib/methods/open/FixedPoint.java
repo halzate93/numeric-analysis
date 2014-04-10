@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.AbstractMap.SimpleEntry;
 
-import net.sourceforge.jeval.EvaluationException;
+import expr.SyntaxException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,7 +70,7 @@ public class FixedPoint extends Method {
 	protected int i;
 	
 	@Override
-	protected JSONObject solve() throws EvaluationException {
+	protected JSONObject solve() throws SyntaxException {
 		JSONObject response = new JSONObject();
 		JSONArray process = new JSONArray();
 		
@@ -130,17 +130,17 @@ public class FixedPoint extends Method {
 	 * @param info An array holding a single JSONObject to save information about that
 	 * step (Emulates the out parameter keyword from other languages).
 	 * @return the new approximation to xv (xa).
-	 * @throws EvaluationException if the evaluated function fails.
+	 * @throws SyntaxException if the evaluated function fails.
 	 */
-	protected float getNextApproximation(JSONObject[] info) throws EvaluationException {
+	protected float getNextApproximation(JSONObject[] info) throws SyntaxException {
 		return g.evaluate(xn);
 	}
 
 	/**
 	 * Updates the values for any variable used in the iteration.
-	 * @throws EvaluationException
+	 * @throws SyntaxException
 	 */
-	protected void updateStatus () throws EvaluationException{
+	protected void updateStatus () throws SyntaxException{
 		y = getFunction().evaluate(xa);
 		
 		error = calculateError(xn, xa);
@@ -151,9 +151,9 @@ public class FixedPoint extends Method {
 	
 	/**
 	 * Sets variables and makes preliminary calculations.
-	 * @throws EvaluationException
+	 * @throws SyntaxException
 	 */
-	protected void firstStep() throws EvaluationException{
+	protected void firstStep() throws SyntaxException{
 		xn = x0;
 		y = getFunction().evaluate(xn);
 		
@@ -219,7 +219,7 @@ public class FixedPoint extends Method {
 				g = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch (EvaluationException e) {
+			} catch (SyntaxException e) {
 				throw new InvalidParameterException(EParameter.G, value);
 			}
 		}

@@ -436,9 +436,6 @@ public class MainActivity extends Activity {
 						return;
 					}
 					
-					// add some new functions to the evalutor					
-					//evalutor.putFunction(new LogTen());
-					//evalutor.putFunction(new Ep());
 	                
 	                if(!isXLog(userInput) && userInput.contains("logs"))
 	                {
@@ -446,9 +443,9 @@ public class MainActivity extends Activity {
 						System.out.println("inner test = : " + userInput);
 	                }
 					
-					if(!isXPower(userInput) && userInput.contains("^")){
+	                if(!isXPower(userInput) && userInput.contains("^")){
 						userInput = replaceCaratWithMath(userInput);
-						System.out.println("inner test = : " + replaceCaratWithMath(userInput));
+						System.out.println("inner test = : " + userInput);
 					}
 					
 					
@@ -2283,7 +2280,7 @@ public class MainActivity extends Activity {
 	private boolean isXPower(String expression){
 
 		 //int powerIndex = expression.indexOf("x^"wink;
-		 if(expression.contains("X^")){
+		 if(expression.contains("x^")){
 		 return true;
 		 } 
 		 return false;

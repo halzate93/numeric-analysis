@@ -2,10 +2,10 @@ package co.edu.eafit.solver.app;
 
 import java.util.*;
 
+import co.edu.eafit.solver.lib.functions.Function;
 import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.EvaluationHelper;
 import net.sourceforge.jeval.Evaluator;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -461,7 +461,7 @@ public class MainActivity extends Activity {
 						
 						String threeString = "";						
 						double powerOfValue = 0;
-			
+						
 						for(int i = -10; i < 10; i++){						
 							
 							
@@ -493,8 +493,9 @@ public class MainActivity extends Activity {
 							
 							evalutor.putVariable("a", String.valueOf(i));							
 							//System.out.println("Variable = : " + "#{a}"wink;
+							userInput = EvaluationHelper.replaceAll(userInput, "exp", "ep");
 							userInput = EvaluationHelper.replaceAll(userInput, "x", "#{a}");							
-							
+							userInput = EvaluationHelper.replaceAll(userInput, "ep", "exp");
 							System.out.println("New Expression =  : " + userInput);								
 							
 							String resultInString = evalutor.evaluate(userInput);

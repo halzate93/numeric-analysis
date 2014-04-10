@@ -1,7 +1,6 @@
 package co.edu.eafit.solver.lib.test.methods;
 
 import static org.junit.Assert.*;
-import net.sourceforge.jeval.EvaluationException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,12 +16,13 @@ import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.methods.exceptions.MissingParametersException;
 import co.edu.eafit.solver.lib.methods.open.FixedPoint;
+import expr.SyntaxException;
 
 public class FixedPointTest {
 
 	private FixedPoint method;
-	private static final String f = "x * exp(x) - pow(x, 2) - 5*x - 3";
-	private static final String g = "(x * exp(x)- pow(x, 2) - 3)/5";
+	private static final String f = "x * exp(x) - x^2 - 5*x - 3";
+	private static final String g = "(x * exp(x)- x^2 - 3)/5";
 	private static final float x0 = -0.5f;
 	private static final float tolerance = 0.0001f; //Tolerance 1x10^-4
 	private static final EErrorType errorType = EErrorType.Relative;
@@ -69,19 +69,19 @@ public class FixedPointTest {
 	}
 	
 	@Test
-	public void findApproximationTest() throws MissingParametersException, EvaluationException{
+	public void findApproximationTest() throws MissingParametersException, SyntaxException{
 		JSONObject response = method.run();
 		assertEquals(-0.7998f, (float)response.getDouble(EResults.Root.toString()), 0.0001f);
 	}
 	
 	@Test
-	public void convergenceTest() throws MissingParametersException, EvaluationException{	
+	public void convergenceTest() throws MissingParametersException, SyntaxException{	
 		JSONObject response = method.run();
 		assertEquals(9, response.getInt(EResultInfo.IterationCount.toString()));
 	}
 	
 	@Test
-	public void failIterationCountTest() throws InvalidParameterException, MissingParametersException, EvaluationException{
+	public void failIterationCountTest() throws InvalidParameterException, MissingParametersException, SyntaxException{
 		JSONObject extraParams = new JSONObject();
 		extraParams.put(EParameter.N.toString(), 8);
 		method.setup(extraParams);
@@ -91,7 +91,7 @@ public class FixedPointTest {
 	}
 	
 	@Test
-	public void findRootTest() throws MissingParametersException, EvaluationException, InvalidParameterException{
+	public void findRootTest() throws MissingParametersException, SyntaxException, InvalidParameterException{
 		JSONObject params = new JSONObject();
 		params.put(EParameter.G.toString(), "x+1");
 		params.put(EParameter.F.toString(), "x");
@@ -106,7 +106,7 @@ public class FixedPointTest {
 	}
 	
 	@Test
-	public void setProcessInformationTest() throws MissingParametersException, EvaluationException{
+	public void setProcessInformationTest() throws MissingParametersException, SyntaxException{
 		JSONObject result = method.run();
 		JSONArray process = result.getJSONArray(EResultInfo.Proccess.toString());
 		assertEquals(10, process.length());

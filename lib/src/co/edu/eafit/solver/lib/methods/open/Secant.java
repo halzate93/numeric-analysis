@@ -4,8 +4,6 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.sourceforge.jeval.EvaluationException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +12,7 @@ import co.edu.eafit.solver.lib.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import expr.SyntaxException;
 
 /**
  * Secant method is a derivative from FixedPoint, as Newton's it has a supplementary G function
@@ -39,7 +38,7 @@ public class Secant extends FixedPoint {
 	 * Sets the denominator for the first time.
 	 */
 	@Override
-	protected void firstStep() throws EvaluationException{
+	protected void firstStep() throws SyntaxException{
 		super.firstStep();
 		lastX = x0;
 		lastY = getFunction().evaluate(lastX);
@@ -47,7 +46,7 @@ public class Secant extends FixedPoint {
 	}
 	
 	@Override
-	protected float getNextApproximation(JSONObject[] info) throws EvaluationException{
+	protected float getNextApproximation(JSONObject[] info) throws SyntaxException{
 		info[0].put(EResultProcess.Denominator.toString(), Float.toString(denominator));
 		return xn - y * (xn - lastX)/denominator;
 	}
@@ -56,7 +55,7 @@ public class Secant extends FixedPoint {
 	 * Updates the lastX value before calling the super update method.
 	 */
 	@Override
-	protected void updateStatus() throws EvaluationException{
+	protected void updateStatus() throws SyntaxException{
 		lastX = xn;
 		lastY = y;
 		super.updateStatus();

@@ -1,9 +1,6 @@
 package co.edu.eafit.solver.lib.methods.closed;
 
-import net.sourceforge.jeval.EvaluationException;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.functions.Function;
@@ -14,9 +11,7 @@ import co.edu.eafit.solver.lib.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.methods.enums.EResults;
 import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import expr.SyntaxException;
 
 /**
  * Similar to the Bisection method.
@@ -94,7 +89,7 @@ public class FakeRule extends Method {
 	}
 	
 	@Override
-	protected JSONObject solve() throws EvaluationException{
+	protected JSONObject solve() throws SyntaxException{
 		JSONObject result = new JSONObject();
 		JSONArray process = new JSONArray();
 		Function f = getFunction();

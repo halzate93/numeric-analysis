@@ -4,7 +4,7 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import net.sourceforge.jeval.EvaluationException;
+import expr.SyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,14 +40,14 @@ public class MultipleRoots extends FixedPoint {
 	protected float d2y;
 	
 	@Override
-	protected void firstStep() throws EvaluationException{
+	protected void firstStep() throws SyntaxException{
 		super.firstStep();
 		dy = df.evaluate(xn);
 		d2y = d2f.evaluate(xn);
 		denominator = ((float) Math.pow(dy, 2f)) - y*d2y;
 	}
 	
-	protected float getNextApproximation(JSONObject[] info) throws EvaluationException{
+	protected float getNextApproximation(JSONObject[] info) throws SyntaxException{
 		info[0].put(EResultProcess.Dfx.toString(), dy);
 		info[0].put(EResultProcess.D2fx.toString(), d2y);
 		info[0].put(EResultProcess.Denominator.toString(), denominator);
@@ -55,7 +55,7 @@ public class MultipleRoots extends FixedPoint {
 	}
 	
 	@Override
-	protected void updateStatus() throws EvaluationException{
+	protected void updateStatus() throws SyntaxException{
 		super.updateStatus();
 		dy = df.evaluate(xn);
 		d2y = d2f.evaluate(xn);
@@ -83,7 +83,7 @@ public class MultipleRoots extends FixedPoint {
 				df = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch (EvaluationException e) {
+			} catch (SyntaxException e) {
 				throw new InvalidParameterException(EParameter.Df, value);
 			}
 		}
@@ -93,7 +93,7 @@ public class MultipleRoots extends FixedPoint {
 				d2f = new Function(value);
 			} catch (JSONException e) {
 				e.printStackTrace();
-			} catch (EvaluationException e) {
+			} catch (SyntaxException e) {
 				throw new InvalidParameterException(EParameter.D2f, value);
 			}
 		}

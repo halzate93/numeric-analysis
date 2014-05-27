@@ -1,5 +1,5 @@
 package co.edu.eafit.solver.lib.systemsolver.gaussianelimination;
 
-public enum EGaussianEliminationParameter {
-	A, b, Strategy
+public enum EPivotingStrategy {
+	Partial, Total, None
 }

@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.test.systemsolver;
+package co.edu.eafit.solver.lib.test.systemsolver.gaussianelimination;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
+import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
@@ -31,6 +32,7 @@ public class GaussianEliminationTest {
 											{0, 0, 0, 0},
 											{0, 0, 0, 0},
 											{0, 0, 0, 0}};
+	
 	private GaussianElimination gaussianElimination;
 	
 	@Before
@@ -96,7 +98,7 @@ public class GaussianEliminationTest {
 	}
 	
 	@Test (expected = DivisionByZeroException.class)
-	public void badSystem() throws MissingParameterException, DivisionByZeroException{
+	public void badSystem() throws MissingParameterException, DivisionByZeroException, BadParameterException{
 		JSONObject params = new JSONObject();
 		params.put(EGaussianEliminationParameter.A.toString(), 
 				MatrixUtility.matrix2Json(badA));

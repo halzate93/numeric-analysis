@@ -1,12 +1,12 @@
 package co.edu.eafit.solver.lib.systemsolver.gaussianelimination;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.systemsolver.LinearSystemMethod;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
+import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 
@@ -14,6 +14,8 @@ public class GaussianElimination implements LinearSystemMethod {
 
 	private double[][] A;
 	private double[] b;
+	private EPivotingStrategy ps = EPivotingStrategy.None;
+	private int[] marks;
 	
 	private JSONObject result;
 
@@ -23,12 +25,30 @@ public class GaussianElimination implements LinearSystemMethod {
 		
 		double[][] Ab = MatrixUtility.augmentedMatrix(A, b);
 		
-		for (int i = 0; i < A.length - 1; i++) {
-			if(A[i][i] == 0) throw new DivisionByZeroException(i);
-			for (int j = i + 1; j < Ab.length; j++) {
-				double m = Ab[j][i]/Ab[i][i];
-				for (int k = i; k < Ab[j].length; k++) {
-					Ab[j][k] -= Ab[i][k] * m;
+		if(ps == EPivotingStrategy.Total){
+			marks = new int[A.length];
+			for (int i = 0; i < marks.length; i++) {
+				marks[i] = i;
+			}
+		}
+		
+		for (int k = 0; k < A.length - 1; k++) {
+			switch (ps) {
+			case Partial:
+				Ab = partialPivoting(Ab, k);
+				break;
+			case Total:
+				Ab = totalPivoting(Ab, k);
+				break;
+			default:
+				break;
+			}
+			
+			if(A[k][k] == 0) throw new DivisionByZeroException(k);
+			for (int i = k + 1; i < Ab.length; i++) {
+				double m = Ab[i][k]/Ab[k][k];
+				for (int j = k; j < Ab[i].length; j++) {
+					Ab[i][j] -= Ab[k][j] * m;
 				}
 			}
 			result.accumulate("Steps", MatrixUtility.matrix2Json(Ab.clone()));
@@ -39,6 +59,60 @@ public class GaussianElimination implements LinearSystemMethod {
 		return result;
 	}
 	
+	private double[][] partialPivoting(double[][] Ab, int k) {
+		int i = k;
+		double champ = Math.abs(Ab[k][k]);
+		for (int s = k+1; s < Ab.length; s++) {
+			if(Math.abs(Ab[s][k]) > champ){
+				i = s;
+				champ = Math.abs(Ab[s][k]);
+			}
+		}
+		
+		if(i != k){
+			double[] aux = Ab[i];
+			Ab[i] = Ab[k];
+			Ab[k] = aux;
+		}
+		
+		return Ab;
+	}
+	
+	private double[][] totalPivoting(double[][] Ab, int k) {
+		int i = k, j = k;
+		double champ = Math.abs(Ab[k][k]);
+		for (int s = k; s < Ab.length; s++) {
+			for (int l = k; l < Ab[s].length - 1; l++) {
+				if(Math.abs(Ab[s][l]) > champ){
+					i = s;
+					j = l;
+					champ = Math.abs(Ab[s][l]);
+				}
+			}
+		}
+		
+		if(i != k){
+			double[] aux = Ab[i];
+			Ab[i] = Ab[k];
+			Ab[k] = aux;
+		}
+		
+		if(j != k){
+			double aux;
+			for (int s = 0; s < Ab.length; s++) {
+				aux = Ab[s][j];
+				Ab[s][j] = Ab[s][k];
+				Ab[s][k] = aux;
+			}
+			
+			int aux2 = marks[j];
+			marks[j] = marks[k];
+			marks[k] = aux2;
+		}
+		
+		return Ab;
+	}
+
 	private void checkParameters() throws MissingParameterException{
 		ArrayList<EGaussianEliminationParameter> missing = 
 				new ArrayList<EGaussianEliminationParameter>(3);
@@ -52,14 +126,22 @@ public class GaussianElimination implements LinearSystemMethod {
 	}
 	
 	public void setParameters(JSONObject parameters)
-			throws InvalidParameterException {
-		if(parameters.has(EGaussianEliminationParameter.A.toString())){
-			A = MatrixUtility.json2Matrix(parameters.getJSONArray(
-					EGaussianEliminationParameter.A.toString()));
-		}
-		if(parameters.has(EGaussianEliminationParameter.b.toString())){
-			b = MatrixUtility.json2Vector(parameters.getJSONArray(
-					EGaussianEliminationParameter.b.toString()));
+			throws BadParameterException {
+		try{
+			if(parameters.has(EGaussianEliminationParameter.A.toString())){
+				A = MatrixUtility.json2Matrix(parameters.getJSONArray(
+						EGaussianEliminationParameter.A.toString()));
+			}
+			if(parameters.has(EGaussianEliminationParameter.b.toString())){
+				b = MatrixUtility.json2Vector(parameters.getJSONArray(
+						EGaussianEliminationParameter.b.toString()));
+			}
+			if(parameters.has(EGaussianEliminationParameter.Strategy.toString())){
+				ps = EPivotingStrategy.valueOf(parameters.getString(
+						EGaussianEliminationParameter.Strategy.toString()));
+			}
+		}catch(Exception e){
+			throw new BadParameterException(e);
 		}
 	}
 	
@@ -71,6 +153,13 @@ public class GaussianElimination implements LinearSystemMethod {
 				values[i] -= Ab[i][j] * values[j];
 			}
 			values[i] /= Ab[i][i];
+		}
+		
+		if(ps == EPivotingStrategy.Total){
+			double[] aux = values.clone();
+			for (int i = 0; i < aux.length; i++) {
+				values[marks[i]] = aux[i];
+			}
 		}
 		return values;
 	}
@@ -86,6 +175,10 @@ public class GaussianElimination implements LinearSystemMethod {
 	
 	public JSONObject getResult(){
 		return result;
+	}
+
+	public EPivotingStrategy getPivotingStrategy() {
+		return ps;
 	}
 	
 }

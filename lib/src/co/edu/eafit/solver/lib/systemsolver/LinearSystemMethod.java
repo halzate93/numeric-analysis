@@ -14,5 +14,5 @@ public interface LinearSystemMethod {
 	 * and no default value exists.
 	 */
 	public JSONObject solve() throws MissingParameterException, DivisionByZeroException;
-	public void setParameters(JSONObject parameters) throws InvalidParameterException;
+	public void setParameters(JSONObject parameters) throws BadParameterException;
 }

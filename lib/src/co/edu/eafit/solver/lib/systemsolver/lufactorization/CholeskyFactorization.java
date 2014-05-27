@@ -1,6 +1,6 @@
 package co.edu.eafit.solver.lib.systemsolver.lufactorization;
 
-public class DolittleFactorization extends LUFactorization {
+public class CholeskyFactorization extends LUFactorization {
 
 	@Override
 	protected void kIteration(int k) {
@@ -8,14 +8,14 @@ public class DolittleFactorization extends LUFactorization {
 		for (int p = 0; p < k; p++) {
 			acum += L[k][p] * U[p][k];
 		}
-		U[k][k] = A[k][k] - acum;
+		U[k][k] = Math.sqrt(A[k][k] - acum);
+		L[k][k] = U[k][k];
+		System.out.println(acum);
 	}
 
 	@Override
 	protected void initialSetup() {
-		for (int i = 0; i < L.length; i++) {
-			L[i][i] = 1;
-		}
+		
 	}
 
 }

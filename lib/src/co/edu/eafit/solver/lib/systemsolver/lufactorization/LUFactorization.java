@@ -28,6 +28,9 @@ public abstract class LUFactorization implements LinearSystemMethod {
 		
 		for (int k = 0; k < A.length; k++) {
 			kIteration(k);
+			fillKLColumn(k);
+			fillKURow(k);	
+			
 			JSONObject step = new JSONObject();
 			step.put(ELUResults.L.toString(),
 					MatrixUtility.matrix2Json(L));
@@ -77,6 +80,26 @@ public abstract class LUFactorization implements LinearSystemMethod {
 	
 	protected abstract void kIteration(int k);
 	protected abstract void initialSetup();
+	
+	protected void fillKURow(int k){
+		for (int j = k + 1; j < A.length; j++) {
+			double acum = 0;
+			for (int p = 0; p < k; p++) {
+				acum += L[k][p]*U[p][j];
+			}
+			U[k][j] = (A[k][j] - acum)/L[k][k];
+		}
+	}
+	
+	protected void fillKLColumn(int k){
+		for (int i = k + 1; i < A.length; i++) {
+			double acum = 0;
+			for (int p = 0; p < k; p++) {
+				acum += L[i][p]*U[p][k];
+			}
+			L[i][k] = (A[i][k] - acum)/U[k][k];
+		}
+	}
 
 	public double[][] getA() {
 		return A;

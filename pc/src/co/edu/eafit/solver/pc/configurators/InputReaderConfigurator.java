@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 
 /**
  * Generic method configurator, receives a list of all the required parameters

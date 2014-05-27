@@ -2,7 +2,7 @@ package co.edu.eafit.solver.pc.configurators;
 
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 
 public interface MethodConfigurator {
 	

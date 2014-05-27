@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.control.Solver;
-import co.edu.eafit.solver.lib.methods.enums.EMethod;
-import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.rootfinding.control.Solver;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.pc.configurators.*;
 
 public class Main {

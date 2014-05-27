@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.LinearSystemMethod;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
@@ -30,12 +31,11 @@ public class GaussianElimination implements LinearSystemMethod {
 	protected double[] b;
 	protected EPivotingStrategy ps = EPivotingStrategy.None;
 	private int[] marks;
-	
-	protected JSONObject result;
+	private double[] x;
 
 	public JSONObject solve() throws MissingParameterException, DivisionByZeroException, Exception {
 		checkParameters();
-		result = new JSONObject();
+		JSONObject result = new JSONObject();
 		
 		double[][] Ab = MatrixUtility.augmentedMatrix(A, b);
 		
@@ -68,7 +68,7 @@ public class GaussianElimination implements LinearSystemMethod {
 		
 		result.put(EGaussianEliminationResult.X.toString(),
 				MatrixUtility.vector2Json(solution));
-		
+		x = solution;
 		return result;
 	}
 
@@ -151,13 +151,13 @@ public class GaussianElimination implements LinearSystemMethod {
 	}
 
 	protected void checkParameters() throws MissingParameterException{
-		ArrayList<EGaussianEliminationParameter> missing = 
-				new ArrayList<EGaussianEliminationParameter>(3);
-		if(A == null) missing.add(EGaussianEliminationParameter.A);
-		if(b == null) missing.add(EGaussianEliminationParameter.b);
+		ArrayList<ESystemSolvingParameter> missing = 
+				new ArrayList<ESystemSolvingParameter>(3);
+		if(A == null) missing.add(ESystemSolvingParameter.A);
+		if(b == null) missing.add(ESystemSolvingParameter.b);
 		if(missing.size() > 0){
-			EGaussianEliminationParameter[] missingArray=
-					new EGaussianEliminationParameter[0];
+			ESystemSolvingParameter[] missingArray=
+					new ESystemSolvingParameter[0];
 			throw new MissingParameterException(missing.toArray(missingArray));
 		}
 	}
@@ -165,17 +165,17 @@ public class GaussianElimination implements LinearSystemMethod {
 	public void setParameters(JSONObject parameters)
 			throws BadParameterException {
 		try{
-			if(parameters.has(EGaussianEliminationParameter.A.toString())){
+			if(parameters.has(ESystemSolvingParameter.A.toString())){
 				A = MatrixUtility.json2Matrix(parameters.getJSONArray(
-						EGaussianEliminationParameter.A.toString()));
+						ESystemSolvingParameter.A.toString()));
 			}
-			if(parameters.has(EGaussianEliminationParameter.b.toString())){
+			if(parameters.has(ESystemSolvingParameter.b.toString())){
 				b = MatrixUtility.json2Vector(parameters.getJSONArray(
-						EGaussianEliminationParameter.b.toString()));
+						ESystemSolvingParameter.b.toString()));
 			}
-			if(parameters.has(EGaussianEliminationParameter.Strategy.toString())){
+			if(parameters.has(ESystemSolvingParameter.Strategy.toString())){
 				ps = EPivotingStrategy.valueOf(parameters.getString(
-						EGaussianEliminationParameter.Strategy.toString()));
+						ESystemSolvingParameter.Strategy.toString()));
 			}
 		}catch(Exception e){
 			throw new BadParameterException(e);
@@ -190,13 +190,13 @@ public class GaussianElimination implements LinearSystemMethod {
 	public double[] getB() {
 		return b;
 	}
-	
-	public JSONObject getResult(){
-		return result;
-	}
 
 	public EPivotingStrategy getPivotingStrategy() {
 		return ps;
+	}
+
+	public double[] getX() {
+		return x;
 	}
 	
 }

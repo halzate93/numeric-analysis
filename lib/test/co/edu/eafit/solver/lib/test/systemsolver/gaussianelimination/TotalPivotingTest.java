@@ -6,9 +6,9 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
-import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationResult;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EPivotingStrategy;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
@@ -31,11 +31,11 @@ public class TotalPivotingTest {
 	@Before
 	public void setUp() throws Exception {
 	JSONObject parameters = new JSONObject();
-		parameters.put(EGaussianEliminationParameter.A.toString(), 
+		parameters.put(ESystemSolvingParameter.A.toString(), 
 				MatrixUtility.matrix2Json(A));
-		parameters.put(EGaussianEliminationParameter.b.toString(),
+		parameters.put(ESystemSolvingParameter.b.toString(),
 				MatrixUtility.vector2Json(b));
-		parameters.put(EGaussianEliminationParameter.Strategy.toString(),
+		parameters.put(ESystemSolvingParameter.Strategy.toString(),
 				EPivotingStrategy.Total.toString());
 		
 		gaussianElimination = new GaussianElimination();
@@ -45,7 +45,7 @@ public class TotalPivotingTest {
 	@Test
 	public void strategyConfigurationTest() throws BadParameterException {
 		JSONObject ps = new JSONObject();
-		ps.put(EGaussianEliminationParameter.Strategy.toString(), EPivotingStrategy.Total.toString());
+		ps.put(ESystemSolvingParameter.Strategy.toString(), EPivotingStrategy.Total.toString());
 		
 		gaussianElimination.setParameters(ps);
 		assertEquals(EPivotingStrategy.Total.toString(), gaussianElimination.getPivotingStrategy().toString());
@@ -53,10 +53,10 @@ public class TotalPivotingTest {
 	
 	@Test
 	public void totalPivotingTest() throws Exception{
-		gaussianElimination.solve();
+		JSONObject result = gaussianElimination.solve();
 		
 		double[][] solution = MatrixUtility.json2Matrix(
-				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString())
+				result.getJSONArray(EGaussianEliminationResult.Steps.toString())
 				.getJSONArray(A.length - 2));
 		
 		assertTrue(MatrixUtility.compareMatrix(solution, answer, 0.00000001));
@@ -64,10 +64,10 @@ public class TotalPivotingTest {
 	
 	@Test
 	public void regresiveSustitutionTest() throws Exception{
-		gaussianElimination.solve();
+		JSONObject result = gaussianElimination.solve();
 		
 		double[] solution = MatrixUtility.json2Vector(
-				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.X.toString()));
+				result.getJSONArray(EGaussianEliminationResult.X.toString()));
 		
 		assertTrue(MatrixUtility.compareVector(solution, xValues, 0.000000001));
 	}

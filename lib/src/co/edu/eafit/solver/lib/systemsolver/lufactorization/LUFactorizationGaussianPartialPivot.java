@@ -2,13 +2,24 @@ package co.edu.eafit.solver.lib.systemsolver.lufactorization;
 
 import org.json.JSONObject;
 
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
-import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EPivotingStrategy;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
 
+/**
+ * Follows the same process as Gaussian Elimination with Partial Pivoting strategy,
+ * but creates L and U matrixes in the process to allow the user to solve many LUx = b
+ * systems easily.
+ * 
+ * Transforms the problem Ax = b in LUx = b where L and U are triangular matrixes
+ * product from the factorization of the A matrix.
+ * 
+ * @author halzate93
+ *
+ */
 public class LUFactorizationGaussianPartialPivot extends GaussianElimination {
 
 	private double[][] L, U, P;
@@ -24,8 +35,8 @@ public class LUFactorizationGaussianPartialPivot extends GaussianElimination {
 	public void setParameters(JSONObject parameters)
 			throws BadParameterException {
 		try{
-			if(parameters.has(EGaussianEliminationParameter.Strategy.toString())){
-				parameters.remove(EGaussianEliminationParameter.Strategy.toString());
+			if(parameters.has(ESystemSolvingParameter.Strategy.toString())){
+				parameters.remove(ESystemSolvingParameter.Strategy.toString());
 			}
 			super.setParameters(parameters);
 		}catch(Exception e){

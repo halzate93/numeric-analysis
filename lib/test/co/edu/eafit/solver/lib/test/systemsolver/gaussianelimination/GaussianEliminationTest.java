@@ -6,10 +6,10 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
-import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationResult;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
 
@@ -39,9 +39,9 @@ public class GaussianEliminationTest {
 	public void setUp() throws Exception {
 		gaussianElimination = new GaussianElimination();
 		JSONObject params = new JSONObject();
-		params.put(EGaussianEliminationParameter.A.toString(),
+		params.put(ESystemSolvingParameter.A.toString(),
 				MatrixUtility.matrix2Json(A));
-		params.put(EGaussianEliminationParameter.b.toString(),
+		params.put(ESystemSolvingParameter.b.toString(),
 				MatrixUtility.vector2Json(b));
 		
 		gaussianElimination.setParameters(params);
@@ -70,18 +70,18 @@ public class GaussianEliminationTest {
 	
 	@Test
 	public void kIterationsTest() throws Exception {
-		gaussianElimination.solve();
+		JSONObject result = gaussianElimination.solve();
 		assertEquals(
-				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString()).length(),
+				result.getJSONArray(EGaussianEliminationResult.Steps.toString()).length(),
 				A.length - 1);
 	}
 	
 	@Test
 	public void gaussianElimination() throws Exception{
-		gaussianElimination.solve();
+		JSONObject result = gaussianElimination.solve();
 
 		double[][] solution = MatrixUtility.json2Matrix(
-				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString())
+				result.getJSONArray(EGaussianEliminationResult.Steps.toString())
 				.getJSONArray(A.length - 2));
 		
 		assertTrue(MatrixUtility.compareMatrix(solution, answer, 0.01));
@@ -89,10 +89,10 @@ public class GaussianEliminationTest {
 	
 	@Test
 	public void regresiveSustitution() throws Exception{
-		gaussianElimination.solve();
+		JSONObject result = gaussianElimination.solve();
 		
 		double[] solution = MatrixUtility.json2Vector(
-				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.X.toString()));
+				result.getJSONArray(EGaussianEliminationResult.X.toString()));
 		
 		assertTrue(MatrixUtility.compareVector(solution, xvalues, 0.000000001));
 	}
@@ -100,7 +100,7 @@ public class GaussianEliminationTest {
 	@Test (expected = DivisionByZeroException.class)
 	public void badSystem() throws Exception{
 		JSONObject params = new JSONObject();
-		params.put(EGaussianEliminationParameter.A.toString(), 
+		params.put(ESystemSolvingParameter.A.toString(), 
 				MatrixUtility.matrix2Json(badA));
 		gaussianElimination.setParameters(params);
 		

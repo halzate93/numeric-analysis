@@ -6,10 +6,9 @@ import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
-import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
-import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
 import co.edu.eafit.solver.lib.systemsolver.lufactorization.ELUResults;
 import co.edu.eafit.solver.lib.systemsolver.lufactorization.LUFactorizationGaussianPartialPivot;
 
@@ -37,9 +36,9 @@ public class GaussianLUPivotFactorizationTest {
 	@Before
 	public void setUp() throws Exception {
 		JSONObject params = new JSONObject();
-		params.put(EGaussianEliminationParameter.A.toString(),
+		params.put(ESystemSolvingParameter.A.toString(),
 				MatrixUtility.matrix2Json(A));
-		params.put(EGaussianEliminationParameter.b.toString(),
+		params.put(ESystemSolvingParameter.b.toString(),
 				MatrixUtility.vector2Json(b));
 		
 		luFact = new LUFactorizationGaussianPartialPivot();

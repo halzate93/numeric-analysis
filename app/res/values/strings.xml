@@ -1,67 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- vars for menu -->
+    <string name="intro">Please choose the set of methods you want to test:</string>
+    <string name="opcion1">variable equations</string>
+    <string name="opcion2">linear equations</string>
     <string name="app_name">Numerical Analysis</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Help</string>
-	<string name="tv_choosemethod">Choose the method you want to prove:</string>
-	<string name="tv_setdata">Insert info for the method:</string>
-	<!-- vars for incremental search -->
-	<string name="tv_xo">Xo :</string>
-	<string name="tv_deltax">Delta X :</string>
-	<string name="tv_iterations">Iter:</string>
-	<!-- vars for bisection and fake rule -->
-	<string name="tv_xi">Xi :</string>
-	<string name="tv_xs">Xs :</string>
-	<string name="tv_tole">Tol:</string>
-	<!-- vars for fixed point -->
-	<string name="tv_X">X:</string>
-	<!-- vars for newton  -->
-	<string name="tv_fp">f´</string>
-	<!-- vars for Secant -->
-	<string name="tv_x0">X0 :</string>
-	<string name="tv_x1">X1 :</string>
-	<!-- vars for Multiple Roots -->
-	<string name="tv_fp2">f´´</string>
-	<string name="tv_enterecuation">Insert ecuation:</string>
-	<string name="btn_delete">&lt;</string>
-	<string name="btn_solve">solve</string>
-	<string name="n1">1</string>
-	<string name="n2">2</string>
-	<string name="n3">3</string>
-	<string name="smas">+</string>
-	<string name="smenos">-</string>
-	<string name="spow">^</string>
-	<string name="sexp">exp</string>
-	<string name="n4">4</string>
-	<string name="n5">5</string>
-	<string name="n6">6</string>
-	<string name="spor">*</string>
-	<string name="sdiv">/</string>
-	<string name="scos">cos</string>
-	<string name="ssin">sin</string>
-	<string name="n7">7</string>
-	<string name="n8">8</string>
-	<string name="n9">9</string>
-	<string name="stan">tan</string>
-	<string name="slog">log</string>
-	<string name="sln">ln</string>
-	<string name="delete">del</string>
-	<string name="n0">0</string>
-	<string name="sdot">.</string>
-	<string name="sx">x</string>
-	<string name="sbraa">(</string>
-	<string name="sbrac">)</string>
-	<string name="spi">Pi</string>
-	<!-- vars for Help -->
-	<string name="help">Help</string>
-	<string name="incremental">Incremental Search</string>
-	<string name="bisection">Bisection</string>
-	<string name="fakerule">False Position</string>
-	<string name="fixedpoint">Fixed Point</string>
-	<string name="newton">Newton</string>
-	<string name="secant">Secant</string>
-	<string name="multipleroots">Multiple Roots</string>
-	<!-- vars for Solve -->
-	<string name="solveHead">Solver for this Function:</string>
+    <string name="tv_choosemethod">Choose the method you want to prove:</string>
+    <string name="tv_setdata">Insert info for the method:</string>
+    <!-- vars for incremental search -->
+    <string name="tv_xo">Xo :</string>
+    <string name="tv_deltax">Delta X :</string>
+    <string name="tv_iterations">Iter:</string>
+    <!-- vars for bisection and fake rule -->
+    <string name="tv_xi">Xi :</string>
+    <string name="tv_xs">Xs :</string>
+    <string name="tv_tole">Tol:</string>
+    <!-- vars for fixed point -->
+    <string name="tv_X">X:</string>
+    <!-- vars for newton -->
+    <string name="tv_fp">f´</string>
+    <!-- vars for Secant -->
+    <string name="tv_x0">X0 :</string>
+    <string name="tv_x1">X1 :</string>
+    <!-- vars for Multiple Roots -->
+    <string name="tv_fp2">f´´</string>
+    <string name="tv_enterecuation">Insert ecuation:</string>
+    <string name="btn_delete">&lt;</string>
+    <string name="btn_solve">solve</string>
+    <string name="n1">1</string>
+    <string name="n2">2</string>
+    <string name="n3">3</string>
+    <string name="smas">+</string>
+    <string name="smenos">-</string>
+    <string name="spow">^</string>
+    <string name="sexp">exp</string>
+    <string name="n4">4</string>
+    <string name="n5">5</string>
+    <string name="n6">6</string>
+    <string name="spor">*</string>
+    <string name="sdiv">/</string>
+    <string name="scos">cos</string>
+    <string name="ssin">sin</string>
+    <string name="n7">7</string>
+    <string name="n8">8</string>
+    <string name="n9">9</string>
+    <string name="stan">tan</string>
+    <string name="slog">log</string>
+    <string name="sln">ln</string>
+    <string name="delete">del</string>
+    <string name="n0">0</string>
+    <string name="sdot">.</string>
+    <string name="sx">x</string>
+    <string name="sbraa">(</string>
+    <string name="sbrac">)</string>
+    <string name="spi">Pi</string>
+    <!-- vars for Help -->
+    <string name="help">Help</string>
+    <string name="incremental">Incremental Search</string>
+    <string name="bisection">Bisection</string>
+    <string name="fakerule">False Position</string>
+    <string name="fixedpoint">Fixed Point</string>
+    <string name="newton">Newton</string>
+    <string name="secant">Secant</string>
+    <string name="multipleroots">Multiple Roots</string>
+    <!-- vars for Solve -->
+    <string name="solveHead">Solver for this Function:</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
 </resources>

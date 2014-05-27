@@ -59,13 +59,7 @@
     <string name="spi">Pi</string>
     <!-- vars for Help -->
     <string name="help">Help</string>
-    <string name="incremental">Incremental Search</string>
-    <string name="bisection">Bisection</string>
-    <string name="fakerule">False Position</string>
-    <string name="fixedpoint">Fixed Point</string>
-    <string name="newton">Newton</string>
-    <string name="secant">Secant</string>
-    <string name="multipleroots">Multiple Roots</string>
+    <string name="gowiki">More Info...</string>
     <!-- vars for Solve -->
     <string name="solveHead">Solver for this Function:</string>
     <string name="title_activity_menu">MenuActivity</string>

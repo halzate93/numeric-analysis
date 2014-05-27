@@ -11,10 +11,10 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.control.Solver;
-import co.edu.eafit.solver.lib.methods.enums.EMethod;
-import co.edu.eafit.solver.lib.methods.enums.EParameter;
-import co.edu.eafit.solver.lib.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.rootfinding.control.Solver;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

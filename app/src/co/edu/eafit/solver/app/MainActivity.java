@@ -2,7 +2,7 @@ package co.edu.eafit.solver.app;
 
 import java.util.*;
 
-import co.edu.eafit.solver.lib.functions.Function;
+import co.edu.eafit.solver.lib.rootfinding.functions.Function;
 import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.EvaluationHelper;
 import net.sourceforge.jeval.Evaluator;
@@ -286,8 +286,14 @@ public class MainActivity extends Activity {
 		pi.setText("π");
 		borrar = (Button)findViewById(R.id.btnBorrar);
 		
-		Button solve  = (Button)findViewById(R.id.calculatedBbutton);
+		mathExpression.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				hideSoftKeyboard(mathExpression);
+			}
+		});
 		
+		Button solve  = (Button)findViewById(R.id.calculatedBbutton);
 		solve.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {

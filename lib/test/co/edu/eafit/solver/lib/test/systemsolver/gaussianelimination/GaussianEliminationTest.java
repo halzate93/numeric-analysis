@@ -7,10 +7,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
-import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
+import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationResult;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
 
 public class GaussianEliminationTest {
@@ -58,7 +58,7 @@ public class GaussianEliminationTest {
 	}
 	
 	@Test
-	public void missingParametersTest() throws DivisionByZeroException{
+	public void missingParametersTest() throws Exception{
 		gaussianElimination = new GaussianElimination();
 		try{
 			gaussianElimination.solve();
@@ -69,36 +69,36 @@ public class GaussianEliminationTest {
 	}
 	
 	@Test
-	public void kIterationsTest() throws MissingParameterException, DivisionByZeroException {
+	public void kIterationsTest() throws Exception {
 		gaussianElimination.solve();
 		assertEquals(
-				gaussianElimination.getResult().getJSONArray("Steps").length(),
+				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString()).length(),
 				A.length - 1);
 	}
 	
 	@Test
-	public void gaussianElimination() throws MissingParameterException, DivisionByZeroException{
+	public void gaussianElimination() throws Exception{
 		gaussianElimination.solve();
 
 		double[][] solution = MatrixUtility.json2Matrix(
-				gaussianElimination.getResult().getJSONArray("Steps")
+				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString())
 				.getJSONArray(A.length - 2));
 		
 		assertTrue(MatrixUtility.compareMatrix(solution, answer, 0.01));
 	}
 	
 	@Test
-	public void regresiveSustitution() throws MissingParameterException, DivisionByZeroException{
+	public void regresiveSustitution() throws Exception{
 		gaussianElimination.solve();
 		
 		double[] solution = MatrixUtility.json2Vector(
-				gaussianElimination.getResult().getJSONArray("Solution"));
+				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.X.toString()));
 		
 		assertTrue(MatrixUtility.compareVector(solution, xvalues, 0.000000001));
 	}
 	
 	@Test (expected = DivisionByZeroException.class)
-	public void badSystem() throws MissingParameterException, DivisionByZeroException, BadParameterException{
+	public void badSystem() throws Exception{
 		JSONObject params = new JSONObject();
 		params.put(EGaussianEliminationParameter.A.toString(), 
 				MatrixUtility.matrix2Json(badA));

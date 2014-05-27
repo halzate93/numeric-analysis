@@ -3,7 +3,7 @@ package co.edu.eafit.solver.lib.rootfinding.methods;
 import org.json.*;
 
 import co.edu.eafit.solver.lib.rootfinding.functions.Function;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.MissingParametersException;
@@ -98,7 +98,7 @@ public abstract class Method {
 	 * Returns the descriptor associated with this Method.
 	 * @return the descriptor.
 	 */
-	public abstract EMethod getMethodDescriptor();
+	public abstract EEquationSolvingMethod getMethodDescriptor();
 
 	public JSONObject getLastResult() throws Exception {
 		if(lastResult == null) throw new Exception("No result has been executed");

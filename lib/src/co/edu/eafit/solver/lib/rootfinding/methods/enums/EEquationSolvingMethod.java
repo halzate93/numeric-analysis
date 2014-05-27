@@ -5,7 +5,7 @@ package co.edu.eafit.solver.lib.rootfinding.methods.enums;
  * @author halzate93
  *
  */
-public enum EMethod {
+public enum EEquationSolvingMethod {
 	IncrementalSearch,
 	Bisection, FakeRule,
 	FixedPoint, Newton, Secant, MultipleRoots

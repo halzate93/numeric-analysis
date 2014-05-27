@@ -4,7 +4,7 @@ import org.json.*;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.closed.Bisection;
 import co.edu.eafit.solver.lib.rootfinding.methods.closed.FakeRule;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.open.FixedPoint;
 import co.edu.eafit.solver.lib.rootfinding.methods.open.MultipleRoots;
 import co.edu.eafit.solver.lib.rootfinding.methods.open.Newton;
@@ -24,7 +24,7 @@ public class MethodFactory {
 	 * @return a Method instance with all the configuration parameters blank.
 	 * @throws Exception when the specified method is not available.
 	 */
-	public static Method build(EMethod method) throws Exception {
+	public static Method build(EEquationSolvingMethod method) throws Exception {
 		Method result = null;
 		switch (method) {
 		case IncrementalSearch:
@@ -66,7 +66,7 @@ public class MethodFactory {
 	 * partially set.
 	 * @throws Exception when the specified method is not available. 
 	 */
-	public static Method build(EMethod method, JSONObject params) throws Exception{
+	public static Method build(EEquationSolvingMethod method, JSONObject params) throws Exception{
 		Method blank = build(method);
 		blank.setup(params);
 		return blank;

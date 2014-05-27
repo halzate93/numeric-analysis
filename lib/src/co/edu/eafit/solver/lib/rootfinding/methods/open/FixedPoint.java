@@ -14,7 +14,7 @@ import co.edu.eafit.solver.lib.rootfinding.functions.Function;
 import co.edu.eafit.solver.lib.rootfinding.methods.Method;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EFailureCauses;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
@@ -263,8 +263,8 @@ public class FixedPoint extends Method {
 	}
 	
 	@Override
-	public EMethod getMethodDescriptor() {
-		return EMethod.FixedPoint;
+	public EEquationSolvingMethod getMethodDescriptor() {
+		return EEquationSolvingMethod.FixedPoint;
 	}
 
 	

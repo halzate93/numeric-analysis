@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.MethodFactory;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResults;
@@ -22,7 +22,7 @@ public class IncrementalSearchTest {
 	private IncrementalSearch method;
 	@Before
 	public void setUp() throws Exception {
-		method = (IncrementalSearch) MethodFactory.build(EMethod.IncrementalSearch);
+		method = (IncrementalSearch) MethodFactory.build(EEquationSolvingMethod.IncrementalSearch);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class IncrementalSearchTest {
 				&& method.getDx() == 1f
 				&& method.getN() == 100
 				&& method.getX0() == 0f
-				&& method.getMethodDescriptor() == EMethod.IncrementalSearch
+				&& method.getMethodDescriptor() == EEquationSolvingMethod.IncrementalSearch
 				);
 	}
 	

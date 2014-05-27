@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.MethodFactory;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResults;
@@ -32,7 +32,7 @@ public class FixedPointTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		method = (FixedPoint) MethodFactory.build(EMethod.FixedPoint);
+		method = (FixedPoint) MethodFactory.build(EEquationSolvingMethod.FixedPoint);
 		JSONObject params = new JSONObject();
 		params.put(EParameter.X0.toString(), x0);
 		params.put(EParameter.F.toString(), f);
@@ -115,7 +115,7 @@ public class FixedPointTest {
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
 		
-		method = (FixedPoint) MethodFactory.build(EMethod.FixedPoint);
+		method = (FixedPoint) MethodFactory.build(EEquationSolvingMethod.FixedPoint);
 		method.run();
 		
 	}

@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.rootfinding.control.Solver;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.NonLinearEquationSolver;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.pc.configurators.*;
 
-public class Main {
+public class NonLinearEquationMain {
 
 	/**
 	 * @param args
@@ -21,7 +21,7 @@ public class Main {
 			method = -1;
 			while(method == -1){
 				System.out.println("Which method do you want to use?");
-				for(EMethod m : EMethod.values()){
+				for(EEquationSolvingMethod m : EEquationSolvingMethod.values()){
 					System.out.println(m.ordinal() + ": " + m.toString());
 				}
 				method = sc.nextInt();
@@ -29,7 +29,7 @@ public class Main {
 		}else{
 			method = Integer.parseInt(args[0]);
 		}
-		EMethod methodEnum = EMethod.values()[method];
+		EEquationSolvingMethod methodEnum = EEquationSolvingMethod.values()[method];
 		
 		try {
 			run(methodEnum);
@@ -39,9 +39,9 @@ public class Main {
 		sc.close();
 	}
 	
-	private static void run(EMethod method) throws Exception {
+	private static void run(EEquationSolvingMethod method) throws Exception {
 		
-		Solver s = new Solver();
+		NonLinearEquationSolver s = new NonLinearEquationSolver();
 		s.setMethodPrototype(method);
 		
 		MethodConfigurator cf = new InputReaderConfigurator();

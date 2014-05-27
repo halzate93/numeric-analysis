@@ -10,16 +10,30 @@ import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 
+/**
+ * It is the first of the equation systems solving methods,
+ * through a finite set of row and column operations gets a
+ * superior triangular matrix and solves the x values for the
+ * system using regresive sustitution.
+ * 
+ * Uses the elements akk to create the zeroes below the principal
+ * diagonal, often these values are manipulated and reorganized using
+ * what we call pivoting strategies, which are used to avoid rounding
+ * and propagation error.
+ * 
+ * @author halzate93
+ *
+ */
 public class GaussianElimination implements LinearSystemMethod {
 
-	private double[][] A;
-	private double[] b;
-	private EPivotingStrategy ps = EPivotingStrategy.None;
+	protected double[][] A;
+	protected double[] b;
+	protected EPivotingStrategy ps = EPivotingStrategy.None;
 	private int[] marks;
 	
-	private JSONObject result;
+	protected JSONObject result;
 
-	public JSONObject solve() throws MissingParameterException, DivisionByZeroException {
+	public JSONObject solve() throws MissingParameterException, DivisionByZeroException, Exception {
 		checkParameters();
 		result = new JSONObject();
 		
@@ -44,19 +58,34 @@ public class GaussianElimination implements LinearSystemMethod {
 				break;
 			}
 			
-			if(A[k][k] == 0) throw new DivisionByZeroException(k);
-			for (int i = k + 1; i < Ab.length; i++) {
-				double m = Ab[i][k]/Ab[k][k];
-				for (int j = k; j < Ab[i].length; j++) {
-					Ab[i][j] -= Ab[k][j] * m;
-				}
-			}
-			result.accumulate("Steps", MatrixUtility.matrix2Json(Ab.clone()));
+			Ab = kIteration(Ab, k);
+			result.accumulate(EGaussianEliminationResult.Steps.toString(),
+					MatrixUtility.matrix2Json(Ab.clone()));
 		}
+		double[] solution = MatrixUtility.regresiveSustitution(Ab);
+		if(ps == EPivotingStrategy.Total)
+			solution = sortSolution(solution, marks);
 		
-		result.put("Solution", MatrixUtility.vector2Json(regresiveSustitution(Ab)));
+		result.put(EGaussianEliminationResult.X.toString(),
+				MatrixUtility.vector2Json(solution));
 		
 		return result;
+	}
+
+	protected double[][] kIteration(double[][] Ab, int k)
+			throws DivisionByZeroException {
+		if(A[k][k] == 0) throw new DivisionByZeroException(k);
+		for (int i = k + 1; i < Ab.length; i++) {
+			double m = calculateMik(Ab, k, i);
+			for (int j = k; j < Ab[i].length; j++) {
+				Ab[i][j] -= Ab[k][j] * m;
+			}
+		}
+		return Ab;
+	}
+
+	protected double calculateMik(double[][] Ab, int k, int i) {
+		return Ab[i][k]/Ab[k][k];
 	}
 	
 	private double[][] partialPivoting(double[][] Ab, int k) {
@@ -70,12 +99,14 @@ public class GaussianElimination implements LinearSystemMethod {
 		}
 		
 		if(i != k){
-			double[] aux = Ab[i];
-			Ab[i] = Ab[k];
-			Ab[k] = aux;
+			swapRows(Ab, k, i);
 		}
 		
 		return Ab;
+	}
+
+	protected void swapRows(double[][] Ab, int k, int i) {
+		MatrixUtility.swapRows(Ab, k, i);
 	}
 	
 	private double[][] totalPivoting(double[][] Ab, int k) {
@@ -92,9 +123,7 @@ public class GaussianElimination implements LinearSystemMethod {
 		}
 		
 		if(i != k){
-			double[] aux = Ab[i];
-			Ab[i] = Ab[k];
-			Ab[k] = aux;
+			swapRows(Ab, k, i);
 		}
 		
 		if(j != k){
@@ -112,8 +141,16 @@ public class GaussianElimination implements LinearSystemMethod {
 		
 		return Ab;
 	}
+	
+	private double[] sortSolution(double[] values, int[] marks){
+		double[] aux = values.clone();
+		for (int i = 0; i < aux.length; i++) {
+			values[marks[i]] = aux[i];
+		}
+		return values;
+	}
 
-	private void checkParameters() throws MissingParameterException{
+	protected void checkParameters() throws MissingParameterException{
 		ArrayList<EGaussianEliminationParameter> missing = 
 				new ArrayList<EGaussianEliminationParameter>(3);
 		if(A == null) missing.add(EGaussianEliminationParameter.A);
@@ -143,25 +180,6 @@ public class GaussianElimination implements LinearSystemMethod {
 		}catch(Exception e){
 			throw new BadParameterException(e);
 		}
-	}
-	
-	private double[] regresiveSustitution(double[][] Ab){
-		double[] values = new double[Ab.length];
-		for(int i = Ab.length -1; i >= 0; i--){
-			values[i] = Ab[i][Ab[i].length - 1];
-			for (int j = i + 1; j < values.length; j++) {
-				values[i] -= Ab[i][j] * values[j];
-			}
-			values[i] /= Ab[i][i];
-		}
-		
-		if(ps == EPivotingStrategy.Total){
-			double[] aux = values.clone();
-			for (int i = 0; i < aux.length; i++) {
-				values[marks[i]] = aux[i];
-			}
-		}
-		return values;
 	}
 
 	

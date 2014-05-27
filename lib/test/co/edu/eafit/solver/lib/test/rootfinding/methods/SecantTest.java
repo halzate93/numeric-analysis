@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.MethodFactory;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
@@ -37,7 +37,7 @@ public class SecantTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		method = (Secant) MethodFactory.build(EMethod.Secant);
+		method = (Secant) MethodFactory.build(EEquationSolvingMethod.Secant);
 		JSONObject params = new JSONObject();
 		params.put(EParameter.F.toString(), f);
 		params.put(EParameter.LastX.toString(), lastX);
@@ -136,7 +136,7 @@ public class SecantTest {
 	
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
-		method = (Secant) MethodFactory.build(EMethod.Secant);
+		method = (Secant) MethodFactory.build(EEquationSolvingMethod.Secant);
 		method.run();
 	}
 	

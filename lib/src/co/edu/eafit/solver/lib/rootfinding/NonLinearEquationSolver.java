@@ -1,9 +1,9 @@
-package co.edu.eafit.solver.lib.rootfinding.control;
+package co.edu.eafit.solver.lib.rootfinding;
 
 import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.*;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.MissingParametersException;
@@ -17,7 +17,7 @@ import expr.SyntaxException;
  * @author halzate93
  *
  */
-public class Solver {
+public class NonLinearEquationSolver {
 	/**
 	 * The current equation solving method.
 	 */
@@ -28,7 +28,7 @@ public class Solver {
 	 * @param method The desired equation solving method.
 	 * @throws Exception 
 	 */
-	public void setMethodPrototype(EMethod method) throws Exception{
+	public void setMethodPrototype(EEquationSolvingMethod method) throws Exception{
 		this.method = MethodFactory.build(method);
 	}
 	
@@ -39,7 +39,7 @@ public class Solver {
 	 * solving method.
 	 * @throws Exception if anything went wrong creating the filled up prototype.
 	 */
-	public void setMethodPrototype(EMethod method, JSONObject params) throws Exception{
+	public void setMethodPrototype(EEquationSolvingMethod method, JSONObject params) throws Exception{
 		this.method = MethodFactory.build(method, params);
 	}
 	

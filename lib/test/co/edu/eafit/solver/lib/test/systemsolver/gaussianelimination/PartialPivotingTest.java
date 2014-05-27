@@ -8,9 +8,8 @@ import org.junit.Test;
 
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
-import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
-import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationParameter;
+import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationResult;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EPivotingStrategy;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
 
@@ -53,22 +52,22 @@ public class PartialPivotingTest {
 	}
 	
 	@Test
-	public void partialPivotingTest() throws MissingParameterException, DivisionByZeroException{
+	public void partialPivotingTest() throws Exception{
 		gaussianElimination.solve();
 		
 		double[][] solution = MatrixUtility.json2Matrix(
-				gaussianElimination.getResult().getJSONArray("Steps")
+				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.Steps.toString())
 				.getJSONArray(A.length - 2));
 		
 		assertTrue(MatrixUtility.compareMatrix(solution, answer, 0.00000001));
 	}
 	
 	@Test
-	public void regresiveSustitutionTest() throws MissingParameterException, DivisionByZeroException{
+	public void regresiveSustitutionTest() throws Exception{
 		gaussianElimination.solve();
 		
 		double[] solution = MatrixUtility.json2Vector(
-				gaussianElimination.getResult().getJSONArray("Solution"));
+				gaussianElimination.getResult().getJSONArray(EGaussianEliminationResult.X.toString()));
 		
 		assertTrue(MatrixUtility.compareVector(solution, xValues, 0.000000001));
 	}

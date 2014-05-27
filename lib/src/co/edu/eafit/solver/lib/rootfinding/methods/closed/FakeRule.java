@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.rootfinding.functions.Function;
 import co.edu.eafit.solver.lib.rootfinding.methods.Method;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
@@ -213,8 +213,8 @@ public class FakeRule extends Method {
 	}
 
 	@Override
-	public EMethod getMethodDescriptor() {
-		return EMethod.FakeRule;
+	public EEquationSolvingMethod getMethodDescriptor() {
+		return EEquationSolvingMethod.FakeRule;
 	}
 }
 

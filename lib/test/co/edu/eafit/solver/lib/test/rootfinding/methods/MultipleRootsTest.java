@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.MethodFactory;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
@@ -38,7 +38,7 @@ public class MultipleRootsTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		method = (MultipleRoots) MethodFactory.build(EMethod.MultipleRoots);
+		method = (MultipleRoots) MethodFactory.build(EEquationSolvingMethod.MultipleRoots);
 		JSONObject params = new JSONObject();
 		params.put(EParameter.F.toString(), f);
 		params.put(EParameter.Df.toString(), df);
@@ -169,7 +169,7 @@ public class MultipleRootsTest {
 	
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
-		method = (MultipleRoots) MethodFactory.build(EMethod.MultipleRoots);
+		method = (MultipleRoots) MethodFactory.build(EEquationSolvingMethod.MultipleRoots);
 		method.run();
 	}
 	

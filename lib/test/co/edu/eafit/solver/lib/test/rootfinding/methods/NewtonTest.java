@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import co.edu.eafit.solver.lib.rootfinding.methods.MethodFactory;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultInfo;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
@@ -37,7 +37,7 @@ public class NewtonTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		method = (Newton) MethodFactory.build(EMethod.Newton);
+		method = (Newton) MethodFactory.build(EEquationSolvingMethod.Newton);
 		JSONObject params = new JSONObject();
 		params.put(EParameter.F.toString(), f);
 		params.put(EParameter.Df.toString(), df);
@@ -133,7 +133,7 @@ public class NewtonTest {
 	
 	@Test(expected = MissingParametersException.class)
 	public void missingParamsTest() throws Exception{
-		method = (Newton) MethodFactory.build(EMethod.Newton);
+		method = (Newton) MethodFactory.build(EEquationSolvingMethod.Newton);
 		method.run();
 	}
 	

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.rootfinding.functions.Function;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EFailureCauses;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResultProcess;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EResults;
@@ -106,8 +106,8 @@ public class Newton extends FixedPoint {
 	}
 	
 	@Override
-	public EMethod getMethodDescriptor() {
-		return EMethod.Newton;
+	public EEquationSolvingMethod getMethodDescriptor() {
+		return EEquationSolvingMethod.Newton;
 	}
 
 	public Function getDerivative() {

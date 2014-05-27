@@ -1,0 +1,47 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.edu.eafit.solver.app.MenuActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <android.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/intro" />
+
+        <Button
+            android:id="@+id/btnOption1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/tv1"
+            android:background="#0066FF"
+            android:text="@string/opcion1"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/btnOption2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btnOption1"
+            android:layout_marginTop="24dp"
+            android:background="#0066FF"
+            android:text="@string/opcion2"
+            android:textColor="#ffffff" />
+
+    </android.widget.RelativeLayout>
+
+</FrameLayout>
+

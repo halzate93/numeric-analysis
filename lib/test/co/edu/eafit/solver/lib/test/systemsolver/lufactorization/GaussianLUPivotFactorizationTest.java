@@ -10,7 +10,7 @@ import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 import co.edu.eafit.solver.lib.systemsolver.lufactorization.ELUResults;
-import co.edu.eafit.solver.lib.systemsolver.lufactorization.LUFactorizationGaussianPartialPivot;
+import co.edu.eafit.solver.lib.systemsolver.lufactorization.GaussianPartialPivotFactorization;
 
 public class GaussianLUPivotFactorizationTest {
 
@@ -31,7 +31,7 @@ public class GaussianLUPivotFactorizationTest {
 	private static double[] x = {3.624387031, 1.603454585, -0.073775891, 2.485618093};
 	private static double[] z = {-32, 28.33333333, -12.74380165, 20.01237478};
 	
-	private LUFactorizationGaussianPartialPivot luFact;
+	private GaussianPartialPivotFactorization luFact;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -41,7 +41,7 @@ public class GaussianLUPivotFactorizationTest {
 		params.put(ESystemSolvingParameter.b.toString(),
 				MatrixUtility.vector2Json(b));
 		
-		luFact = new LUFactorizationGaussianPartialPivot();
+		luFact = new GaussianPartialPivotFactorization();
 		luFact.setParameters(params);
 	}
 	
@@ -57,7 +57,7 @@ public class GaussianLUPivotFactorizationTest {
 	
 	@Test
 	public void missingParametersTest() throws Exception{
-		luFact = new LUFactorizationGaussianPartialPivot();
+		luFact = new GaussianPartialPivotFactorization();
 		try{
 			luFact.solve();
 			fail();

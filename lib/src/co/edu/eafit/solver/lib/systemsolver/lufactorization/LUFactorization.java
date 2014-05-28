@@ -11,6 +11,26 @@ import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 
+/**
+ * A direct factorization LU of a matrix A is achieved applying the fundamentals
+ * of matrix multiplication. Given a aij, we know it is the result of the point
+ * product of the Li row and the Uj column.
+ * 
+ * Anyway, we need an starting point, there is where the different methods of
+ * Direct Factorization get important, each one of them gives us a preliminary
+ * condition that must be met in order to complete de factorization.
+ * 
+ * Crout: Ukk = 1
+ * Dolittle: Lkk = 1
+ * Cholesky: Ukk = Lkk
+ * 
+ * With this condition we can solve the equation:
+ * lkk * ukk = akk - sum(p := 1 to k-1, lkp * upk)
+ * 
+ * And so, fill each one of the indexes for both matrixes.
+ * @author halzate93
+ *
+ */
 public abstract class LUFactorization implements LinearSystemMethod {
 
 	protected double[][] A, L, U;

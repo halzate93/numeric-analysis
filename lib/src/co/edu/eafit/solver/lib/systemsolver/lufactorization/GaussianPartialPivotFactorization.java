@@ -20,13 +20,13 @@ import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianEliminat
  * @author halzate93
  *
  */
-public class LUFactorizationGaussianPartialPivot extends GaussianElimination {
+public class GaussianPartialPivotFactorization extends GaussianElimination {
 
 	private double[][] L, U, P;
 	private double[] x, z;
 	private JSONObject result;
 	
-	public LUFactorizationGaussianPartialPivot(){
+	public GaussianPartialPivotFactorization(){
 		super.ps = EPivotingStrategy.Partial;
 		result = new JSONObject();
 	}

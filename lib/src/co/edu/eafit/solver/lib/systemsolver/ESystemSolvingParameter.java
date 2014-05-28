@@ -7,5 +7,5 @@ package co.edu.eafit.solver.lib.systemsolver;
  *
  */
 public enum ESystemSolvingParameter {
-	A, b, Strategy
+	A, b, Strategy, Initial, Tolerance, Iterations, Norm, Error, Lambda
 }

@@ -84,7 +84,7 @@ public class MatrixUtility {
 	public static boolean compareVector(double[] m, double[] n, double tolerance){
 		boolean equals = m.length == n.length;
 		for (int i = 0; equals && i < n.length; i++) {
-			equals = Math.abs(m[i]-n[i]) < tolerance;
+			equals = Math.abs(m[i]-n[i]) <= tolerance;
 		}
 		return equals;
 	}

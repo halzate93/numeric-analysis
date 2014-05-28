@@ -16,7 +16,7 @@ public class MissingParameterException extends Exception {
 		super("Some obligatory parameters are missing: " + getMissingList(missingParameters));
 		this.missingParameters = missingParameters;
 	}
-	
+
 	private static String getMissingList(ESystemSolvingParameter[] missingParameters) {
 		String message = "";
 		for(ESystemSolvingParameter m : missingParameters){

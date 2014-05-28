@@ -18,7 +18,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -32,12 +35,30 @@ public class Main2Activity extends Activity {
 	TextView tvrows;
 	private String userMatrix = "";
 	private EditText mathMatrix;
+	private EditText xi;
+	private EditText tol;
+	private EditText iter;
+	private EditText lamb;
+	private EditText xv;
+	private EditText xn;
+	private EditText fxn;
+	LinearLayout layoutjs;
+	RelativeLayout relativelayoutFirst;
+	RelativeLayout relativelayoutSecond;
 	Button solve;
+	
 	//global vars for Input
 	String [] A;
 	String [] b;
 	String n = "";
 	String strategy = "";
+	String [] Xi;
+	Double tolerance;
+	int iterations;
+	Double lambda;
+	Double x;
+	String [] Xn;
+	String [] Fxn;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,30 +79,107 @@ public class Main2Activity extends Activity {
 		        	case 0:
 		        		Toast.makeText(Main2Activity.this, "Gaussian-Elimination", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		layoutjs.setVisibility(View.INVISIBLE);
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 1:
 		        		Toast.makeText(Main2Activity.this, "Partial Pivoting, Gaussian-Elimination", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 2:
 		        		Toast.makeText(Main2Activity.this, "Total Pivoting, Gaussian-Elimination", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 3:
 		        		Toast.makeText(Main2Activity.this, "Gaussian-Factorization-PartialPivoting", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 4:
 		        		Toast.makeText(Main2Activity.this, "Crout", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 5:
 		        		Toast.makeText(Main2Activity.this, "Dolittle", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
 		        		break;
 		        	case 6:
 		        		Toast.makeText(Main2Activity.this, "Cholesky", Toast.LENGTH_LONG).show();
 		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		layoutjs.setVisibility(View.INVISIBLE);
+		        		break;
+		        	case 7:
+		        		Toast.makeText(Main2Activity.this, "Jacobi", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		layoutjs.setVisibility(View.VISIBLE);
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		break;
+		        	case 8:
+		        		Toast.makeText(Main2Activity.this, "Gauss-Seidel", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		layoutjs.setVisibility(View.VISIBLE);
+		        		relativelayoutFirst.setVisibility(View.VISIBLE);
+		        		relativelayoutSecond.setVisibility(View.INVISIBLE);
+		        		break;
+		        	case 9:
+		        		Toast.makeText(Main2Activity.this, "SystemEquation", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 10:
+		        		Toast.makeText(Main2Activity.this, "Newton", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 11:
+		        		Toast.makeText(Main2Activity.this, "Lagrange", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 12:
+		        		Toast.makeText(Main2Activity.this, "Neville", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 13:
+		        		Toast.makeText(Main2Activity.this, "Lineal Spline", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 14:
+		        		Toast.makeText(Main2Activity.this, "Quadratic Spline", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 15:
+		        		Toast.makeText(Main2Activity.this, "Cubic Spline", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
 		        		break;
 		        }
 		    }
@@ -92,7 +190,9 @@ public class Main2Activity extends Activity {
 		    }
 
 		});
-
+		layoutjs = (LinearLayout)findViewById(R.id.layoutSJ);
+		relativelayoutFirst = (RelativeLayout)findViewById(R.id.layoutFirst);
+		relativelayoutSecond = (RelativeLayout)findViewById(R.id.layoutSecond);
 		spinnersize.setOnItemSelectedListener(new OnItemSelectedListener() {
 		    @Override
 		    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -154,13 +254,39 @@ public class Main2Activity extends Activity {
 		});
 		
 		mathMatrix = (EditText) findViewById(R.id.txtMatriz);
+		xi = (EditText) findViewById(R.id.etXi);
+		tol  = (EditText) findViewById(R.id.etTol);
+		iter  = (EditText) findViewById(R.id.etIter);
+		lamb  = (EditText) findViewById(R.id.etLambda);
+		xv = (EditText) findViewById(R.id.txtX);
+		xn = (EditText) findViewById(R.id.txtXn);
+		fxn = (EditText) findViewById(R.id.txtFxn);
 		
 		solve = (Button) findViewById(R.id.btnSolve);
 		solve.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
 				userMatrix = mathMatrix.getText().toString();
-				if (userMatrix.equals(""))
+				if (actualMethod > 8)
+				{
+					actualSize = -1;
+					if (xv.getText().toString().equals(""))
+					{
+						Toast.makeText(Main2Activity.this, "You need to Fill the X value", Toast.LENGTH_LONG).show();
+						return;
+					}
+					if (xn.getText().toString().equals(""))
+					{
+						Toast.makeText(Main2Activity.this, "You need to Fill the Xn value", Toast.LENGTH_LONG).show();
+						return;
+					}
+					if (fxn.getText().toString().equals(""))
+					{
+						Toast.makeText(Main2Activity.this, "You need to Fill the F(Xn) value", Toast.LENGTH_LONG).show();
+						return;
+					}
+				}
+				if (userMatrix.equals("") && actualMethod <= 8)
 				{
 					Toast.makeText(Main2Activity.this, "You need to Fill the Matrix to evaluate", Toast.LENGTH_LONG).show();
 					return;
@@ -365,12 +491,79 @@ public class Main2Activity extends Activity {
 					    b = GetB();
 					    System.out.println(Arrays.toString(b));
 						break;
+					case 7:
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
+					    Xi = GetXi();
+					    System.out.println(Arrays.toString(Xi));
+					    tolerance = Double.parseDouble(tol.getText().toString());
+					    iterations = Integer.parseInt(iter.getText().toString());
+					    lambda = Double.parseDouble(lamb.getText().toString());
+						break;
+					case 8:
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
+					    Xi = GetXi();
+					    System.out.println(Arrays.toString(Xi));
+					    tolerance = Double.parseDouble(tol.getText().toString());
+					    iterations = Integer.parseInt(iter.getText().toString());
+					    lambda = Double.parseDouble(lamb.getText().toString());
+						break;
+					case 9:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						System.out.println(Arrays.toString(Xn));
+						System.out.println(Arrays.toString(Fxn));
+						break;
+					case 10:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 11:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 12:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 13:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 14:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 15:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
 				}
 				Intent mIntent = new Intent(Main2Activity.this, Solver2Activity.class);
+				mIntent.putExtra("method", actualMethod);
 				mIntent.putExtra("A", A);
 				mIntent.putExtra("b", b);
 				mIntent.putExtra("n", n);
 				mIntent.putExtra("strategy", strategy);
+				mIntent.putExtra("Xi", Xi);
+				mIntent.putExtra("tolerance", tolerance);
+				mIntent.putExtra("iterations", iterations);
+				mIntent.putExtra("lambda", lambda);
+				mIntent.putExtra("x", x);
+				mIntent.putExtra("Xn", Xn);
+				mIntent.putExtra("Fxn", Fxn);
 				startActivity(mIntent);
 			}
 		});
@@ -400,6 +593,24 @@ public class Main2Activity extends Activity {
 	    }
 	    return br = bvalues.split(":");
 	}
+	private String[] GetXi()
+	{
+		String[] xr;
+		String matrix = xi.getText().toString();
+	    return xr = matrix.split(":");
+	}
+	private String[] GetXn()
+	{
+		String[] xnr;
+		String matrix = xn.getText().toString().replace("\n", "n");
+		return xnr = matrix.split("n");
+	}
+	private String[] GetFxn()
+	{
+		String[] fxnr;
+		String matrix = fxn.getText().toString().replace("\n", "n");
+		return fxnr = matrix.split("n");
+	}
 	
 	private void createMethodList()
 	{
@@ -411,6 +622,15 @@ public class Main2Activity extends Activity {
 		SpinnerList.add("Crout");
 		SpinnerList.add("Dolittle");
 		SpinnerList.add("Cholesky");
+		SpinnerList.add("Jacobi");
+		SpinnerList.add("Gauss-Seidel");
+		SpinnerList.add("SystemEquation");
+		SpinnerList.add("Newton");
+		SpinnerList.add("Lagrange");
+		SpinnerList.add("Neville");
+		SpinnerList.add("Lineal Spline");
+		SpinnerList.add("Quadratic Spline");
+		SpinnerList.add("Cubic Spline");
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, SpinnerList);
 		// Specify the layout to use when the list of choices appears

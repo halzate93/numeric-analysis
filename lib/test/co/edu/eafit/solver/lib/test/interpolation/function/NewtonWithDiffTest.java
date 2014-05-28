@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
-import co.edu.eafit.solver.lib.interpolation.function.NewtonWithDiff;
+import co.edu.eafit.solver.lib.interpolation.function.NewtonWithDiffInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 
@@ -23,7 +23,7 @@ public class NewtonWithDiffTest {
 								   {11.145858, 11.60625, 9.604513, 5.5825}};
 	private static double[] p = {6.219231, 5.26244, 6.255013, 5.5825};
 	private static double y = 7.466204;
-	private NewtonWithDiff nw;
+	private NewtonWithDiffInterpolation nw;
 	
 	@Before
 	public void setUp() throws BadParameterException{
@@ -32,7 +32,7 @@ public class NewtonWithDiffTest {
 				MatrixUtility.matrix2Json(points));
 		parameters.put(EInterpolationParameter.X.toString(), x);
 		
-		nw = new NewtonWithDiff();
+		nw = new NewtonWithDiffInterpolation();
 		nw.setParameters(parameters);
 	}
 	

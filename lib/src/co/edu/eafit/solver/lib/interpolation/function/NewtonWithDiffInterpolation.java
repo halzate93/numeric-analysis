@@ -1,6 +1,6 @@
 package co.edu.eafit.solver.lib.interpolation.function;
 
-public class NewtonWithDiff extends FunctionInterpolation {
+public class NewtonWithDiffInterpolation extends FunctionInterpolation {
 
 	private double[][] f;
 	private boolean[][] done;

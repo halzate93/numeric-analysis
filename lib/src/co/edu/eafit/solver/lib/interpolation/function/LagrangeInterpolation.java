@@ -1,7 +1,7 @@
 package co.edu.eafit.solver.lib.interpolation.function;
 
 
-public class Lagrange extends FunctionInterpolation {
+public class LagrangeInterpolation extends FunctionInterpolation {
 	
 	@Override
 	protected double evaluate() {
@@ -25,6 +25,5 @@ public class Lagrange extends FunctionInterpolation {
 		}
 		return l;
 	}
-	
 
 }

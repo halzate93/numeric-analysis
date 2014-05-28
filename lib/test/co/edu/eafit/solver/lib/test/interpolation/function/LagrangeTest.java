@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
-import co.edu.eafit.solver.lib.interpolation.function.Lagrange;
+import co.edu.eafit.solver.lib.interpolation.function.LagrangeInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 
 public class LagrangeTest {
@@ -19,7 +19,7 @@ public class LagrangeTest {
 	private static double[] p = {-0.039313, 0.904188, 0.159563, -0.024438};
 	private static double y = 7.466204;
 	
-	private Lagrange lg;
+	private LagrangeInterpolation lg;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -28,7 +28,7 @@ public class LagrangeTest {
 				MatrixUtility.matrix2Json(points));
 		parameters.put(EInterpolationParameter.X.toString(), x);
 		
-		lg = new Lagrange();
+		lg = new LagrangeInterpolation();
 		lg.setParameters(parameters);
 	}
 

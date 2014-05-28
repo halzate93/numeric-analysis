@@ -552,21 +552,35 @@ public class Main2Activity extends Activity {
 						break;
 				}
 				Intent mIntent = new Intent(Main2Activity.this, Solver2Activity.class);
-				mIntent.putExtra("method", actualMethod);
-				mIntent.putExtra("A", A);
-				mIntent.putExtra("b", b);
+				mIntent.putExtra("method", String.valueOf(actualMethod));
+				mIntent.putExtra("A", ArrayToString(A));
+				mIntent.putExtra("b", ArrayToString(b));
 				mIntent.putExtra("n", n);
 				mIntent.putExtra("strategy", strategy);
-				mIntent.putExtra("Xi", Xi);
-				mIntent.putExtra("tolerance", tolerance);
-				mIntent.putExtra("iterations", iterations);
-				mIntent.putExtra("lambda", lambda);
-				mIntent.putExtra("x", x);
-				mIntent.putExtra("Xn", Xn);
-				mIntent.putExtra("Fxn", Fxn);
+				mIntent.putExtra("Xi", ArrayToString(Xi));
+				mIntent.putExtra("tolerance", String.valueOf(tolerance));
+				mIntent.putExtra("iterations", String.valueOf(iterations));
+				mIntent.putExtra("lambda", String.valueOf(lambda));
+				mIntent.putExtra("x", String.valueOf(x));
+				mIntent.putExtra("Xn", ArrayToString(Xn));
+				mIntent.putExtra("Fxn", ArrayToString(Fxn));
 				startActivity(mIntent);
 			}
 		});
+	}
+	
+	private String ArrayToString(String[]array)
+	{
+		String result = "";
+		try
+		{
+			for (String s : array) {
+			    result = result + s+",";
+			}
+
+			return result;
+		}
+		catch(Exception e){return result;}
 	}
 	
 	private String[] GetA()

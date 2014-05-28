@@ -8,9 +8,10 @@ public class CholeskyFactorization extends LUFactorization {
 		for (int p = 0; p < k; p++) {
 			acum += L[k][p] * U[p][k];
 		}
-		U[k][k] = Math.sqrt(A[k][k] - acum);
+		double squared = A[k][k] - acum;
+		U[k][k] = Math.sqrt(Math.abs(squared));
 		L[k][k] = U[k][k];
-		System.out.println(acum);
+		if(squared < 0) L[k][k] *= -1;
 	}
 
 	@Override

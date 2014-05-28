@@ -44,7 +44,7 @@ public abstract class LUFactorization implements LinearSystemMethod {
 		result.put(ELUResults.Z.toString(), MatrixUtility.vector2Json(z));
 		
 		x = MatrixUtility.regresiveSustitution(U, z);
-		result.put(ELUResults.X.toString(), MatrixUtility.vector2Json(x));
+		result.put(ELUResults.X.toString(),MatrixUtility.vector2Json(x));
 		
 		return result;
 	}

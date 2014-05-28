@@ -68,5 +68,6 @@
     <!-- vars for System equations -->
     <string name="infoMatrix">For split columns please use the colon sign(:) (ex. 3:45:2.34) and for The independent terms use equal(=) (ex. 3+45+2.34=5)\n Fill the Matrix(no spaces):</string>
     <string name="btnsolves">solve</string>
-	
+    <string name="solve2Head">Solver for this System:</string>
+
 </resources>

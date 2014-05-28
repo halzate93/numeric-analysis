@@ -47,6 +47,11 @@
         </activity>
         <activity
             android:name="co.edu.eafit.solver.app.Help2Activity"
+            android:label="@string/opcion2"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name="co.edu.eafit.solver.app.Solver2Activity"
             android:label="@string/opcion2" 
             android:theme="@style/AppTheme" >
         </activity>

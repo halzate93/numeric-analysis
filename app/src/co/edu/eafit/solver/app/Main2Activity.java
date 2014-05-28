@@ -3,6 +3,7 @@ package co.edu.eafit.solver.app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
@@ -159,7 +160,6 @@ public class Main2Activity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				userMatrix = mathMatrix.getText().toString();
-				System.out.println(userMatrix);
 				if (userMatrix.equals(""))
 				{
 					Toast.makeText(Main2Activity.this, "You need to Fill the Matrix to evaluate", Toast.LENGTH_LONG).show();
@@ -322,32 +322,83 @@ public class Main2Activity extends Activity {
 				{
 					case 0:
 						strategy = "None";
-					    final Pattern pattern = Pattern.compile("[\\*=\"]");
-					    b = pattern.split(userMatrix);
+					    A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
 					    System.out.println(Arrays.toString(b));
 						break;
 					case 1:
 						strategy = "Partial";
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 					case 2:
 						strategy = "Total";
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 					case 3:
-						
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 					case 4:
-						
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 					case 5:
-						
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 					case 6:
-						
+						A = GetA();
+					    System.out.println(Arrays.toString(A));
+					    b = GetB();
+					    System.out.println(Arrays.toString(b));
 						break;
 				}
-				
+				Intent mIntent = new Intent(Main2Activity.this, Solver2Activity.class);
+				mIntent.putExtra("A", A);
+				mIntent.putExtra("b", b);
+				mIntent.putExtra("n", n);
+				mIntent.putExtra("strategy", strategy);
+				startActivity(mIntent);
 			}
 		});
+	}
+	
+	private String[] GetA()
+	{
+		String[] ar;
+		String nchar = "n";
+		String matrix = userMatrix.replace("\n", "n");
+		String bvalues = "";
+		matrix = matrix + nchar;
+	    final Pattern pattern = Pattern.compile("=(.*?)n");
+	    return ar = pattern.split(matrix);
+	}
+	private String[] GetB()
+	{
+		String[] br;
+		String nchar = "n";
+		String matrix = userMatrix.replace("\n", "n");
+		String bvalues = "";
+		matrix = matrix + nchar;
+	    Pattern pattern2 = Pattern.compile("=(.*?)n");
+	    Matcher matcher = pattern2.matcher(matrix);
+	    while (matcher.find()) {
+	    	bvalues = bvalues + matcher.group(1)+":";
+	    }
+	    return br = bvalues.split(":");
 	}
 	
 	private void createMethodList()

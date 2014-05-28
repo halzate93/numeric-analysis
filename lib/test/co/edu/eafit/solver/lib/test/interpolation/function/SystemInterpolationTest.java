@@ -23,7 +23,7 @@ public class SystemInterpolationTest {
 								   {8, 4, 2, 1},
 								   {27, 9, 3, 1}};
 	private static double y = 0.0046995;
-	
+	private static double[] p = {0.412412, 0.939374, -5.836218, 0.004700}; 
 	
 	private SystemInterpolation sys;
 	
@@ -53,5 +53,11 @@ public class SystemInterpolationTest {
 	public void testSolution() throws Exception {
 		sys.interpolate();
 		assertEquals(y, sys.getY(), 0.0000001);
+	}
+	
+	@Test
+	public void testP() throws Exception{
+		sys.interpolate();
+		assertTrue(MatrixUtility.compareVector(p, sys.getP(), 0.000001));
 	}
 }

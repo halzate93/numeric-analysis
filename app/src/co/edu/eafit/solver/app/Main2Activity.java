@@ -181,6 +181,42 @@ public class Main2Activity extends Activity {
 		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
 		        		relativelayoutSecond.setVisibility(View.VISIBLE);
 		        		break;
+		        	case 16:
+		        		Toast.makeText(Main2Activity.this, "Trapezoid", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 17:
+		        		Toast.makeText(Main2Activity.this, "Composed Trapezoid", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 18:
+		        		Toast.makeText(Main2Activity.this, "Simpson 1/3", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 19:
+		        		Toast.makeText(Main2Activity.this, "Composed Simpson 1/3", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 20:
+		        		Toast.makeText(Main2Activity.this, "Simpson 3/8", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
+		        	case 21:
+		        		Toast.makeText(Main2Activity.this, "Composed Simpson 3/8", Toast.LENGTH_LONG).show();
+		        		actualMethod = selected;
+		        		relativelayoutFirst.setVisibility(View.INVISIBLE);
+		        		relativelayoutSecond.setVisibility(View.VISIBLE);
+		        		break;
 		        }
 		    }
 
@@ -550,6 +586,36 @@ public class Main2Activity extends Activity {
 						Xn = GetXn();
 						Fxn = GetFxn();
 						break;
+					case 16:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 17:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 18:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 19:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 20:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
+					case 21:
+						x = Double.parseDouble(xv.getText().toString());
+						Xn = GetXn();
+						Fxn = GetFxn();
+						break;
 				}
 				Intent mIntent = new Intent(Main2Activity.this, Solver2Activity.class);
 				mIntent.putExtra("method", String.valueOf(actualMethod));
@@ -645,6 +711,12 @@ public class Main2Activity extends Activity {
 		SpinnerList.add("Lineal Spline");
 		SpinnerList.add("Quadratic Spline");
 		SpinnerList.add("Cubic Spline");
+		SpinnerList.add("Trapezoid");
+		SpinnerList.add("Composed Trapezoid");
+		SpinnerList.add("Simpson 1/3");
+		SpinnerList.add("Composed Simpson 1/3");
+		SpinnerList.add("Simpson 3/8");
+		SpinnerList.add("Composed Simpson 3/8");
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, SpinnerList);
 		// Specify the layout to use when the list of choices appears

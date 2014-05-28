@@ -2,6 +2,16 @@ package co.edu.eafit.solver.app;
 
 import java.util.Arrays;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import co.edu.eafit.solver.lib.rootfinding.NonLinearEquationSolver;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
+import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
+import co.edu.eafit.solver.lib.systemsolver.EEquationSystemMethod;
+import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
+import co.edu.eafit.solver.lib.systemsolver.EquationSystemSolver;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -21,16 +31,22 @@ public class Solver2Activity extends Activity {
 	//Global vars
     int actualMethod = 0;
     String[] A;
+    Double[] Ad;
     String[] b;
+    Double[] bd;
     int n = 0;
     String strategy = "";
     String[] Xi;
+    Double[] Xid;
     Double tolerance = 0.0;
     int iterations = 0;
     Double lambda = 0.0;
     Double x = 0.0;
     String[] Xn;
+    Double[] Xnd;
     String[] Fxn;
+    Double[] Fxnd;
+    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +57,18 @@ public class Solver2Activity extends Activity {
 		actualMethod = getMethod();
 		System.out.println("Actual Method: "+actualMethod);
 		A = getA();
-		System.out.println("A Matrix: "+Arrays.toString(A));
+		Ad = StringToDouble(A);
+		System.out.println("A Matrix: "+Arrays.toString(Ad));
 		b = getb();
-		System.out.println("b Matrix: "+Arrays.toString(b));
+		bd = StringToDouble(b);
+		System.out.println("b Matrix: "+Arrays.toString(bd));
 		n = getn();
 		System.out.println("Size of Matrix: "+n);
 		strategy = getstrategy();
 		System.out.println("Pivot Strategy: "+strategy);
 		Xi = getXi();
-		System.out.println("Initial Values Xi: "+Arrays.toString(Xi));
+		Xid = StringToDouble(Xi);
+		System.out.println("Initial Values Xi: "+Arrays.toString(Xid));
 		tolerance = gettolerance();
 		System.out.println("Tolerance: "+tolerance);
 		iterations = getiterations();
@@ -59,10 +78,39 @@ public class Solver2Activity extends Activity {
 		x = getx();
 		System.out.println("X value for evaluation: "+x);
 		Xn = getXn();
-		System.out.println("Xn values: "+Arrays.toString(Xn));
+		Xnd = StringToDouble(Xn);
+		System.out.println("Xn values: "+Arrays.toString(Xnd));
 		Fxn = getFxn();
-		System.out.println("F(Xn) values: "+Arrays.toString(Fxn));
+		Fxnd = StringToDouble(Fxn);
+		System.out.println("F(Xn) values: "+Arrays.toString(Fxnd));
 		
+		//Solver
+	    /*EEquationSystemMethod methodEnum = EEquationSystemMethod.values()[getMethod()];
+	    try {
+			run(methodEnum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		
+	}
+	
+
+	private Double[] StringToDouble(String[] array)
+	{
+		Double[] result = null;
+		try
+		{
+		result = new Double[array.length];;
+		for (int i = 0; i < result.length; i++)
+		{
+			result[i] = Double.parseDouble(array[i]);
+		}
+		return result;
+		}
+		catch(Exception exc)
+		{
+			return result = null;
+		}
 	}
 	
 	public int getMethod(){
@@ -87,7 +135,8 @@ public class Solver2Activity extends Activity {
 		{
 			try
 			{
-				return a = mIntent.getString("A").split(",");
+				String matrix = mIntent.getString("A").replace(",", ":");
+				return a = matrix.split(":");
 			}
 			catch(Exception e){return a = null;}
 		}

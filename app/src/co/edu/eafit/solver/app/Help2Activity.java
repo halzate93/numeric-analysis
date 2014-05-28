@@ -8,27 +8,29 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.*;
 
-public class HelpActivity extends Activity {
-	
+public class Help2Activity extends Activity {
+
 	private Button  btnMore;
 	Spinner spinner;
 	private String urlmethod;
 	private TextView textHelp;
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		setContentView(R.layout.activity_help2);
+setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		spinner = (Spinner) findViewById(R.id.spinnerMethods);
 		textHelp = (TextView)findViewById(R.id.txtAyuda);
@@ -84,21 +86,18 @@ public class HelpActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
 	}
 	
-
-    
-    private void createMethodList()
+	private void createMethodList()
 	{
 		List<String> SpinnerList = new ArrayList<String>();
-		SpinnerList.add("Incremental Search");
-		SpinnerList.add("Bisection");
-		SpinnerList.add("False Position");
-		SpinnerList.add("Fixed Point");
-		SpinnerList.add("Newton");
-		SpinnerList.add("Secant");
-		SpinnerList.add("Multiple Roots");
+		SpinnerList.add("Gaussian-Elimination");
+		SpinnerList.add("Partial Pivoting, Gaussian-Elimination");
+		SpinnerList.add("Total Pivoting, Gaussian-Elimination");
+		SpinnerList.add("Gaussian-Factorization-PartialPivoting");
+		SpinnerList.add("Crout");
+		SpinnerList.add("Dolittle");
+		SpinnerList.add("Cholesky");
 		// Create an ArrayAdapter using the string array and a default spinner layout
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, SpinnerList);
 		// Specify the layout to use when the list of choices appears
@@ -106,5 +105,4 @@ public class HelpActivity extends Activity {
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
 	}
-
 }

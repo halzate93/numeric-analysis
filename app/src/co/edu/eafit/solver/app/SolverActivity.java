@@ -11,8 +11,8 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import co.edu.eafit.solver.lib.rootfinding.control.Solver;
-import co.edu.eafit.solver.lib.rootfinding.methods.enums.EMethod;
+import co.edu.eafit.solver.lib.rootfinding.NonLinearEquationSolver;
+import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
 import co.edu.eafit.solver.lib.rootfinding.methods.exceptions.InvalidParameterException;
 import android.app.Activity;
@@ -109,7 +109,7 @@ public class SolverActivity extends Activity {
 	      }
 	    
 	    //Solver
-	    EMethod methodEnum = EMethod.values()[Integer.parseInt(getMethod())];
+	    EEquationSolvingMethod methodEnum = EEquationSolvingMethod.values()[Integer.parseInt(getMethod())];
 	    try {
 			run(methodEnum);
 		} catch (Exception e) {
@@ -117,9 +117,9 @@ public class SolverActivity extends Activity {
 		}
 	}
 	
-	private void run(EMethod method) throws Exception {
+	private void run(EEquationSolvingMethod method) throws Exception {
 		
-		Solver s = new Solver();
+		NonLinearEquationSolver s = new NonLinearEquationSolver();
 		s.setMethodPrototype(method);
 		
 		JSONObject params = getConfiguration(s.getRequiredParameters(), method);
@@ -139,7 +139,7 @@ public class SolverActivity extends Activity {
 		result.setText(s.getLastResult().toString(2));
 	}
 	
-	public JSONObject getConfiguration(EParameter[] required, EMethod method) throws JSONException {
+	public JSONObject getConfiguration(EParameter[] required, EEquationSolvingMethod method) throws JSONException {
 		JSONObject parameters = new JSONObject();
 		
 		for(EParameter p : required){

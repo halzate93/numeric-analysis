@@ -1,8 +1,10 @@
 package co.edu.eafit.solver.lib.interpolation.function;
 
+import org.json.JSONObject;
+
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 
-public class NevilleInterpolation extends FunctionInterpolation {
+public class NevilleInterpolation extends FunctionPolinomyInterpolation {
 
 	private double[][] n;
 	private boolean[][] done;
@@ -38,4 +40,11 @@ public class NevilleInterpolation extends FunctionInterpolation {
 		return n;
 	}
 	
+	@Override
+	public JSONObject interpolate() throws Exception{
+		JSONObject result = super.interpolate();
+		result.put(EFunctionInterpolationResult.N.toString(),
+				MatrixUtility.matrix2Json(n));
+		return result;
+	}
 }

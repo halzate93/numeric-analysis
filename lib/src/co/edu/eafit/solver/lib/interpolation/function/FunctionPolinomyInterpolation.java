@@ -4,10 +4,12 @@ import org.json.JSONObject;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
 import co.edu.eafit.solver.lib.interpolation.InterpolationMethod;
+import co.edu.eafit.solver.lib.interpolation.MissingParameterException;
+import co.edu.eafit.solver.lib.interpolation.OutOfRangeException;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 
-public abstract class FunctionInterpolation extends InterpolationMethod {
+public abstract class FunctionPolinomyInterpolation extends InterpolationMethod {
 	
 	protected double x, y;
 	protected double[] p;
@@ -21,13 +23,11 @@ public abstract class FunctionInterpolation extends InterpolationMethod {
 		result.put(EFunctionInterpolationResult.P.toString(),
 				MatrixUtility.vector2Json(p));
 		result.put(EFunctionInterpolationResult.Y.toString(), y);
-		
+	
 		return result;
 	}
-	
-	protected abstract double evaluate();
+	protected abstract double evaluate() throws OutOfRangeException;
 	protected abstract double[] calculatePolinomy() throws Exception;
-	
 
 	@Override
 	public void setParameters(JSONObject parameters) throws BadParameterException{
@@ -38,6 +38,14 @@ public abstract class FunctionInterpolation extends InterpolationMethod {
 			}
 		}catch(Exception e){
 			throw new BadParameterException(e);
+		}
+	}
+	
+	@Override
+	protected void checkParameters() throws MissingParameterException, OutOfRangeException{
+		super.checkParameters();
+		if(points[0][0] > x || points[points.length - 1][0] < x){
+			throw new OutOfRangeException(x, points[0][0], points[points.length - 1][0]);
 		}
 	}
 

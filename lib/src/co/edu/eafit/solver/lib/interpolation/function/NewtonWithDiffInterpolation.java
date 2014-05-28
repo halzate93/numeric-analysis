@@ -1,6 +1,10 @@
 package co.edu.eafit.solver.lib.interpolation.function;
 
-public class NewtonWithDiffInterpolation extends FunctionInterpolation {
+import org.json.JSONObject;
+
+import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
+
+public class NewtonWithDiffInterpolation extends FunctionPolinomyInterpolation {
 
 	private double[][] f;
 	private boolean[][] done;
@@ -40,6 +44,14 @@ public class NewtonWithDiffInterpolation extends FunctionInterpolation {
 			done[j][j - i] = true;
 		}
 		return f[j][j - i];
+	}
+	
+	@Override
+	public JSONObject interpolate() throws Exception{
+		JSONObject result = super.interpolate();
+		result.put(EFunctionInterpolationResult.F.toString(),
+				MatrixUtility.matrix2Json(f));
+		return result;
 	}
 
 	public double[][] getF() {

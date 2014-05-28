@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
+import co.edu.eafit.solver.lib.interpolation.function.EFunctionInterpolationResult;
 import co.edu.eafit.solver.lib.interpolation.function.NewtonWithDiffInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
@@ -57,6 +58,12 @@ public class NewtonWithDiffTest {
 	public void testSolution() throws Exception{
 		nw.interpolate();
 		assertEquals(y, nw.getY(), 0.000001);
+	}
+	
+	@Test
+	public void testJSON() throws Exception{
+		JSONObject result = nw.interpolate();
+		assertTrue(result.has(EFunctionInterpolationResult.F.toString()));
 	}
 
 }

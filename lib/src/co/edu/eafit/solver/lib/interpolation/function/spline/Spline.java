@@ -1,37 +1,23 @@
-package co.edu.eafit.solver.lib.interpolation.function;
+package co.edu.eafit.solver.lib.interpolation.function.spline;
 
 import org.json.JSONObject;
 
+import co.edu.eafit.solver.lib.interpolation.function.EFunctionInterpolationResult;
+import co.edu.eafit.solver.lib.interpolation.function.FunctionPolinomyInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.lufactorization.GaussianPartialPivotFactorization;
 
-public class SystemInterpolation extends FunctionPolinomyInterpolation {
+public abstract class Spline extends FunctionPolinomyInterpolation {
 
-	private double[][] A;
-	private double[] b;
-	
+	protected double[][] A;
+	protected double[] b;
+
 	private GaussianPartialPivotFactorization g;
-	
-	@Override
-	protected double evaluate() {
-		double fx = 0;
-		for (int i = 0; i < p.length; i++) {
-			fx += Math.pow(x, p.length - 1 - i) * p[i];
-		}
-		return fx;
-	}
 
 	@Override
 	protected double[] calculatePolinomy() throws Exception {
-		A = new double[points.length][points.length];
-		b = new double[points.length];
-		for (int i = 0; i < points.length; i++) {
-			for (int j = 0; j < points.length; j++) {
-				A[i][j] = Math.pow(points[i][0], points.length - 1 - j);
-			}
-			b[i] = points[i][1];
-		}
+		conformSystem();
 		
 		g = new GaussianPartialPivotFactorization();
 		JSONObject parameters = new JSONObject();
@@ -45,7 +31,9 @@ public class SystemInterpolation extends FunctionPolinomyInterpolation {
 		
 		return g.getX();
 	}
-
+	
+	protected abstract void conformSystem();
+	
 	@Override
 	public JSONObject interpolate() throws Exception{
 		JSONObject result = super.interpolate();
@@ -62,5 +50,5 @@ public class SystemInterpolation extends FunctionPolinomyInterpolation {
 	public double[] getB() {
 		return b;
 	}
-	
+
 }

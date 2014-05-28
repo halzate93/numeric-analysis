@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
+import co.edu.eafit.solver.lib.interpolation.function.EFunctionInterpolationResult;
 import co.edu.eafit.solver.lib.interpolation.function.SystemInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 
@@ -59,5 +60,11 @@ public class SystemInterpolationTest {
 	public void testP() throws Exception{
 		sys.interpolate();
 		assertTrue(MatrixUtility.compareVector(p, sys.getP(), 0.000001));
+	}
+	
+	@Test
+	public void testJSON() throws Exception{
+		JSONObject result = sys.interpolate();
+		assertTrue(result.has(EFunctionInterpolationResult.A.toString()));
 	}
 }

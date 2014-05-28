@@ -14,7 +14,7 @@ public abstract class InterpolationMethod {
 		return run();
 	}
 	
-	protected void checkParameters() throws MissingParameterException {
+	protected void checkParameters() throws MissingParameterException, OutOfRangeException {
 		if(points == null)
 			throw new MissingParameterException(
 					new EInterpolationParameter[]{EInterpolationParameter.Points});

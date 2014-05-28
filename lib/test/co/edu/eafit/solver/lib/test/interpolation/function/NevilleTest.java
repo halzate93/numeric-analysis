@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
+import co.edu.eafit.solver.lib.interpolation.function.EFunctionInterpolationResult;
 import co.edu.eafit.solver.lib.interpolation.function.NevilleInterpolation;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 
@@ -53,5 +54,11 @@ public class NevilleTest {
 	public void testSolution() throws Exception{
 		nvl.interpolate();
 		assertEquals(y, nvl.getY(), 0.000001);
+	}
+	
+	@Test
+	public void testJSON() throws Exception{
+		JSONObject result = nvl.interpolate();
+		assertTrue(result.has(EFunctionInterpolationResult.N.toString()));
 	}
 }

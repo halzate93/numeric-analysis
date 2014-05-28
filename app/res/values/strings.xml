@@ -64,5 +64,9 @@
     <string name="solveHead">Solver for this Function:</string>
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_main2">Main2Activity</string>
-
+    <string name="title_activity_help2">Help2Activity</string>
+    <!-- vars for System equations -->
+    <string name="infoMatrix">For split columns please use the colon sign(:) (ex. 3:45:2.34) and for The independent terms use equal(=) (ex. 3+45+2.34=5)\n Fill the Matrix(no spaces):</string>
+    <string name="btnsolves">solve</string>
+	
 </resources>

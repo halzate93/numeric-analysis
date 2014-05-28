@@ -554,10 +554,10 @@ public class Main2Activity extends Activity {
 				Intent mIntent = new Intent(Main2Activity.this, Solver2Activity.class);
 				mIntent.putExtra("method", String.valueOf(actualMethod));
 				mIntent.putExtra("A", ArrayToString(A));
-				mIntent.putExtra("b", b);
+				mIntent.putExtra("b", ArrayToString(b));
 				mIntent.putExtra("n", n);
 				mIntent.putExtra("strategy", strategy);
-				mIntent.putExtra("Xi", Xi);
+				mIntent.putExtra("Xi", ArrayToString(Xi));
 				mIntent.putExtra("tolerance", String.valueOf(tolerance));
 				mIntent.putExtra("iterations", String.valueOf(iterations));
 				mIntent.putExtra("lambda", String.valueOf(lambda));

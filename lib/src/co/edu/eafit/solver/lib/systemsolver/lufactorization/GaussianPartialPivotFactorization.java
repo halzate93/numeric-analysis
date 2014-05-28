@@ -76,6 +76,7 @@ public class GaussianPartialPivotFactorization extends GaussianElimination {
 	@Override
 	protected double[][] kIteration(double[][] Ab, int k)
 			throws DivisionByZeroException {
+		
 		Ab = super.kIteration(Ab, k);
 		U = MatrixUtility.decomposeMatrix2A(Ab);
 		JSONObject step = new JSONObject();
@@ -89,6 +90,7 @@ public class GaussianPartialPivotFactorization extends GaussianElimination {
 				MatrixUtility.matrix2Json(P));
 		
 		result.accumulate(ELUResults.Steps.toString(), step);
+		
 		return Ab;
 	}
 	

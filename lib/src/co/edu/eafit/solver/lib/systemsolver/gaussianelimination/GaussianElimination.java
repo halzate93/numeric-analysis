@@ -74,7 +74,7 @@ public class GaussianElimination implements LinearSystemMethod {
 
 	protected double[][] kIteration(double[][] Ab, int k)
 			throws DivisionByZeroException {
-		if(A[k][k] == 0) throw new DivisionByZeroException(k);
+		if(Ab[k][k] == 0) throw new DivisionByZeroException(k);
 		for (int i = k + 1; i < Ab.length; i++) {
 			double m = calculateMik(Ab, k, i);
 			for (int j = k; j < Ab[i].length; j++) {

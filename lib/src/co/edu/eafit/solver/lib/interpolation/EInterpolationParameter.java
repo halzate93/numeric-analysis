@@ -1,5 +1,5 @@
 package co.edu.eafit.solver.lib.interpolation;
 
 public enum EInterpolationParameter {
-	Points, X
+	Points, X, SplineType, Rule, FixedValue
 }

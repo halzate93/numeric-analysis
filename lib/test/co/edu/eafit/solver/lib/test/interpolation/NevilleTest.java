@@ -1,4 +1,4 @@
-package co.edu.eafit.solver.lib.test.interpolation.function;
+package co.edu.eafit.solver.lib.test.interpolation;
 
 import static org.junit.Assert.*;
 

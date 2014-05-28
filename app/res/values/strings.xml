@@ -66,8 +66,13 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_help2">Help2Activity</string>
     <!-- vars for System equations -->
-    <string name="infoMatrix">For split columns please use the colon sign(:) (ex. 3:45:2.34) and for The independent terms use equal(=) (ex. 3+45+2.34=5)\n Fill the Matrix(no spaces):</string>
+    <string name="infoMatrix">For separate columns please use the colon sign(:) (ex. 3:45:2.34) and for The independent terms use equal(=) (ex. 3+45+2.34=5)\n Fill the Matrix(no spaces):</string>
+    <string name="info2">Insert the value of X to evaluate:</string>
+    <string name="info3">Below insert the values of Xn and F(Xn) for new Rows press Enter Key:</string>
     <string name="btnsolves">solve</string>
     <string name="solve2Head">Solver for this System:</string>
-
+	<string name="tv_lambda">Lambda</string>
+	<string name="tv_infoSJ">Insert initial approximation to x, for separate values please use the colon sign(:) (ex. 3:45:2.34)</string>
+	<string name="tv_Xn">Xn</string>
+	<string name="tv_Fxn">F(Xn)</string>
 </resources>

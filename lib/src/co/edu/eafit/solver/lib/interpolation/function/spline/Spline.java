@@ -15,6 +15,7 @@ public abstract class Spline extends FunctionPolinomyInterpolation {
 	protected double[] b;
 	
 	protected double[][] c;
+	protected int n;
 	
 	private GaussianPartialPivotFactorization g;
 
@@ -55,9 +56,9 @@ public abstract class Spline extends FunctionPolinomyInterpolation {
 	protected abstract void conformSystem() throws Exception;
 	
 	private void fillC(double[] p){
-		c = new double[points.length - 1][3];
+		c = new double[points.length - 1][n];
 		for (int j = 0; j < p.length; j++) {
-			c[j / 3][j % 3] = p[j];
+			c[j / n][j % n] = p[j];
 		}
 	}
 	

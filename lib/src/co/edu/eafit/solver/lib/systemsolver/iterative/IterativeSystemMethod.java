@@ -11,6 +11,25 @@ import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
 import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
 import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 
+/**
+ * Starts with a given approximation to the solution vector, and keeps creating a better
+ * one in each iteration until the tolerance is met or the method runs out of iterations.
+ * 
+ * Each approximation is calculated by solving xi from the equation i, using the current
+ * values for the other xj, i!=j. Depending of the method we use the x values calculated
+ * for this iteration (Gauss-Seidel) or we use the ones from the last iteration (Jacobi).
+ * 
+ * We have many different ways to measure the dispersion between two approximations, many
+ * of them include the concept of norm, the norm is a way to order vectors using scalar
+ * magnitudes. The most common norm is the euclidean.
+ * 
+ * Also, we can use the relaxation method to enhance the convergence of the method, the
+ * objective of this method is calculating the new x vector by a ponderated average between
+ * the last x and the current one. The ponderation factor is called lambda and it's value
+ * is in the range [0, 1].
+ * @author halzate93
+ *
+ */
 public abstract class IterativeSystemMethod implements LinearSystemMethod {
 
 	protected double[][] A;

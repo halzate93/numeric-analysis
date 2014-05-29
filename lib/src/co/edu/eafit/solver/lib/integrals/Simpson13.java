@@ -22,5 +22,4 @@ public class Simpson13 extends Integral {
 			throw new MissingParameterException(new EInterpolationParameter[]{EInterpolationParameter.Points});
 		}
 	}
-
 }

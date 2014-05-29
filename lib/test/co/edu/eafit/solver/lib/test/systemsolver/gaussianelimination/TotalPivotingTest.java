@@ -9,6 +9,8 @@ import org.junit.Test;
 import co.edu.eafit.solver.lib.systemsolver.ESystemSolvingParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import co.edu.eafit.solver.lib.systemsolver.exception.BadParameterException;
+import co.edu.eafit.solver.lib.systemsolver.exception.DivisionByZeroException;
+import co.edu.eafit.solver.lib.systemsolver.exception.MissingParameterException;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EGaussianEliminationResult;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.EPivotingStrategy;
 import co.edu.eafit.solver.lib.systemsolver.gaussianelimination.GaussianElimination;
@@ -70,6 +72,21 @@ public class TotalPivotingTest {
 				result.getJSONArray(EGaussianEliminationResult.X.toString()));
 		
 		assertTrue(MatrixUtility.compareVector(solution, xValues, 0.000000001));
+	}
+	
+	@Test
+	public void test() throws MissingParameterException, DivisionByZeroException, Exception{
+		double [][] matrix = {{2, -4, 1},
+				{3, 2, 5},
+				{4, 3, 5}};
+		double[] b = {-1, -2, 4};
+		
+		JSONObject params = new JSONObject();
+		params.put(ESystemSolvingParameter.A.toString(), MatrixUtility.matrix2Json(matrix));
+		params.put(ESystemSolvingParameter.b.toString(), MatrixUtility.vector2Json(b));
+		gaussianElimination.setParameters(params);
+		
+		gaussianElimination.solve();
 	}
 
 }

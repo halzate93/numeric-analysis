@@ -72,4 +72,5 @@ public class CroutFactorizationTest {
 		luFact.solve();
 		assertTrue(MatrixUtility.compareVector(x, luFact.getX(), 0.000000001));
 	}
+
 }

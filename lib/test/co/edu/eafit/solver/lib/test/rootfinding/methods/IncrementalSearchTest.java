@@ -62,6 +62,7 @@ public class IncrementalSearchTest {
 			interval = (float)intervalArray.getDouble(0) == 0f
 					&& (float)intervalArray.getDouble(1) == 1f; 
 		}
+		
 		assertTrue(interval);
 	}
 	

@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SolverLib"/>
-	<classpathentry kind="lib" path="/home/halzate93/Code/solver/lib/lib/expr.jar"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/SolverLib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

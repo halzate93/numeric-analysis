@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/scroll_systemsolving"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Spinner
+            android:id="@+id/spn_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            app:listitem="@android:layout/simple_dropdown_item_1line" />
+
+        <EditText
+            android:id="@+id/txt_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/btn_addnumber"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="numberDecimal|numberSigned" />
+
+        <Spinner
+            android:id="@+id/spn_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_matrix"
+            android:layout_marginTop="20dp"
+            app:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spn_method"
+            android:gravity="center"
+            android:text="@string/points"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txt_matrix"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="18dp"
+            android:ems="10"
+            android:inputType="textMultiLine" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btn_solve"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/btn_clear"
+            android:layout_marginTop="28dp"
+            android:text="@string/solve" />
+
+        <Button
+            android:id="@+id/btn_clear"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btn_addnumber"
+            android:layout_below="@+id/txt_number"
+            android:layout_marginTop="39dp"
+            android:text="@string/clear" />
+
+        <Button
+            android:id="@+id/btn_addnumber"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/spn_number"
+            android:layout_alignBottom="@+id/spn_number"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="34dp"
+            android:text="@string/add" />
+    </RelativeLayout>
+
+</ScrollView>

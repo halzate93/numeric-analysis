@@ -177,4 +177,24 @@ public class MatrixUtility {
 		return mt;
 	}
 
+	public static double[] parseVector(String vectorString) {
+		String[] elements = vectorString.split(",");
+		double[] vector = new double[elements.length];
+		
+		for (int i = 0; i < vector.length; i++) {
+			vector[i] = Double.parseDouble(elements[i]);
+		}
+		
+		return vector;
+	}
+
+	public static double[][] parseMatrix(String matrixString) {
+		String[] lines = matrixString.split("\n");
+		double[][] matrix = new double[lines.length][];
+		for (int i = 0; i < matrix.length; i++) {
+			matrix[i] = parseVector(lines[i]);
+		}
+		return matrix;
+	}
+
 }

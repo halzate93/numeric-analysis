@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.edu.eafit.solver.rootfinding.RootSolvingFragment" >
+
+    <Spinner
+        android:id="@+id/spn_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        tools:listitem="@android:layout/simple_dropdown_item_1line" />
+
+    <Button
+        android:id="@+id/btn_rootfinding_function"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/spn_systemsolving_matrix"
+        android:layout_alignBottom="@+id/spn_systemsolving_matrix"
+        android:layout_alignParentRight="true"
+        android:text="@string/add" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/txt_rootfinding_function"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btn_rootfinding_function"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/btn_rootfinding_solve"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/solve" />
+
+    <Spinner
+        android:id="@+id/spn_rootfinding_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/textView1"
+        tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+    <Button
+        android:id="@+id/btn_rootfinding_number"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/spn_rootfinding_number"
+        android:text="@string/add" />
+
+    <Button
+        android:id="@+id/btn_rootfinding_clear"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/spn_rootfinding_error"
+        android:layout_alignBottom="@+id/spn_rootfinding_error"
+        android:layout_alignParentRight="true"
+        android:text="@string/clear" />
+
+    <Spinner
+        android:id="@+id/spn_systemsolving_matrix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spn_rootfinding_number"
+        android:layout_below="@+id/spn_method"
+        tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+    <EditText
+        android:id="@+id/txt_rootfinding_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/spn_rootfinding_number"
+        android:ems="10"
+        android:inputType="numberDecimal|numberSigned" >
+
+        <requestFocus />
+    </EditText>
+
+    <Spinner
+        android:id="@+id/spn_rootfinding_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txt_rootfinding_function"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="23dp"
+        tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/spn_rootfinding_number"
+        android:layout_below="@+id/txt_rootfinding_number"
+        android:layout_marginTop="48dp"
+        android:text="@string/rootfinding_error"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

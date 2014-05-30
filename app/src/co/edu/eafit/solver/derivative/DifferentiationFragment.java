@@ -11,6 +11,7 @@ import co.edu.eafit.solver.lib.derivatives.EDerivativeParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DifferentiationFragment extends Fragment{
 	private JSONObject parameters;
@@ -54,13 +56,14 @@ public class DifferentiationFragment extends Fragment{
                 	String key = ((Spinner)view.findViewById(R.id.spn_number)).getSelectedItem().toString();
                 	parameters.put(key, n);
                 	numberField.setText("");
-                } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                } catch (Exception e) {
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence text = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, text, duration);
+                	toast.show();
+				} 
             }
         });
 		
@@ -78,9 +81,13 @@ public class DifferentiationFragment extends Fragment{
 					derivative.setParameters(parameters);
 					showResults(derivative.solve());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence text = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, text, duration);
+                	toast.show();
+				} 
 			}
 		});
 		

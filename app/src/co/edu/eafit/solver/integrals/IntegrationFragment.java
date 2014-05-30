@@ -11,6 +11,7 @@ import co.edu.eafit.solver.lib.interpolation.EInterpolationParameter;
 import co.edu.eafit.solver.lib.systemsolver.MatrixUtility;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IntegrationFragment extends Fragment {
 	private JSONObject parameters;
@@ -59,9 +61,13 @@ public class IntegrationFragment extends Fragment {
 					integrator.setParameters(parameters);
 					showResults(integrator.integrate());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence text = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, text, duration);
+                	toast.show();
+				} 
 			}
 		});
 		

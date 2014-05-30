@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import co.edu.eafit.solver.MockupSolutionFragment;
 import co.edu.eafit.solver.R;
 import co.edu.eafit.solver.lib.rootfinding.NonLinearEquationSolver;
@@ -20,7 +22,6 @@ import co.edu.eafit.solver.lib.rootfinding.functions.Function;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EEquationSolvingMethod;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EErrorType;
 import co.edu.eafit.solver.lib.rootfinding.methods.enums.EParameter;
-import expr.SyntaxException;
 
 public class RootSolvingFragment extends Fragment {
 
@@ -57,13 +58,14 @@ public class RootSolvingFragment extends Fragment {
                 	String key = ((Spinner)view.findViewById(R.id.spn_rootfinding_number)).getSelectedItem().toString();
                 	parameters.put(key, n);
                 	numberField.setText("");
-                } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                } catch (Exception e) {
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
             }
         });
         
@@ -77,12 +79,14 @@ public class RootSolvingFragment extends Fragment {
                 	String key = ((Spinner)view.findViewById(R.id.spn_systemsolving_matrix)).getSelectedItem().toString();
                 	parameters.put(key, functionString);
                 	functionField.setText("");
-                }catch(SyntaxException e){
-                	// TODO: handle the invalid function exception.
-                } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                }catch (Exception e) {
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
             }
         });
         
@@ -105,9 +109,13 @@ public class RootSolvingFragment extends Fragment {
 					solver.setMethodPrototype(m, parameters);
 					showResults(solver.solve());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
 			}
 		});
 	}

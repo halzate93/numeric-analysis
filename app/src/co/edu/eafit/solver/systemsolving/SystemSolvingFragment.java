@@ -14,6 +14,7 @@ import co.edu.eafit.solver.lib.systemsolver.iterative.ENorm;
 import co.edu.eafit.solver.lib.systemsolver.iterative.EVectorErrorType;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SystemSolvingFragment extends Fragment {
 	
@@ -58,9 +60,13 @@ public class SystemSolvingFragment extends Fragment {
                 	parameters.put(key, MatrixUtility.vector2Json(vector));
                 	vectorField.setText("");
                 } catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
 			}
 		});
 		
@@ -74,13 +80,14 @@ public class SystemSolvingFragment extends Fragment {
                 	String key = ((Spinner)view.findViewById(R.id.spn_number)).getSelectedItem().toString();
                 	parameters.put(key, n);
                 	numberField.setText("");
-                } catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                } catch (Exception e) {
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
             }
         });
 		
@@ -95,9 +102,13 @@ public class SystemSolvingFragment extends Fragment {
                 	parameters.put(key, text);
                 	textField.setText("");
                 } catch (Exception e) {
-                	// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
 			}
 		});
 		
@@ -115,9 +126,13 @@ public class SystemSolvingFragment extends Fragment {
 					solver.setParameters(parameters);
 					showResults(solver.solve());
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+                	Context context = getActivity().getApplicationContext();
+                	CharSequence message = e.toString();
+                	int duration = Toast.LENGTH_SHORT;
+
+                	Toast toast = Toast.makeText(context, message, duration);
+                	toast.show();
+				} 
 			}
 		});
 		

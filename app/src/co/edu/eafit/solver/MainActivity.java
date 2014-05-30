@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -79,6 +81,8 @@ public class MainActivity extends Activity implements
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
+		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/halzate93/solver/wiki"));
+		startActivity(browserIntent);
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
